@@ -15,6 +15,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Base path for GitHub Pages deployment
-  base: process.env.NODE_ENV === 'production' ? '/your-repo-name/' : '/',
+  // Base path for GitHub Pages deployment with custom domain
+  base: '/',
 }));
