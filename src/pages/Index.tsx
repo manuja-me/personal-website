@@ -57,16 +57,18 @@ const Index = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="group bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-base glow-terminal transition-all duration-300">
-                <Mail className="mr-2 h-5 w-5" />
-                Get In Touch
-              </Button>
+              <a href="mailto:manuja.public@gmail.com?subject=Contact%20from%20Portfolio&body=Hello%20Manuja,%0A%0AI'm%20reaching%20out%20regarding...">
+                <Button size="lg" className="group bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-base glow-terminal transition-all duration-300">
+                  <Mail className="mr-2 h-5 w-5" />
+                  Get In Touch
+                </Button>
+              </a>
               
               <div className="flex gap-3">
-                <Button size="lg" variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300">
+                <Button size="lg" variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" onClick = { () => window.open('https://github.com/manuja-me', '_blank') }>
                   <Github className="h-5 w-5" />
                 </Button>
-                <Button size="lg" variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300">
+                <Button size="lg" variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" onClick = { () => window.open('https://www.linkedin.com/in/manuja-medhankara-12609b392/', '_blank')}>
                   <Linkedin className="h-5 w-5" />
                 </Button>
               </div>
@@ -331,10 +333,12 @@ const Index = () => {
                 Open for collaborations, security research, and interesting projects
               </p>
               <div className="flex justify-center">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-10 py-6 text-lg glow-terminal">
-                  <Mail className="mr-2 h-5 w-5" />
-                  Contact Me
-                </Button>
+                <a href="mailto:manuja.public@gmail.com?subject=Portfolio%20Contact&body=Hi%20Manuja,%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20discuss...">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-10 py-6 text-lg glow-terminal">
+                    <Mail className="mr-2 h-5 w-5" />
+                    Contact Me
+                  </Button>
+                </a>
               </div>
             </div>
           </Card>
