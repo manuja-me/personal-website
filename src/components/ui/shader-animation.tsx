@@ -81,12 +81,10 @@ export function ShaderAnimation() {
     const scene = new THREE.Scene()
     const geometry = new THREE.PlaneGeometry(2, 2)
 
-    const isDarkInitial = resolvedTheme === "dark" ? 1.0 : 0.0
-
     const uniforms = {
       time: { type: "f", value: 1.0 },
       resolution: { type: "v2", value: new THREE.Vector2() },
-      isDark: { type: "f", value: isDarkInitial },
+      isDark: { type: "f", value: 1.0 },
     }
 
     const material = new THREE.ShaderMaterial({

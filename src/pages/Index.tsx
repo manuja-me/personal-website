@@ -65,24 +65,34 @@ const Index = () => {
               </a>
               
               <div className="flex gap-3">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-border hover:border-primary/50 text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" 
-                  onClick={() => window.open('https://github.com/manuja-me', '_blank')}
+                <a 
+                  href="https://github.com/manuja-me" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   aria-label="GitHub Profile"
                 >
-                  <Github className="h-5 w-5" />
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-border hover:border-primary/50 text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" 
-                  onClick={() => window.open('https://www.linkedin.com/in/manuja-medhankara-12609b392/', '_blank')}
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-border hover:border-primary/50 text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" 
+                  >
+                    <Github className="h-5 w-5" />
+                  </Button>
+                </a>
+                <a 
+                  href="https://www.linkedin.com/in/manuja-medhankara-12609b392/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   aria-label="LinkedIn Profile"
                 >
-                  <Linkedin className="h-5 w-5" />
-                </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-border hover:border-primary/50 text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" 
+                  >
+                    <Linkedin className="h-5 w-5" />
+                  </Button>
+                </a>
               </div>
             </div>
           </div>
@@ -91,11 +101,11 @@ const Index = () => {
         <div className="absolute bottom-10 left-0 right-0 z-20 flex justify-center">
           <button 
             onClick={() => {
-              const aboutSection = document.querySelectorAll("section")[1];
+              const aboutSection = document.getElementById("about");
               aboutSection?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
-            className="animate-bounce cursor-pointer hover:scale-110 transition-transform p-2 rounded-full hover:bg-primary/10"
-            aria-label="Scroll to next section"
+            className="animate-bounce cursor-pointer hover:scale-110 transition-transform p-2 rounded-full hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            aria-label="Scroll to about section"
           >
             <Keyboard className="w-8 h-8 text-primary" />
           </button>
@@ -103,7 +113,7 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section className="min-h-screen py-24 px-6 relative flex items-center">
+      <section id="about" className="min-h-screen py-24 px-6 relative flex items-center">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-16">
             <div className="inline-block mb-4">
@@ -170,7 +180,7 @@ const Index = () => {
       </section>
 
       {/* Expertise Section */}
-      <section className="min-h-screen py-24 px-6 relative bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent flex items-center">
+      <section id="skills" className="min-h-screen py-24 px-6 relative bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent flex items-center">
         <div className="container mx-auto">
           <div className="text-center mb-20">
             <div className="inline-block mb-4">
@@ -249,7 +259,7 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section className="min-h-screen py-24 px-6 flex items-center">
+      <section id="projects" className="min-h-screen py-24 px-6 flex items-center">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-16">
             <div className="inline-block mb-4">
@@ -264,7 +274,9 @@ const Index = () => {
             <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between mb-4">
                 <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">Network Scanner Pro</h3>
-                <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                <a href="https://github.com/manuja-me" target="_blank" rel="noopener noreferrer" aria-label="View Network Scanner Pro on GitHub">
+                  <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-110" />
+                </a>
               </div>
               <p className="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
                 Advanced network reconnaissance tool with service detection, vulnerability scanning, and automated reporting capabilities.
@@ -279,7 +291,9 @@ const Index = () => {
             <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between mb-4">
                 <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">Linux Hardening Script</h3>
-                <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                <a href="https://github.com/manuja-me" target="_blank" rel="noopener noreferrer" aria-label="View Linux Hardening Script on GitHub">
+                  <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-110" />
+                </a>
               </div>
               <p className="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
                 Automated security hardening suite for Linux servers following CIS benchmarks with customizable rule sets.
@@ -294,7 +308,9 @@ const Index = () => {
             <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between mb-4">
                 <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">Web Vulnerability Scanner</h3>
-                <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                <a href="https://github.com/manuja-me" target="_blank" rel="noopener noreferrer" aria-label="View Web Vulnerability Scanner on GitHub">
+                  <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-110" />
+                </a>
               </div>
               <p className="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
                 Custom web application security scanner detecting XSS, SQL injection, CSRF, and other common vulnerabilities.
@@ -309,7 +325,9 @@ const Index = () => {
             <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between mb-4">
                 <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">CTF Writeups</h3>
-                <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                <a href="https://github.com/manuja-me" target="_blank" rel="noopener noreferrer" aria-label="View CTF Writeups on GitHub">
+                  <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-110" />
+                </a>
               </div>
               <p className="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
                 Detailed writeups and solutions for various CTF challenges, covering web, binary exploitation, and cryptography.
@@ -325,7 +343,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="min-h-screen py-24 px-6 flex items-center relative overflow-hidden">
+      <section id="contact" className="min-h-screen py-24 px-6 flex items-center relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.06)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.06)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)] pointer-events-none" />
