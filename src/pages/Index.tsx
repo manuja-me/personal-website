@@ -4,10 +4,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Github, Linkedin, Mail, Terminal, Shield, Code, Lock, Server, Globe, Database, Keyboard } from "lucide-react";
-import { useEffect } from "react";
 
 const Index = () => {
-  return <main className="min-h-screen bg-background">
+  return (
+    <main className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
       {/* Theme Toggle - Fixed Position */}
       <div className="fixed top-6 right-6 z-50">
         <ThemeToggle />
@@ -19,15 +19,15 @@ const Index = () => {
           <ShaderAnimation />
         </div>
         
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background z-10 pointer-events-none" />
         
         <div className="relative z-20 container mx-auto px-6 text-center">
           <div className="animate-fade-in">
-            <div className="inline-block mb-4 px-4 py-2 rounded-md terminal-border bg-background/50 backdrop-blur-sm">
+            <div className="inline-block mb-4 px-4 py-2 rounded-md terminal-border bg-card/80 backdrop-blur-md">
               <span className="text-primary text-sm font-mono font-medium">$ whoami</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-foreground">
               Manuja Medhankara
             </h1>
             
@@ -36,21 +36,21 @@ const Index = () => {
             </p>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed font-mono">
-              Cybersecurity Specialist & Linux Enthusiast <span className="animate-terminal-blink">_</span>
+              Cybersecurity Specialist & Linux Enthusiast <span className="animate-terminal-blink text-primary">_</span>
               <br />
-              <span className="text-primary">Securing systems, one line of code at a time</span>
+              <span className="text-primary font-medium">Securing systems, one line of code at a time</span>
             </p>
             
             <div className="flex flex-wrap gap-3 justify-center items-center mb-10">
-              <Badge variant="outline" className="text-primary border-primary/50 bg-primary/10 px-4 py-2">
+              <Badge variant="outline" className="text-primary border-primary/40 bg-primary/10 hover:bg-primary/15 px-4 py-2 transition-colors font-medium">
                 <Shield className="w-4 h-4 mr-2" />
                 Penetration Testing
               </Badge>
-              <Badge variant="outline" className="text-primary border-primary/50 bg-primary/10 px-4 py-2">
+              <Badge variant="outline" className="text-primary border-primary/40 bg-primary/10 hover:bg-primary/15 px-4 py-2 transition-colors font-medium">
                 <Terminal className="w-4 h-4 mr-2" />
                 Linux Administration
               </Badge>
-              <Badge variant="outline" className="text-primary border-primary/50 bg-primary/10 px-4 py-2">
+              <Badge variant="outline" className="text-primary border-primary/40 bg-primary/10 hover:bg-primary/15 px-4 py-2 transition-colors font-medium">
                 <Lock className="w-4 h-4 mr-2" />
                 Security Research
               </Badge>
@@ -58,17 +58,29 @@ const Index = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a href="mailto:manuja.public@gmail.com?subject=Contact%20from%20Portfolio&body=Hello%20Manuja,%0A%0AI'm%20reaching%20out%20regarding...">
-                <Button size="lg" className="group bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-base glow-terminal transition-all duration-300">
+                <Button size="lg" className="group bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-base glow-terminal transition-all duration-300 shadow-sm">
                   <Mail className="mr-2 h-5 w-5" />
                   Get In Touch
                 </Button>
               </a>
               
               <div className="flex gap-3">
-                <Button size="lg" variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" onClick = { () => window.open('https://github.com/manuja-me', '_blank') }>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-border hover:border-primary/50 text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" 
+                  onClick={() => window.open('https://github.com/manuja-me', '_blank')}
+                  aria-label="GitHub Profile"
+                >
                   <Github className="h-5 w-5" />
                 </Button>
-                <Button size="lg" variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" onClick = { () => window.open('https://www.linkedin.com/in/manuja-medhankara-12609b392/', '_blank')}>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-border hover:border-primary/50 text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 font-semibold px-6 py-6 backdrop-blur-sm transition-all duration-300" 
+                  onClick={() => window.open('https://www.linkedin.com/in/manuja-medhankara-12609b392/', '_blank')}
+                  aria-label="LinkedIn Profile"
+                >
                   <Linkedin className="h-5 w-5" />
                 </Button>
               </div>
@@ -82,7 +94,7 @@ const Index = () => {
               const aboutSection = document.querySelectorAll("section")[1];
               aboutSection?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
-            className="animate-bounce cursor-pointer hover:scale-110 transition-transform"
+            className="animate-bounce cursor-pointer hover:scale-110 transition-transform p-2 rounded-full hover:bg-primary/10"
             aria-label="Scroll to next section"
           >
             <Keyboard className="w-8 h-8 text-primary" />
@@ -95,9 +107,9 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="mb-16">
             <div className="inline-block mb-4">
-              <span className="text-primary font-mono text-sm">$ cat about.txt</span>
+              <span className="text-primary font-mono text-sm font-semibold">$ cat about.txt</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               About <span className="gradient-text">Me</span>
             </h2>
           </div>
@@ -113,40 +125,42 @@ const Index = () => {
                 projects, writing security tools, or deep-diving into kernel exploits and reverse engineering.
               </p>
               <div className="flex flex-wrap gap-2">
-                {["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python", "Bash", "Docker", "AWS"].map(skill => <span key={skill} className="px-3 py-1 text-sm font-mono bg-primary/10 text-primary border border-primary/30 rounded">
+                {["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python", "Bash", "Docker", "AWS"].map(skill => (
+                  <span key={skill} className="px-3 py-1 text-sm font-mono bg-primary/10 text-primary border border-primary/25 rounded font-medium">
                     {skill}
-                  </span>)}
+                  </span>
+                ))}
               </div>
             </div>
 
-            <Card className="p-8 bg-card/50 backdrop-blur-sm terminal-border">
+            <Card className="p-8 bg-card/80 backdrop-blur-sm border border-border/80 terminal-border shadow-sm">
               <div className="space-y-4 font-mono text-sm">
                 <div className="flex items-start gap-3">
-                  <span className="text-primary">→</span>
+                  <span className="text-primary font-bold">→</span>
                   <div>
                     <span className="text-muted-foreground">Role:</span>
-                    <span className="text-foreground ml-2">Security Researcher</span>
+                    <span className="text-foreground font-medium ml-2">Security Researcher</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-primary">→</span>
+                  <span className="text-primary font-bold">→</span>
                   <div>
                     <span className="text-muted-foreground">Focus:</span>
-                    <span className="text-foreground ml-2">Offensive Security</span>
+                    <span className="text-foreground font-medium ml-2">Offensive Security</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-primary">→</span>
+                  <span className="text-primary font-bold">→</span>
                   <div>
                     <span className="text-muted-foreground">OS:</span>
-                    <span className="text-foreground ml-2">Arch Linux / Kali</span>
+                    <span className="text-foreground font-medium ml-2">Arch Linux / Kali</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-primary">→</span>
+                  <span className="text-primary font-bold">→</span>
                   <div>
                     <span className="text-muted-foreground">Editor:</span>
-                    <span className="text-foreground ml-2">Neovim</span>
+                    <span className="text-foreground font-medium ml-2">Neovim</span>
                   </div>
                 </div>
               </div>
@@ -156,13 +170,13 @@ const Index = () => {
       </section>
 
       {/* Expertise Section */}
-      <section className="min-h-screen py-24 px-6 relative bg-gradient-to-b from-transparent via-primary/5 to-transparent flex items-center">
+      <section className="min-h-screen py-24 px-6 relative bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent flex items-center">
         <div className="container mx-auto">
           <div className="text-center mb-20">
             <div className="inline-block mb-4">
-              <span className="text-primary font-mono text-sm">$ ls -la /skills</span>
+              <span className="text-primary font-mono text-sm font-semibold">$ ls -la /skills</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               Core <span className="gradient-text">Expertise</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-mono">
@@ -171,61 +185,61 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="p-8 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 terminal-border">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
+              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/30">
                 <Shield className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Penetration Testing</h3>
+              <h3 className="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">Penetration Testing</h3>
               <p className="text-muted-foreground leading-relaxed font-mono text-sm">
                 Web app security assessments, network pentesting, and vulnerability analysis using industry-standard tools
               </p>
             </Card>
 
-            <Card className="p-8 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 terminal-border">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
+              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/30">
                 <Terminal className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Linux Systems</h3>
+              <h3 className="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">Linux Systems</h3>
               <p className="text-muted-foreground leading-relaxed font-mono text-sm">
                 System administration, shell scripting, kernel customization, and server hardening across distributions
               </p>
             </Card>
 
-            <Card className="p-8 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 terminal-border">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
+              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/30">
                 <Code className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Security Tools</h3>
+              <h3 className="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">Security Tools</h3>
               <p className="text-muted-foreground leading-relaxed font-mono text-sm">
                 Developing custom exploitation tools, automation scripts, and security utilities in Python and Bash
               </p>
             </Card>
 
-            <Card className="p-8 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 terminal-border">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
+              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/30">
                 <Globe className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Network Security</h3>
+              <h3 className="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">Network Security</h3>
               <p className="text-muted-foreground leading-relaxed font-mono text-sm">
                 Traffic analysis, IDS/IPS configuration, firewall management, and wireless security assessments
               </p>
             </Card>
 
-            <Card className="p-8 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 terminal-border">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
+              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/30">
                 <Server className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Cloud Security</h3>
+              <h3 className="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">Cloud Security</h3>
               <p className="text-muted-foreground leading-relaxed font-mono text-sm">
                 Securing cloud infrastructure, container security, CI/CD pipeline hardening, and IAM configuration
               </p>
             </Card>
 
-            <Card className="p-8 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 terminal-border">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
+              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/30">
                 <Database className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Incident Response</h3>
+              <h3 className="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">Incident Response</h3>
               <p className="text-muted-foreground leading-relaxed font-mono text-sm">
                 Digital forensics, malware analysis, log analysis, and threat hunting to identify and mitigate attacks
               </p>
@@ -239,71 +253,71 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="mb-16">
             <div className="inline-block mb-4">
-              <span className="text-primary font-mono text-sm">$ git log --oneline</span>
+              <span className="text-primary font-mono text-sm font-semibold">$ git log --oneline</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               Featured <span className="gradient-text">Projects</span>
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 bg-card/50 backdrop-blur-sm terminal-border hover:border-primary transition-all duration-300 group">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between mb-4">
-                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">Network Scanner Pro</h3>
+                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">Network Scanner Pro</h3>
                 <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
               <p className="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
                 Advanced network reconnaissance tool with service detection, vulnerability scanning, and automated reporting capabilities.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Python</span>
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Nmap</span>
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Scapy</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Python</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Nmap</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Scapy</span>
               </div>
             </Card>
 
-            <Card className="p-8 bg-card/50 backdrop-blur-sm terminal-border hover:border-primary transition-all duration-300 group">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between mb-4">
-                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">Linux Hardening Script</h3>
+                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">Linux Hardening Script</h3>
                 <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
               <p className="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
                 Automated security hardening suite for Linux servers following CIS benchmarks with customizable rule sets.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Bash</span>
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Security</span>
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Automation</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Bash</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Security</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Automation</span>
               </div>
             </Card>
 
-            <Card className="p-8 bg-card/50 backdrop-blur-sm terminal-border hover:border-primary transition-all duration-300 group">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between mb-4">
-                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">Web Vulnerability Scanner</h3>
+                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">Web Vulnerability Scanner</h3>
                 <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
               <p className="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
                 Custom web application security scanner detecting XSS, SQL injection, CSRF, and other common vulnerabilities.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Python</span>
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">BeautifulSoup</span>
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Requests</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Python</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">BeautifulSoup</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Requests</span>
               </div>
             </Card>
 
-            <Card className="p-8 bg-card/50 backdrop-blur-sm terminal-border hover:border-primary transition-all duration-300 group">
+            <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between mb-4">
-                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">CTF Writeups</h3>
+                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">CTF Writeups</h3>
                 <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
               <p className="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
                 Detailed writeups and solutions for various CTF challenges, covering web, binary exploitation, and cryptography.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">CTF</span>
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Writeups</span>
-                <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded font-mono">Tutorials</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">CTF</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Writeups</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Tutorials</span>
               </div>
             </Card>
           </div>
@@ -313,19 +327,19 @@ const Index = () => {
       {/* CTA Section */}
       <section className="min-h-screen py-24 px-6 flex items-center relative overflow-hidden">
         {/* Background Effects */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.15),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.06)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.06)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)] pointer-events-none" />
         
         <div className="container mx-auto max-w-4xl relative z-10">
-          <Card className="relative overflow-hidden border-0 terminal-border bg-gradient-to-br from-primary/10 via-background/95 to-background/95 backdrop-blur-xl shadow-[0_0_80px_-20px_hsl(var(--primary)/0.3)]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,hsl(var(--primary)/0.2),transparent)]" />
+          <Card className="relative overflow-hidden border border-primary/30 bg-card/90 dark:bg-card/40 backdrop-blur-xl shadow-lg dark:shadow-[0_0_80px_-20px_hsl(var(--primary)/0.3)]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,hsl(var(--primary)/0.15),transparent)] pointer-events-none" />
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
             <div className="relative p-12 md:p-16 text-center">
               <div className="inline-block mb-6">
-                <span className="text-primary font-mono text-sm">$ echo "Let's connect"</span>
+                <span className="text-primary font-mono text-sm font-semibold">$ echo "Let's connect"</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
                 Let's Build Something
                 <span className="block gradient-text mt-2">Secure Together</span>
               </h2>
@@ -334,7 +348,7 @@ const Index = () => {
               </p>
               <div className="flex justify-center">
                 <a href="mailto:manuja.public@gmail.com?subject=Portfolio%20Contact&body=Hi%20Manuja,%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20discuss...">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-10 py-6 text-lg glow-terminal">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-10 py-6 text-lg glow-terminal shadow-md">
                     <Mail className="mr-2 h-5 w-5" />
                     Contact Me
                   </Button>
@@ -346,16 +360,18 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 py-12 px-6">
+      <footer className="border-t border-border/80 py-12 px-6 bg-background">
         <div className="container mx-auto text-center">
           <p className="text-muted-foreground font-mono text-sm mb-4">
             $ sudo rm -rf /vulnerabilities
           </p>
           <p className="text-muted-foreground text-sm">
-            © 2024 Manuja Medhankara (@manuja_me) - Crafted with <span className="text-primary">{"</>"}</span> and security in mind
+            © {new Date().getFullYear()} Manuja Medhankara (@manuja_me) - Crafted with <span className="text-primary font-bold">{"</>"}</span> and security in mind
           </p>
         </div>
       </footer>
-    </main>;
+    </main>
+  );
 };
+
 export default Index;
