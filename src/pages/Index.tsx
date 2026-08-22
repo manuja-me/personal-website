@@ -307,18 +307,20 @@ const Index = () => {
 
             <Card className="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 transition-all duration-300 group shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between mb-4">
-                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">Web Vulnerability Scanner</h3>
-                <a href="https://github.com/manuja-me" target="_blank" rel="noopener noreferrer" aria-label="View Web Vulnerability Scanner on GitHub">
+                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">VulnRadar</h3>
+                <a href="https://github.com/manuja-me/vuln-radar" target="_blank" rel="noopener noreferrer" aria-label="View VulnRadar on GitHub">
                   <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-110" />
                 </a>
               </div>
               <p className="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
-                Custom web application security scanner detecting XSS, SQL injection, CSRF, and other common vulnerabilities.
+                Desktop Web Vulnerability &amp; Security Posture Scanner. Conducts passive audits on security headers, cookie policies, client-side CVE dependency risks, and credential leaks with automated risk scoring.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Python</span>
-                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">BeautifulSoup</span>
-                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Requests</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Rust</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Tauri v2</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">Svelte 5</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">TypeScript</span>
+                <span className="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">SQLite</span>
               </div>
             </Card>
 
