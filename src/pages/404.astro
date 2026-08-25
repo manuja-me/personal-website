@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import { Home } from 'lucide-astro';
+---
+
+<Layout title="404 - Not Found | Manuja Medhankara">
+  <div class="relative flex min-h-screen items-center justify-center bg-background text-foreground px-6">
+    <div class="fixed top-6 right-6 z-50">
+      <ThemeToggle />
+    </div>
+
+    <div class="text-center max-w-md p-8 rounded-xl border border-border/80 bg-card/80 backdrop-blur-md shadow-lg">
+      <span class="text-primary font-mono text-sm font-semibold">$ error 404</span>
+      <h1 class="my-3 text-6xl font-bold gradient-text">404</h1>
+      <p class="mb-6 text-xl text-muted-foreground font-mono">Target route not found in system</p>
+      <a href="/">
+        <button class="inline-flex items-center justify-center rounded-md bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 cursor-pointer shadow-sm">
+          <Home class="w-4 h-4 mr-2" />
+          Return to Terminal
+        </button>
+      </a>
+    </div>
+  </div>
+</Layout>

@@ -35,11 +35,12 @@ git push -u origin main
      - 185.199.110.153
      - 185.199.111.153
 
-### 4. Update Vite Config
-Make sure to update the `base` path in `vite.config.ts`:
-```typescript
-base: process.env.NODE_ENV === 'production' ? '/your-actual-repo-name/' : '/',
+### 4. Update Astro Config (Optional)
+If deploying without a custom domain under a GitHub user subpath, update `base` in `astro.config.mjs`:
+```javascript
+base: '/your-repo-name/',
 ```
+With custom domain `manuja.dev`, the root path `base: '/'` is used by default.
 
 ## Deployment
 - Every push to the `main` branch triggers automatic deployment

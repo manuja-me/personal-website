@@ -8,32 +8,7 @@
 
 ## 🛠️ Tech Stack
 
-- **Framework:** React + Vite
+- **Framework:** Astro
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS + shadcn/ui
-- **Icons:** Lucide React
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/manuja-me/personal-website.git
-cd personal-website
-```
-
-### 2. Install dependencies
-```bash
-npm install
-```
-
-### 3. Start development server
-```bash
-npm run dev
-```
-
-### 4. Build for production
-```bash
-npm run build
-```
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide Icons

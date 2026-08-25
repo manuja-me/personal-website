@@ -1,0 +1,93 @@
+---
+import ShaderBackground from './ShaderBackground.astro';
+import { Shield, Terminal, Lock, Mail, Github, Linkedin, Keyboard } from 'lucide-astro';
+---
+
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- Hero Shader Background -->
+  <div class="absolute inset-0 z-0">
+    <ShaderBackground />
+  </div>
+
+  <!-- Radial/Vertical Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background z-10 pointer-events-none"></div>
+
+  <div class="relative z-20 container mx-auto px-6 text-center">
+    <div class="animate-fade-in">
+      <div class="inline-block mb-4 px-4 py-2 rounded-md terminal-border bg-card/80 backdrop-blur-md">
+        <span class="text-primary text-sm font-mono font-medium">$ whoami</span>
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-foreground">
+        Manuja Medhankara
+      </h1>
+
+      <p class="text-2xl md:text-3xl gradient-text font-semibold mb-6">
+        @manuja_me
+      </p>
+
+      <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed font-mono">
+        Cybersecurity Specialist &amp; Linux Enthusiast <span class="animate-terminal-blink text-primary">_</span>
+        <br />
+        <span class="text-primary font-medium">Securing systems, one line of code at a time</span>
+      </p>
+
+      <div class="flex flex-wrap gap-3 justify-center items-center mb-10">
+        <div class="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 hover:bg-primary/15 px-4 py-2 text-sm text-primary font-mono font-medium transition-colors">
+          <Shield class="w-4 h-4 mr-2" />
+          Penetration Testing
+        </div>
+        <div class="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 hover:bg-primary/15 px-4 py-2 text-sm text-primary font-mono font-medium transition-colors">
+          <Terminal class="w-4 h-4 mr-2" />
+          Linux Administration
+        </div>
+        <div class="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 hover:bg-primary/15 px-4 py-2 text-sm text-primary font-mono font-medium transition-colors">
+          <Lock class="w-4 h-4 mr-2" />
+          Security Research
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="mailto:manuja.public@gmail.com?subject=Contact%20from%20Portfolio&body=Hello%20Manuja,%0A%0AI'm%20reaching%20out%20regarding...">
+          <button class="inline-flex items-center justify-center rounded-md font-semibold text-base px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground glow-terminal transition-all duration-300 shadow-sm cursor-pointer">
+            <Mail class="mr-2 h-5 w-5" />
+            Get In Touch
+          </button>
+        </a>
+
+        <div class="flex gap-3">
+          <a
+            href="https://github.com/manuja-me"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+          >
+            <button class="inline-flex items-center justify-center rounded-md p-4 border border-border hover:border-primary/50 text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 backdrop-blur-sm transition-all duration-300 cursor-pointer shadow-sm">
+              <Github class="h-5 w-5" />
+            </button>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/manuja-medhankara-12609b392/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+          >
+            <button class="inline-flex items-center justify-center rounded-md p-4 border border-border hover:border-primary/50 text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 backdrop-blur-sm transition-all duration-300 cursor-pointer shadow-sm">
+              <Linkedin class="h-5 w-5" />
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-10 left-0 right-0 z-20 flex justify-center">
+    <a
+      href="#about"
+      class="animate-bounce cursor-pointer hover:scale-110 transition-transform p-2 rounded-full hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      aria-label="Scroll to about section"
+    >
+      <Keyboard class="w-8 h-8 text-primary" />
+    </a>
+  </div>
+</section>

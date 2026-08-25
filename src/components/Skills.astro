@@ -1,0 +1,71 @@
+---
+import { Shield, Terminal, Code, Globe, Server, Database } from 'lucide-astro';
+
+const expertise = [
+  {
+    icon: Shield,
+    title: "Penetration Testing",
+    description: "Web app security assessments, network pentesting, and vulnerability analysis using industry-standard tools"
+  },
+  {
+    icon: Terminal,
+    title: "Linux Systems",
+    description: "System administration, shell scripting, kernel customization, and server hardening across distributions"
+  },
+  {
+    icon: Code,
+    title: "Security Tools",
+    description: "Developing custom exploitation tools, automation scripts, and security utilities in Python and Bash"
+  },
+  {
+    icon: Globe,
+    title: "Network Security",
+    description: "Traffic analysis, IDS/IPS configuration, firewall management, and wireless security assessments"
+  },
+  {
+    icon: Server,
+    title: "Cloud Security",
+    description: "Securing cloud infrastructure, container security, CI/CD pipeline hardening, and IAM configuration"
+  },
+  {
+    icon: Database,
+    title: "Incident Response",
+    description: "Digital forensics, malware analysis, log analysis, and threat hunting to identify and mitigate attacks"
+  }
+];
+---
+
+<section id="skills" class="min-h-screen py-24 px-6 relative bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent flex items-center">
+  <div class="container mx-auto">
+    <div class="text-center mb-20">
+      <div class="inline-block mb-4">
+        <span class="text-primary font-mono text-sm font-semibold">$ ls -la /skills</span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+        Core <span class="gradient-text">Expertise</span>
+      </h2>
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto font-mono">
+        Building secure systems and breaking insecure ones
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {expertise.map((item) => {
+        const Icon = item.icon;
+        return (
+          <div class="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 rounded-xl transition-all duration-300 group shadow-sm hover:shadow-md">
+            <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/30">
+              <Icon class="w-7 h-7 text-primary" />
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">
+              {item.title}
+            </h3>
+            <p class="text-muted-foreground leading-relaxed font-mono text-sm">
+              {item.description}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

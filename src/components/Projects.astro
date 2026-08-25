@@ -1,0 +1,73 @@
+---
+import { Github } from 'lucide-astro';
+
+const projects = [
+  {
+    title: "Network Scanner Pro",
+    url: "https://github.com/manuja-me",
+    description: "Advanced network reconnaissance tool with service detection, vulnerability scanning, and automated reporting capabilities.",
+    tags: ["Python", "Nmap", "Scapy"]
+  },
+  {
+    title: "Linux Hardening Script",
+    url: "https://github.com/manuja-me",
+    description: "Automated security hardening suite for Linux servers following CIS benchmarks with customizable rule sets.",
+    tags: ["Bash", "Security", "Automation"]
+  },
+  {
+    title: "VulnRadar",
+    url: "https://github.com/manuja-me/vuln-radar",
+    description: "Desktop Web Vulnerability & Security Posture Scanner. Conducts passive audits on security headers, cookie policies, client-side CVE dependency risks, and credential leaks with automated risk scoring.",
+    tags: ["Rust", "Tauri v2", "Svelte 5", "TypeScript", "SQLite"]
+  },
+  {
+    title: "CTF Writeups",
+    url: "https://github.com/manuja-me",
+    description: "Detailed writeups and solutions for various CTF challenges, covering web, binary exploitation, and cryptography.",
+    tags: ["CTF", "Writeups", "Tutorials"]
+  }
+];
+---
+
+<section id="projects" class="min-h-screen py-24 px-6 flex items-center">
+  <div class="container mx-auto max-w-6xl">
+    <div class="mb-16">
+      <div class="inline-block mb-4">
+        <span class="text-primary font-mono text-sm font-semibold">$ git log --oneline</span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+        Featured <span class="gradient-text">Projects</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      {projects.map((project) => (
+        <div class="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 rounded-xl transition-all duration-300 group shadow-sm hover:shadow-md">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">
+              {project.title}
+            </h3>
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${project.title} on GitHub`}
+            >
+              <Github class="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-110" />
+            </a>
+          </div>
+          <p class="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
+            {project.description}
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span class="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

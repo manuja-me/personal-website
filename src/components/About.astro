@@ -1,0 +1,69 @@
+---
+const skills = ["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python", "Bash", "Docker", "AWS"];
+---
+
+<section id="about" class="min-h-screen py-24 px-6 relative flex items-center">
+  <div class="container mx-auto max-w-6xl">
+    <div class="mb-16">
+      <div class="inline-block mb-4">
+        <span class="text-primary font-mono text-sm font-semibold">$ cat about.txt</span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+        About <span class="gradient-text">Me</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="text-lg text-foreground/90 leading-relaxed mb-6 font-mono">
+          Passionate about exploring the depths of cybersecurity and the endless possibilities of Linux systems. 
+          I specialize in identifying vulnerabilities, hardening systems, and building secure infrastructure.
+        </p>
+        <p class="text-lg text-muted-foreground leading-relaxed mb-6 font-mono">
+          When I'm not breaking into systems (ethically, of course), you'll find me contributing to open-source 
+          projects, writing security tools, or deep-diving into kernel exploits and reverse engineering.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <span class="px-3 py-1 text-sm font-mono bg-primary/10 text-primary border border-primary/25 rounded font-medium">
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="p-8 bg-card/80 backdrop-blur-sm border border-border/80 rounded-xl terminal-border shadow-sm">
+        <div class="space-y-4 font-mono text-sm">
+          <div class="flex items-start gap-3">
+            <span class="text-primary font-bold">→</span>
+            <div>
+              <span class="text-muted-foreground">Role:</span>
+              <span class="text-foreground font-medium ml-2">Security Researcher</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-primary font-bold">→</span>
+            <div>
+              <span class="text-muted-foreground">Focus:</span>
+              <span class="text-foreground font-medium ml-2">Offensive Security</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-primary font-bold">→</span>
+            <div>
+              <span class="text-muted-foreground">OS:</span>
+              <span class="text-foreground font-medium ml-2">Arch Linux / Kali</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-primary font-bold">→</span>
+            <div>
+              <span class="text-muted-foreground">Editor:</span>
+              <span class="text-foreground font-medium ml-2">Neovim</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
