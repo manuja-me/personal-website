@@ -2,68 +2,54 @@
 import { Sun, Moon } from 'lucide-astro';
 ---
 
-<div class="theme-toggle-wrapper flex items-center gap-2.5 rounded-full border border-border/80 bg-card/90 backdrop-blur-md px-3.5 py-1.5 shadow-sm hover:border-primary/40 transition-all duration-200">
-  <Sun class="theme-sun h-4 w-4 transition-colors duration-200 text-muted-foreground/60 dark:text-muted-foreground/60" />
+<button
+  id="theme-toggle"
+  type="button"
+  role="switch"
+  aria-label="Toggle dark/light theme"
+  class="group flex items-center gap-2.5 rounded-full border border-border/80 bg-card/90 backdrop-blur-md px-3.5 py-1.5 shadow-sm hover:border-primary/40 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+>
+  <Sun class="h-4 w-4 transition-colors duration-200 text-amber-500 dark:text-muted-foreground/60 shrink-0" />
   
-  <button
-    id="theme-toggle-btn"
-    type="button"
-    role="switch"
-    aria-checked="true"
-    aria-label="Toggle theme"
-    class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary"
-  >
+  <span class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out bg-muted-foreground/30 dark:bg-primary">
     <span
       id="theme-toggle-thumb"
-      class="pointer-events-none inline-block h-4 w-4 transform rounded-full bg-background shadow-lg ring-0 transition duration-200 ease-in-out translate-x-4"
+      class="pointer-events-none inline-block h-4 w-4 transform rounded-full bg-background shadow-lg ring-0 transition duration-200 ease-in-out translate-x-0 dark:translate-x-4"
     />
-  </button>
+  </span>
 
-  <Moon class="theme-moon h-4 w-4 transition-colors duration-200 text-muted-foreground/60 dark:text-primary" />
-</div>
+  <Moon class="h-4 w-4 transition-colors duration-200 text-muted-foreground/60 dark:text-primary shrink-0" />
+</button>
 
-<script>
-  function setupThemeToggle() {
-    const toggleBtn = document.getElementById('theme-toggle-btn');
-    const toggleThumb = document.getElementById('theme-toggle-thumb');
-    const sunIcon = document.querySelector('.theme-sun');
-    const moonIcon = document.querySelector('.theme-moon');
+<script is:inline>
+  (function () {
+    function initToggle() {
+      const toggle = document.getElementById('theme-toggle');
+      if (!toggle) return;
 
-    function updateUI(isDark: boolean) {
-      if (toggleBtn) {
-        toggleBtn.setAttribute('aria-checked', isDark.toString());
-        toggleBtn.className = `relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-          isDark ? 'bg-primary' : 'bg-muted-foreground/30'
-        }`;
+      // Update aria-checked based on class
+      function syncAria() {
+        const isDark = document.documentElement.classList.contains('dark');
+        toggle.setAttribute('aria-checked', isDark ? 'true' : 'false');
       }
-      if (toggleThumb) {
-        toggleThumb.className = `pointer-events-none inline-block h-4 w-4 transform rounded-full bg-background shadow-lg ring-0 transition duration-200 ease-in-out ${
-          isDark ? 'translate-x-4' : 'translate-x-0'
-        }`;
-      }
-      if (sunIcon) {
-        sunIcon.className = `theme-sun h-4 w-4 transition-colors duration-200 ${
-          !isDark ? 'text-amber-500' : 'text-muted-foreground/60'
-        }`;
-      }
-      if (moonIcon) {
-        moonIcon.className = `theme-moon h-4 w-4 transition-colors duration-200 ${
-          isDark ? 'text-primary' : 'text-muted-foreground/60'
-        }`;
-      }
+
+      syncAria();
+
+      // Remove any previously attached listener to prevent double clicks
+      toggle.onclick = function () {
+        const isDark = document.documentElement.classList.toggle('dark');
+        try {
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        } catch (e) {}
+        syncAria();
+        window.dispatchEvent(new CustomEvent('theme-change', { detail: { isDark: isDark } }));
+      };
     }
 
-    const isCurrentDark = document.documentElement.classList.contains('dark');
-    updateUI(isCurrentDark);
-
-    toggleBtn?.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      updateUI(isDark);
-      window.dispatchEvent(new CustomEvent('theme-change', { detail: { theme: isDark ? 'dark' : 'light' } }));
-    });
-  }
-
-  setupThemeToggle();
-  document.addEventListener('astro:page-load', setupThemeToggle);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initToggle);
+    } else {
+      initToggle();
+    }
+  })();
 </script>

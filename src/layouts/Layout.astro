@@ -13,7 +13,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -38,14 +38,19 @@ const {
 
     <!-- Instant theme initialization to prevent flash -->
     <script is:inline>
-      const getThemePreference = () => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
+      (function () {
+        try {
+          const stored = localStorage.getItem('theme');
+          const isDark = stored ? stored === 'dark' : true;
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark');
         }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark';
-      };
-      const isDark = getThemePreference() === 'dark';
-      document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+      })();
     </script>
   </head>
   <body class="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
