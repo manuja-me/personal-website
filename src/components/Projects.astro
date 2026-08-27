@@ -1,73 +1,272 @@
 ---
-import { Github } from 'lucide-astro';
+import { Github, ChevronDown, CheckCircle2, Clock, Sparkles, ExternalLink } from 'lucide-astro';
 
-const projects = [
+interface ProjectTimelineItem {
+  id: string;
+  title: string;
+  url: string;
+  status: 'completed' | 'in_development' | 'planned' | 'ongoing';
+  statusLabel: string;
+  badgeColor: string;
+  phase: string;
+  description: string;
+  highlights: string[];
+  tags: string[];
+  defaultOpen?: boolean;
+}
+
+const projects: ProjectTimelineItem[] = [
   {
-    title: "Network Scanner Pro",
-    url: "https://github.com/manuja-me",
-    description: "Advanced network reconnaissance tool with service detection, vulnerability scanning, and automated reporting capabilities.",
-    tags: ["Python", "Nmap", "Scapy"]
-  },
-  {
-    title: "Linux Hardening Script",
-    url: "https://github.com/manuja-me",
-    description: "Automated security hardening suite for Linux servers following CIS benchmarks with customizable rule sets.",
-    tags: ["Bash", "Security", "Automation"]
-  },
-  {
+    id: "vulnradar",
     title: "VulnRadar",
     url: "https://github.com/manuja-me/vuln-radar",
+    status: "completed",
+    statusLabel: "Built & Released",
+    badgeColor: "text-emerald-700 dark:text-emerald-400 border-emerald-600/30 dark:border-emerald-500/30 bg-emerald-500/10",
+    phase: "v1.0 Active",
     description: "Desktop Web Vulnerability & Security Posture Scanner. Conducts passive audits on security headers, cookie policies, client-side CVE dependency risks, and credential leaks with automated risk scoring.",
-    tags: ["Rust", "Tauri v2", "Svelte 5", "TypeScript", "SQLite"]
+    highlights: [
+      "Automated HTTP security header audits (CSP, HSTS, X-Frame-Options, COOP, Permissions-Policy)",
+      "Cookie security inspection (HttpOnly, Secure, SameSite attribute validation)",
+      "Client-side CVE dependency risk detection & sensitive key exposure scanning",
+      "Embedded SQLite history database with automated security health rating (0-100)"
+    ],
+    tags: ["Rust", "Tauri v2", "Svelte 5", "TypeScript", "SQLite"],
+    defaultOpen: true
   },
   {
-    title: "CTF Writeups",
+    id: "linux-hardening",
+    title: "Linux Hardening Script",
     url: "https://github.com/manuja-me",
-    description: "Detailed writeups and solutions for various CTF challenges, covering web, binary exploitation, and cryptography.",
-    tags: ["CTF", "Writeups", "Tutorials"]
+    status: "in_development",
+    statusLabel: "Up Next / In Dev",
+    badgeColor: "text-amber-700 dark:text-amber-400 border-amber-600/30 dark:border-amber-500/30 bg-amber-500/10",
+    phase: "Next Release",
+    description: "Automated security hardening suite for Linux servers following CIS benchmarks with customizable rule sets and non-destructive audits.",
+    highlights: [
+      "Automated compliance checks aligned with CIS Benchmarks & NIST security baselines",
+      "SSH, UFW/iptables firewall, kernel sysctl tuning, and strict user permission audits",
+      "Non-destructive dry-run validation with automatic configuration backups and rollbacks",
+      "Modular multi-distro architecture targeting Debian, Ubuntu, and Arch Linux"
+    ],
+    tags: ["Bash", "Python", "Linux Security", "CIS Benchmarks", "Automation"],
+    defaultOpen: true
+  },
+  {
+    id: "network-scanner",
+    title: "Network Scanner Pro",
+    url: "https://github.com/manuja-me",
+    status: "planned",
+    statusLabel: "Planned",
+    badgeColor: "text-primary border-primary/20 bg-primary/5",
+    phase: "Roadmap",
+    description: "Advanced network reconnaissance and asset discovery tool with service fingerprinting, vulnerability scanning, and automated reporting.",
+    highlights: [
+      "High-speed asynchronous port scanning with service and banner detection",
+      "Integrated vulnerability script engine with CVE catalog matching",
+      "Exportable security assessment reports in JSON, Markdown, and HTML formats"
+    ],
+    tags: ["Python", "Nmap", "Scapy", "Reconnaissance"],
+    defaultOpen: false
+  },
+  {
+    id: "ctf-writeups",
+    title: "CTF Writeups & Security Research",
+    url: "https://github.com/manuja-me",
+    status: "ongoing",
+    statusLabel: "Continuous",
+    badgeColor: "text-primary border-primary/20 bg-primary/5",
+    phase: "Ongoing",
+    description: "Detailed writeups, binary exploit analyses, and practical solutions for CTF challenges covering web, reverse engineering, and cryptography.",
+    highlights: [
+      "Step-by-step exploit breakdowns with proof-of-concept scripts and attack vectors",
+      "Practical remediation and defensive countermeasures for each discovered vulnerability",
+      "Active documentation covering HackTheBox, TryHackMe, and competitive CTFs"
+    ],
+    tags: ["CTF", "Binary Exploitation", "Web Security", "Cryptography", "Research"],
+    defaultOpen: false
   }
 ];
 ---
 
-<section id="projects" class="min-h-screen py-24 px-6 flex items-center">
-  <div class="container mx-auto max-w-6xl">
+<section id="projects" class="min-h-screen py-24 px-6 relative flex items-center">
+  <div class="container mx-auto max-w-5xl">
+    <!-- Section Header -->
     <div class="mb-16">
       <div class="inline-block mb-4">
-        <span class="text-primary font-mono text-sm font-semibold">$ git log --oneline</span>
+        <span class="text-primary font-mono text-sm font-semibold">$ git log --graph --timeline</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-        Featured <span class="gradient-text">Projects</span>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+        Project <span class="gradient-text">Timeline</span>
       </h2>
+      <p class="text-lg text-muted-foreground font-mono max-w-2xl">
+        A chronological roadmap of security tools, active development, and upcoming releases.
+      </p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8">
+    <!-- Timeline Container -->
+    <div class="relative border-l-2 border-primary/25 dark:border-primary/30 ml-4 md:ml-6 pl-6 md:pl-10 space-y-8">
       {projects.map((project) => (
-        <div class="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 rounded-xl transition-all duration-300 group shadow-sm hover:shadow-md">
-          <div class="flex items-start justify-between mb-4">
-            <h3 class="text-2xl font-bold group-hover:text-primary transition-colors text-foreground">
-              {project.title}
-            </h3>
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View ${project.title} on GitHub`}
-            >
-              <Github class="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors hover:scale-110" />
-            </a>
+        <div class="relative group timeline-item" data-project-id={project.id}>
+          <!-- Node Dot on Timeline Spine -->
+          <div class="absolute -left-[31px] md:-left-[47px] top-6 flex items-center justify-center">
+            {project.status === 'completed' && (
+              <div class="w-8 h-8 rounded-full bg-card border-2 border-emerald-500 flex items-center justify-center shadow-[0_0_12px_rgba(16,185,129,0.4)]">
+                <CheckCircle2 class="w-4 h-4 text-emerald-500" />
+              </div>
+            )}
+            {project.status === 'in_development' && (
+              <div class="relative flex items-center justify-center">
+                <span class="animate-ping absolute inline-flex h-6 w-6 rounded-full bg-amber-400 opacity-40"></span>
+                <div class="w-8 h-8 rounded-full bg-card border-2 border-amber-500 flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.4)]">
+                  <Clock class="w-4 h-4 text-amber-500" />
+                </div>
+              </div>
+            )}
+            {project.status === 'planned' && (
+              <div class="w-8 h-8 rounded-full bg-card border-2 border-primary/40 flex items-center justify-center">
+                <Sparkles class="w-4 h-4 text-primary/70" />
+              </div>
+            )}
+            {project.status === 'ongoing' && (
+              <div class="w-8 h-8 rounded-full bg-card border-2 border-primary/40 flex items-center justify-center">
+                <div class="w-2.5 h-2.5 rounded-full bg-primary" />
+              </div>
+            )}
           </div>
-          <p class="text-muted-foreground mb-6 font-mono text-sm leading-relaxed">
-            {project.description}
-          </p>
-          <div class="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span class="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">
-                {tag}
-              </span>
-            ))}
+
+          <!-- Expandable Card -->
+          <div class="rounded-xl border border-border/80 bg-card/90 dark:bg-card/80 backdrop-blur-md hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-md overflow-hidden">
+            <!-- Card Header / Toggle Button -->
+            <button
+              type="button"
+              class="w-full p-6 md:p-8 text-left flex items-start justify-between gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary timeline-toggle-btn"
+              aria-expanded={project.defaultOpen ? "true" : "false"}
+              aria-controls={`details-${project.id}`}
+            >
+              <div class="space-y-2 flex-1">
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <span class={`text-xs px-2.5 py-0.5 rounded-full border font-mono font-semibold ${project.badgeColor}`}>
+                    {project.statusLabel}
+                  </span>
+                  <span class="text-xs text-muted-foreground font-mono">
+                    [{project.phase}]
+                  </span>
+                </div>
+
+                <h3 class="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  {project.title}
+                </h3>
+
+                <p class="text-sm md:text-base text-muted-foreground font-mono leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+
+              <!-- Chevron Indicator -->
+              <div class="flex items-center gap-3 shrink-0 pt-1">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${project.title} on GitHub`}
+                  class="p-2 rounded-md hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
+                  onclick="event.stopPropagation()"
+                >
+                  <Github class="w-5 h-5" />
+                </a>
+                <div class={`p-1.5 rounded-full bg-muted/60 text-foreground transition-transform duration-300 chevron-icon ${project.defaultOpen ? 'rotate-180' : ''}`}>
+                  <ChevronDown class="w-5 h-5" />
+                </div>
+              </div>
+            </button>
+
+            <!-- Collapsible Body Content -->
+            <div
+              id={`details-${project.id}`}
+              class={`transition-all duration-300 ease-in-out border-t border-border/40 timeline-details-content ${project.defaultOpen ? 'block' : 'hidden'}`}
+            >
+              <div class="p-6 md:p-8 pt-4 space-y-6 bg-primary/[0.02]">
+                <!-- Key Highlights -->
+                <div>
+                  <h4 class="text-xs font-mono font-semibold text-primary uppercase tracking-wider mb-3">
+                    // Key Features & Scope
+                  </h4>
+                  <ul class="space-y-2.5">
+                    {project.highlights.map((highlight) => (
+                      <li class="flex items-start gap-2.5 text-sm text-foreground/90 font-mono">
+                        <span class="text-primary font-bold mt-0.5">▹</span>
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <!-- Tech Badges & Direct Action Link -->
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-border/40">
+                  <div class="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span class="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-primary hover:underline group/link"
+                  >
+                    <span>View Repository</span>
+                    <ExternalLink class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    function initTimeline() {
+      const items = document.querySelectorAll('.timeline-item');
+      items.forEach((item) => {
+        const btn = item.querySelector('.timeline-toggle-btn');
+        const content = item.querySelector('.timeline-details-content');
+        const chevron = item.querySelector('.chevron-icon');
+
+        if (!btn || !content) return;
+
+        btn.onclick = function (e) {
+          // If clicked directly on the github anchor link inside the header, don't toggle
+          if (e.target.closest('a')) return;
+
+          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          const nextState = !isExpanded;
+
+          btn.setAttribute('aria-expanded', nextState ? 'true' : 'false');
+          if (nextState) {
+            content.classList.remove('hidden');
+            content.classList.add('block');
+            chevron?.classList.add('rotate-180');
+          } else {
+            content.classList.remove('block');
+            content.classList.add('hidden');
+            chevron?.classList.remove('rotate-180');
+          }
+        };
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTimeline);
+    } else {
+      initTimeline();
+    }
+  })();
+</script>
