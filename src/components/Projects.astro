@@ -5,14 +5,13 @@ interface ProjectTimelineItem {
   id: string;
   title: string;
   url: string;
-  status: 'completed' | 'in_development' | 'planned' | 'ongoing';
+  status: 'completed' | 'in_development' | 'planned';
   statusLabel: string;
   badgeColor: string;
   phase: string;
   description: string;
   highlights: string[];
   tags: string[];
-  defaultOpen?: boolean;
 }
 
 const projects: ProjectTimelineItem[] = [
@@ -31,8 +30,7 @@ const projects: ProjectTimelineItem[] = [
       "Client-side CVE dependency risk detection & sensitive key exposure scanning",
       "Embedded SQLite history database with automated security health rating (0-100)"
     ],
-    tags: ["Rust", "Tauri v2", "Svelte 5", "TypeScript", "SQLite"],
-    defaultOpen: true
+    tags: ["Rust", "Tauri v2", "Svelte 5", "TypeScript", "SQLite"]
   },
   {
     id: "linux-hardening",
@@ -49,8 +47,7 @@ const projects: ProjectTimelineItem[] = [
       "Non-destructive dry-run validation with automatic configuration backups and rollbacks",
       "Modular multi-distro architecture targeting Debian, Ubuntu, and Arch Linux"
     ],
-    tags: ["Bash", "Python", "Linux Security", "CIS Benchmarks", "Automation"],
-    defaultOpen: true
+    tags: ["Bash", "Python", "Linux Security", "CIS Benchmarks", "Automation"]
   },
   {
     id: "network-scanner",
@@ -66,8 +63,7 @@ const projects: ProjectTimelineItem[] = [
       "Integrated vulnerability script engine with CVE catalog matching",
       "Exportable security assessment reports in JSON, Markdown, and HTML formats"
     ],
-    tags: ["Python", "Nmap", "Scapy", "Reconnaissance"],
-    defaultOpen: false
+    tags: ["Python", "Nmap", "Scapy", "Reconnaissance"]
   }
 ];
 ---
@@ -83,7 +79,7 @@ const projects: ProjectTimelineItem[] = [
         Project <span class="gradient-text">Timeline</span>
       </h2>
       <p class="text-lg text-muted-foreground font-mono max-w-2xl">
-        A chronological roadmap of security tools, active development, and upcoming releases.
+        A chronological roadmap of security tools, active development, and upcoming releases. Click any item to expand details.
       </p>
     </div>
 
@@ -111,20 +107,15 @@ const projects: ProjectTimelineItem[] = [
                 <Sparkles class="w-4 h-4 text-primary/70" />
               </div>
             )}
-            {project.status === 'ongoing' && (
-              <div class="w-8 h-8 rounded-full bg-card border-2 border-primary/40 flex items-center justify-center">
-                <div class="w-2.5 h-2.5 rounded-full bg-primary" />
-              </div>
-            )}
           </div>
 
           <!-- Expandable Card -->
           <div class="rounded-xl border border-border/80 bg-card/90 dark:bg-card/80 backdrop-blur-md hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-md overflow-hidden">
-            <!-- Card Header / Toggle Button -->
+            <!-- Card Header / Toggle Button (Minimized by Default) -->
             <button
               type="button"
               class="w-full p-6 md:p-8 text-left flex items-start justify-between gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary timeline-toggle-btn"
-              aria-expanded={project.defaultOpen ? "true" : "false"}
+              aria-expanded="false"
               aria-controls={`details-${project.id}`}
             >
               <div class="space-y-2 flex-1">
@@ -146,7 +137,7 @@ const projects: ProjectTimelineItem[] = [
                 </p>
               </div>
 
-              <!-- Chevron Indicator -->
+              <!-- Action & Expand Icon -->
               <div class="flex items-center gap-3 shrink-0 pt-1">
                 <a
                   href={project.url}
@@ -158,16 +149,19 @@ const projects: ProjectTimelineItem[] = [
                 >
                   <Github class="w-5 h-5" />
                 </a>
-                <div class={`p-1.5 rounded-full bg-muted/60 text-foreground transition-transform duration-300 chevron-icon ${project.defaultOpen ? 'rotate-180' : ''}`}>
+                <div
+                  class="p-1.5 rounded-full bg-muted/60 text-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300 chevron-icon"
+                  title="Toggle details"
+                >
                   <ChevronDown class="w-5 h-5" />
                 </div>
               </div>
             </button>
 
-            <!-- Collapsible Body Content -->
+            <!-- Collapsible Body Content (Hidden by default) -->
             <div
               id={`details-${project.id}`}
-              class={`transition-all duration-300 ease-in-out border-t border-border/40 timeline-details-content ${project.defaultOpen ? 'block' : 'hidden'}`}
+              class="hidden transition-all duration-300 ease-in-out border-t border-border/40 timeline-details-content"
             >
               <div class="p-6 md:p-8 pt-4 space-y-6 bg-primary/[0.02]">
                 <!-- Key Highlights -->
