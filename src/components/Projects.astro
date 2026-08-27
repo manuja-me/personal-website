@@ -1,5 +1,5 @@
 ---
-import { Github, ChevronDown, CheckCircle2, Clock, Sparkles, ExternalLink } from 'lucide-astro';
+import { Github, ChevronDown, ExternalLink } from 'lucide-astro';
 
 interface ProjectTimelineItem {
   id: string;
@@ -84,27 +84,31 @@ const projects: ProjectTimelineItem[] = [
     </div>
 
     <!-- Timeline Container -->
-    <div class="relative border-l-2 border-primary/25 dark:border-primary/30 ml-4 md:ml-6 pl-6 md:pl-10 space-y-8">
+    <div class="relative border-l border-primary/20 dark:border-primary/25 ml-2 md:ml-3 pl-6 md:pl-8 space-y-6">
       {projects.map((project) => (
         <div class="relative group timeline-item" data-project-id={project.id}>
-          <!-- Node Dot on Timeline Spine -->
-          <div class="absolute -left-[31px] md:-left-[47px] top-6 flex items-center justify-center">
+          <!-- Minimal Precision Node Dot on Timeline Spine -->
+          <div class="absolute -left-[31px] md:-left-[39px] top-7 flex items-center justify-center pointer-events-none">
             {project.status === 'completed' && (
-              <div class="w-8 h-8 rounded-full bg-card border-2 border-emerald-500 flex items-center justify-center shadow-[0_0_12px_rgba(16,185,129,0.4)]">
-                <CheckCircle2 class="w-4 h-4 text-emerald-500" />
+              <div class="relative flex items-center justify-center">
+                <div class="w-3.5 h-3.5 rounded-full border-2 border-emerald-500 bg-background flex items-center justify-center shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                  <div class="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                </div>
               </div>
             )}
             {project.status === 'in_development' && (
               <div class="relative flex items-center justify-center">
-                <span class="animate-ping absolute inline-flex h-6 w-6 rounded-full bg-amber-400 opacity-40"></span>
-                <div class="w-8 h-8 rounded-full bg-card border-2 border-amber-500 flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.4)]">
-                  <Clock class="w-4 h-4 text-amber-500" />
+                <span class="animate-ping absolute inline-flex h-4 w-4 rounded-full bg-amber-400/40" />
+                <div class="w-3.5 h-3.5 rounded-full border-2 border-amber-500 bg-background flex items-center justify-center shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+                  <div class="w-1.5 h-1.5 rounded-full bg-amber-500" />
                 </div>
               </div>
             )}
             {project.status === 'planned' && (
-              <div class="w-8 h-8 rounded-full bg-card border-2 border-primary/40 flex items-center justify-center">
-                <Sparkles class="w-4 h-4 text-primary/70" />
+              <div class="relative flex items-center justify-center">
+                <div class="w-3.5 h-3.5 rounded-full border border-border/80 dark:border-primary/40 bg-background flex items-center justify-center">
+                  <div class="w-1 h-1 rounded-full bg-muted-foreground/50 dark:bg-primary/40" />
+                </div>
               </div>
             )}
           </div>
@@ -114,7 +118,7 @@ const projects: ProjectTimelineItem[] = [
             <!-- Card Header / Toggle Button (Minimized by Default) -->
             <button
               type="button"
-              class="w-full p-6 md:p-8 text-left flex items-start justify-between gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary timeline-toggle-btn"
+              class="w-full p-6 md:p-7 text-left flex items-start justify-between gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary timeline-toggle-btn"
               aria-expanded="false"
               aria-controls={`details-${project.id}`}
             >
@@ -128,17 +132,17 @@ const projects: ProjectTimelineItem[] = [
                   </span>
                 </div>
 
-                <h3 class="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
+                <h3 class="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
 
-                <p class="text-sm md:text-base text-muted-foreground font-mono leading-relaxed">
+                <p class="text-sm text-muted-foreground font-mono leading-relaxed">
                   {project.description}
                 </p>
               </div>
 
               <!-- Action & Expand Icon -->
-              <div class="flex items-center gap-3 shrink-0 pt-1">
+              <div class="flex items-center gap-2.5 shrink-0 pt-1">
                 <a
                   href={project.url}
                   target="_blank"
@@ -147,13 +151,13 @@ const projects: ProjectTimelineItem[] = [
                   class="p-2 rounded-md hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
                   onclick="event.stopPropagation()"
                 >
-                  <Github class="w-5 h-5" />
+                  <Github class="w-4 h-4" />
                 </a>
                 <div
-                  class="p-1.5 rounded-full bg-muted/60 text-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300 chevron-icon"
+                  class="p-1.5 rounded-md bg-muted/50 text-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300 chevron-icon"
                   title="Toggle details"
                 >
-                  <ChevronDown class="w-5 h-5" />
+                  <ChevronDown class="w-4 h-4" />
                 </div>
               </div>
             </button>
@@ -163,16 +167,16 @@ const projects: ProjectTimelineItem[] = [
               id={`details-${project.id}`}
               class="hidden transition-all duration-300 ease-in-out border-t border-border/40 timeline-details-content"
             >
-              <div class="p-6 md:p-8 pt-4 space-y-6 bg-primary/[0.02]">
+              <div class="p-6 md:p-7 pt-4 space-y-5 bg-primary/[0.02]">
                 <!-- Key Highlights -->
                 <div>
                   <h4 class="text-xs font-mono font-semibold text-primary uppercase tracking-wider mb-3">
                     // Key Features & Scope
                   </h4>
-                  <ul class="space-y-2.5">
+                  <ul class="space-y-2">
                     {project.highlights.map((highlight) => (
-                      <li class="flex items-start gap-2.5 text-sm text-foreground/90 font-mono">
-                        <span class="text-primary font-bold mt-0.5">▹</span>
+                      <li class="flex items-start gap-2 text-sm text-foreground/90 font-mono">
+                        <span class="text-primary font-bold mt-0.5 text-xs">▹</span>
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -181,9 +185,9 @@ const projects: ProjectTimelineItem[] = [
 
                 <!-- Tech Badges & Direct Action Link -->
                 <div class="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-border/40">
-                  <div class="flex flex-wrap gap-2">
+                  <div class="flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
-                      <span class="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">
+                      <span class="text-xs px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">
                         {tag}
                       </span>
                     ))}
