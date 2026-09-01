@@ -71,11 +71,11 @@ const projects: ProjectTimelineItem[] = [
 <section id="projects" class="min-h-screen py-24 px-6 relative flex items-center">
   <div class="container mx-auto max-w-5xl">
     <!-- Section Header -->
-    <div class="mb-16">
-      <div class="inline-block mb-4">
-        <span class="text-primary font-mono text-sm font-semibold">$ git log --graph --timeline</span>
+    <div class="mb-16 projects-header-anim">
+      <div class="inline-block mb-4 cursor-pointer group" id="projects-cmd-badge">
+        <span class="text-primary font-mono text-sm font-semibold anime-decrypt-target" data-original-text="$ git log --graph --timeline">$ git log --graph --timeline</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-foreground anime-decrypt-target cursor-pointer" data-original-text="Project Timeline">
         Project <span class="gradient-text">Timeline</span>
       </h2>
       <p class="text-lg text-muted-foreground font-mono max-w-2xl">
@@ -88,7 +88,7 @@ const projects: ProjectTimelineItem[] = [
       {projects.map((project) => (
         <div class="relative group timeline-item" data-project-id={project.id}>
           <!-- Minimal Precision Node Dot on Timeline Spine -->
-          <div class="absolute -left-[31px] md:-left-[39px] top-7 flex items-center justify-center pointer-events-none">
+          <div class="timeline-node absolute -left-[31px] md:-left-[39px] top-7 flex items-center justify-center pointer-events-none">
             {project.status === 'completed' && (
               <div class="relative flex items-center justify-center">
                 <div class="w-3.5 h-3.5 rounded-full border-2 border-emerald-500 bg-background flex items-center justify-center shadow-[0_0_8px_rgba(16,185,129,0.5)]">
@@ -114,7 +114,7 @@ const projects: ProjectTimelineItem[] = [
           </div>
 
           <!-- Expandable Card -->
-          <div class="rounded-xl border border-border/80 bg-card/90 dark:bg-card/80 backdrop-blur-md hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-md overflow-hidden">
+          <div class="timeline-card rounded-xl border border-border/80 bg-card/90 dark:bg-card/80 backdrop-blur-md hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-md overflow-hidden">
             <!-- Card Header / Toggle Button (Minimized by Default) -->
             <button
               type="button"
@@ -165,9 +165,9 @@ const projects: ProjectTimelineItem[] = [
             <!-- Collapsible Body Content (Hidden by default) -->
             <div
               id={`details-${project.id}`}
-              class="hidden transition-all duration-300 ease-in-out border-t border-border/40 timeline-details-content"
+              class="hidden overflow-hidden border-t border-border/40 timeline-details-content"
             >
-              <div class="p-6 md:p-7 pt-4 space-y-5 bg-primary/[0.02]">
+              <div class="p-6 md:p-7 pt-4 space-y-5 bg-primary/[0.02] details-inner-wrap">
                 <!-- Key Highlights -->
                 <div>
                   <h4 class="text-xs font-mono font-semibold text-primary uppercase tracking-wider mb-3">
@@ -175,7 +175,7 @@ const projects: ProjectTimelineItem[] = [
                   </h4>
                   <ul class="space-y-2">
                     {project.highlights.map((highlight) => (
-                      <li class="flex items-start gap-2 text-sm text-foreground/90 font-mono">
+                      <li class="project-highlight-item flex items-start gap-2 text-sm text-foreground/90 font-mono">
                         <span class="text-primary font-bold mt-0.5 text-xs">▹</span>
                         <span>{highlight}</span>
                       </li>
@@ -212,42 +212,147 @@ const projects: ProjectTimelineItem[] = [
   </div>
 </section>
 
-<script is:inline>
-  (function () {
-    function initTimeline() {
-      const items = document.querySelectorAll('.timeline-item');
-      items.forEach((item) => {
-        const btn = item.querySelector('.timeline-toggle-btn');
-        const content = item.querySelector('.timeline-details-content');
-        const chevron = item.querySelector('.chevron-icon');
+<script>
+  import { animate, createTimeline, stagger, createSpring } from 'animejs';
 
-        if (!btn || !content) return;
+  function initTimeline() {
+    const projectsSection = document.getElementById('projects');
+    if (!projectsSection) return;
 
-        btn.onclick = function (e) {
-          // If clicked directly on the github anchor link inside the header, don't toggle
-          if (e.target.closest('a')) return;
+    let hasAnimated = false;
 
-          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-          const nextState = !isExpanded;
+    function runEntrance() {
+      if (hasAnimated) return;
+      hasAnimated = true;
 
-          btn.setAttribute('aria-expanded', nextState ? 'true' : 'false');
-          if (nextState) {
-            content.classList.remove('hidden');
-            content.classList.add('block');
-            chevron?.classList.add('rotate-180');
-          } else {
-            content.classList.remove('block');
-            content.classList.add('hidden');
-            chevron?.classList.remove('rotate-180');
+      const tl = createTimeline({ defaults: { ease: 'outBack' } });
+
+      tl.add('.projects-header-anim', {
+        opacity: [0, 1],
+        translateY: [30, 0],
+        duration: 600
+      })
+      .add('.timeline-item', {
+        opacity: [0, 1],
+        translateX: [-25, 0],
+        delay: stagger(120),
+        duration: 600
+      }, '-=300');
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runEntrance();
+            observer.disconnect();
           }
-        };
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(projectsSection);
+    } else {
+      runEntrance();
+    }
+
+    // Anime.js Accordion Expand / Collapse
+    const items = document.querySelectorAll('.timeline-item');
+    items.forEach((item) => {
+      const btn = item.querySelector('.timeline-toggle-btn');
+      const content = item.querySelector('.timeline-details-content') as HTMLElement;
+      const chevron = item.querySelector('.chevron-icon');
+
+      if (!btn || !content) return;
+
+      btn.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).closest('a')) return;
+
+        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+        const nextState = !isExpanded;
+
+        btn.setAttribute('aria-expanded', nextState ? 'true' : 'false');
+
+        if (nextState) {
+          content.classList.remove('hidden');
+          content.classList.add('block');
+          
+          const fullHeight = content.scrollHeight;
+          
+          animate(content, {
+            height: [0, fullHeight],
+            opacity: [0, 1],
+            duration: 350,
+            ease: 'outQuart',
+            onComplete: () => {
+              content.style.height = 'auto';
+            }
+          });
+
+          const highlights = content.querySelectorAll('.project-highlight-item');
+          animate(highlights, {
+            translateX: [-15, 0],
+            opacity: [0, 1],
+            delay: stagger(40),
+            duration: 300,
+            ease: 'outBack'
+          });
+
+          if (chevron) {
+            animate(chevron, {
+              rotate: 180,
+              duration: 250,
+              ease: 'outBack'
+            });
+          }
+        } else {
+          const currentHeight = content.offsetHeight;
+          animate(content, {
+            height: [currentHeight, 0],
+            opacity: [1, 0],
+            duration: 250,
+            ease: 'inOutQuad',
+            onComplete: () => {
+              content.classList.remove('block');
+              content.classList.add('hidden');
+            }
+          });
+
+          if (chevron) {
+            animate(chevron, {
+              rotate: 0,
+              duration: 250,
+              ease: 'outBack'
+            });
+          }
+        }
+      });
+    });
+
+    // Decrypt on badge hover
+    const badge = document.getElementById('projects-cmd-badge');
+    if (badge) {
+      badge.addEventListener('mouseenter', () => {
+        const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
+        if (!span) return;
+        const original = span.getAttribute('data-original-text') || span.textContent || '';
+        const chars = '01#$*&abcdef';
+        let iter = 0;
+        const int = setInterval(() => {
+          span.textContent = original
+            .split('')
+            .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
+            .join('');
+          if (iter >= original.length) clearInterval(int);
+          iter += 1/2;
+        }, 30);
       });
     }
+  }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initTimeline);
-    } else {
-      initTimeline();
-    }
-  })();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTimeline);
+  } else {
+    initTimeline();
+  }
 </script>
+

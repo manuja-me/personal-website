@@ -4,26 +4,34 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Skills from '../components/Skills.astro';
+import AnimeGridRipple from '../components/AnimeGridRipple.astro';
 import Projects from '../components/Projects.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import AnimePlayground from '../components/AnimePlayground.astro';
 ---
 
 <Layout>
-  <main class="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
+  <main class="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary relative">
     <!-- Theme Toggle - Fixed Position -->
     <div class="fixed top-6 right-6 z-50">
       <ThemeToggle />
     </div>
 
+    <!-- Anime.js Interactive Studio HUD Controller -->
+    <AnimePlayground />
+
     <!-- Hero Section -->
     <Hero />
 
-    <!-- About Section -->
+    <!-- About Section with Physics Badges -->
     <About />
 
     <!-- Skills / Expertise Section -->
     <Skills />
+
+    <!-- Anime.js Interactive Cyber Grid Matrix -->
+    <AnimeGridRipple />
 
     <!-- Projects Section -->
     <Projects />
@@ -35,3 +43,4 @@ import Footer from '../components/Footer.astro';
     <Footer />
   </main>
 </Layout>
+

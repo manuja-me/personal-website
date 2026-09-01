@@ -1,5 +1,5 @@
 ---
-import { Mail } from 'lucide-astro';
+import { Mail, Sparkles } from 'lucide-astro';
 ---
 
 <section id="contact" class="min-h-screen py-24 px-6 flex items-center relative overflow-hidden">
@@ -8,16 +8,16 @@ import { Mail } from 'lucide-astro';
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)] pointer-events-none"></div>
 
   <div class="container mx-auto max-w-4xl relative z-10">
-    <div class="relative overflow-hidden rounded-xl border border-primary/30 bg-card/90 dark:bg-card/40 backdrop-blur-xl shadow-lg dark:shadow-[0_0_80px_-20px_hsl(var(--primary)/0.3)]">
+    <div class="contact-card-box relative overflow-hidden rounded-2xl border border-primary/30 bg-card/90 dark:bg-card/40 backdrop-blur-xl shadow-lg dark:shadow-[0_0_80px_-20px_hsl(var(--primary)/0.3)]">
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,hsl(var(--primary)/0.15),transparent)] pointer-events-none"></div>
-      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+      <div id="contact-top-laser" class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+      <div id="contact-bottom-laser" class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
       
-      <div class="relative p-12 md:p-16 text-center">
-        <div class="inline-block mb-6">
-          <span class="text-primary font-mono text-sm font-semibold">$ echo "Let's connect"</span>
+      <div class="relative p-12 md:p-16 text-center contact-content-anim">
+        <div class="inline-block mb-6 cursor-pointer group" id="contact-cmd-badge">
+          <span class="text-primary font-mono text-sm font-semibold anime-decrypt-target" data-original-text="$ echo &quot;Let's connect&quot;">$ echo &quot;Let's connect&quot;</span>
         </div>
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground anime-decrypt-target cursor-pointer" data-original-text="Let's Build Something Secure Together">
           Let's Build Something
           <span class="block gradient-text mt-2">Secure Together</span>
         </h2>
@@ -26,8 +26,9 @@ import { Mail } from 'lucide-astro';
         </p>
         <div class="flex justify-center">
           <a
+            id="contact-cta-btn"
             href="mailto:manuja.public@gmail.com?subject=Portfolio%20Contact&body=Hi%20Manuja,%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20discuss..."
-            class="inline-flex items-center justify-center rounded-md bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-10 py-5 text-lg glow-terminal shadow-md cursor-pointer transition-all duration-300"
+            class="contact-magnetic-btn inline-flex items-center justify-center rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-10 py-5 text-lg glow-terminal shadow-md cursor-pointer transition-all duration-300 select-none"
           >
             <Mail class="mr-2 h-5 w-5" />
             Contact Me
@@ -37,3 +38,116 @@ import { Mail } from 'lucide-astro';
     </div>
   </div>
 </section>
+
+<script>
+  import { animate, createSpring, createTimeline } from 'animejs';
+
+  function initContactAnimations() {
+    const contactSection = document.getElementById('contact');
+    if (!contactSection) return;
+
+    let hasAnimated = false;
+
+    function runEntrance() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      createTimeline({ defaults: { ease: 'outBack' } })
+        .add('.contact-card-box', {
+          scale: [0.92, 1],
+          opacity: [0, 1],
+          duration: 700
+        })
+        .add('.contact-content-anim > *', {
+          translateY: [20, 0],
+          opacity: [0, 1],
+          duration: 500
+        }, '-=400');
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runEntrance();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.2 });
+
+      observer.observe(contactSection);
+    } else {
+      runEntrance();
+    }
+
+    // Laser beam sweep animation with Anime.js
+    animate('#contact-top-laser', {
+      translateX: ['-100%', '100%'],
+      duration: 3000,
+      loop: true,
+      ease: 'inOutSine'
+    });
+
+    animate('#contact-bottom-laser', {
+      translateX: ['100%', '-100%'],
+      duration: 3000,
+      loop: true,
+      ease: 'inOutSine'
+    });
+
+    // Magnetic Button Spring Hover
+    const btn = document.getElementById('contact-cta-btn');
+    if (btn) {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        animate(btn, {
+          x: x * 0.35,
+          y: y * 0.35,
+          duration: 150,
+          ease: 'outQuad'
+        });
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        animate(btn, {
+          x: 0,
+          y: 0,
+          ease: createSpring({
+            stiffness: 260,
+            damping: 10
+          })
+        });
+      });
+    }
+
+    // Decrypt on badge hover
+    const badge = document.getElementById('contact-cmd-badge');
+    if (badge) {
+      badge.addEventListener('mouseenter', () => {
+        const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
+        if (!span) return;
+        const original = span.getAttribute('data-original-text') || span.textContent || '';
+        const chars = '01#$*&abcdef';
+        let iter = 0;
+        const int = setInterval(() => {
+          span.textContent = original
+            .split('')
+            .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
+            .join('');
+          if (iter >= original.length) clearInterval(int);
+          iter += 1/2;
+        }, 30);
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactAnimations);
+  } else {
+    initContactAnimations();
+  }
+</script>
+

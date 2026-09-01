@@ -1,0 +1,224 @@
+---
+import { Grid, Sparkles, Activity, Play } from 'lucide-astro';
+---
+
+<section id="cyber-matrix" class="py-20 px-6 relative overflow-hidden bg-background/50 border-y border-border/40">
+  <!-- Subtle Background Glow -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.08),transparent_70%)] pointer-events-none"></div>
+
+  <div class="container mx-auto max-w-6xl relative z-10">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-primary/10 border border-primary/20 text-primary font-mono text-xs font-semibold mb-3">
+          <Activity class="w-3.5 h-3.5 animate-pulse" />
+          <span>ANIME.JS // STAGGERED MATRIX</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
+          Interactive <span class="gradient-text">Threat Matrix</span>
+        </h2>
+        <p class="text-muted-foreground font-mono text-sm mt-2 max-w-xl">
+          Click any cell or trigger scanning wave pulses. Powered by Anime.js 2D grid staggering with spring physics.
+        </p>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button
+          id="btn-matrix-pulse"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-mono text-xs font-semibold transition-all hover:scale-105 cursor-pointer shadow-sm active:scale-95"
+        >
+          <Sparkles class="w-3.5 h-3.5" />
+          Center Ripple
+        </button>
+        <button
+          id="btn-matrix-wave"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-card hover:bg-muted text-foreground border border-border font-mono text-xs font-semibold transition-all hover:scale-105 cursor-pointer shadow-sm active:scale-95"
+        >
+          <Play class="w-3.5 h-3.5 text-primary" />
+          Diagonal Wave
+        </button>
+        <button
+          id="btn-matrix-scan"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-card hover:bg-muted text-foreground border border-border font-mono text-xs font-semibold transition-all hover:scale-105 cursor-pointer shadow-sm active:scale-95"
+        >
+          <Grid class="w-3.5 h-3.5 text-primary" />
+          Radar Sweep
+        </button>
+      </div>
+    </div>
+
+    <!-- Matrix Card Container -->
+    <div class="relative rounded-2xl border border-primary/30 bg-card/80 dark:bg-card/40 backdrop-blur-xl p-6 md:p-8 shadow-xl overflow-hidden">
+      <!-- Top HUD Details -->
+      <div class="flex items-center justify-between border-b border-border/50 pb-4 mb-6 font-mono text-xs text-muted-foreground">
+        <div class="flex items-center gap-3">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+          <span class="text-foreground font-semibold">GRID STATUS: ACTIVE</span>
+          <span class="hidden sm:inline text-muted-foreground/60">|</span>
+          <span class="hidden sm:inline" id="matrix-node-info">196 Interactive Nodes</span>
+        </div>
+        <div class="flex items-center gap-2 text-primary">
+          <span>anime.stagger(grid: [14, 14])</span>
+        </div>
+      </div>
+
+      <!-- The 2D Interactive Grid -->
+      <div class="flex justify-center items-center py-4">
+        <div
+          id="anime-cyber-grid"
+          class="grid grid-cols-14 gap-1.5 sm:gap-2 p-2 sm:p-4 rounded-xl bg-background/60 dark:bg-background/80 border border-primary/20 shadow-inner select-none cursor-pointer max-w-full"
+          style="grid-template-columns: repeat(14, minmax(0, 1fr));"
+        >
+          <!-- 14x14 = 196 cells will be rendered or generated -->
+        </div>
+      </div>
+
+      <!-- Footer Info -->
+      <div class="mt-6 pt-4 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-muted-foreground gap-2">
+        <span class="flex items-center gap-1.5">
+          <span class="text-primary font-bold">💡 TIP:</span> Hover or click on nodes to emit wave vectors
+        </span>
+        <span class="text-primary/80 font-mono">Anime.js v4 Spring Engine</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animate, createTimeline, stagger } from 'animejs';
+
+  function initCyberMatrix() {
+    const gridContainer = document.getElementById('anime-cyber-grid');
+    if (!gridContainer) return;
+
+    const COLS = 14;
+    const ROWS = 14;
+    const TOTAL = COLS * ROWS;
+
+    gridContainer.innerHTML = '';
+
+    // Generate grid items
+    for (let i = 0; i < TOTAL; i++) {
+      const el = document.createElement('div');
+      el.className = 'cyber-node w-3.5 h-3.5 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-md bg-primary/10 border border-primary/25 hover:border-primary transition-colors flex items-center justify-center';
+      el.dataset.index = i.toString();
+
+      const inner = document.createElement('div');
+      inner.className = 'w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-[2px] bg-primary/40 pointer-events-none';
+      el.appendChild(inner);
+
+      gridContainer.appendChild(el);
+    }
+
+    function triggerRipple(fromIndex: number | 'center' | 'first' | 'last' = 'center') {
+      const nodes = gridContainer?.querySelectorAll('.cyber-node');
+      if (!nodes || nodes.length === 0) return;
+
+      animate(nodes, {
+        scale: [
+          { to: 0.35, duration: 180, ease: 'inQuad' },
+          { to: 1.35, duration: 320, ease: 'outBack(2)' },
+          { to: 1, duration: 350, ease: 'outElastic(1, 0.6)' }
+        ],
+        rotateZ: [
+          { to: 90, duration: 250, ease: 'outQuad' },
+          { to: 0, duration: 400, ease: 'outBack' }
+        ],
+        backgroundColor: [
+          { to: 'hsl(142, 76%, 50%)', duration: 180 },
+          { to: 'hsl(160, 84%, 40%)', duration: 300 },
+          { to: 'hsl(142, 76%, 45%, 0.1)', duration: 400 }
+        ],
+        delay: stagger(35, {
+          grid: [COLS, ROWS],
+          from: fromIndex,
+          ease: 'outQuad'
+        })
+      });
+    }
+
+    function triggerWave() {
+      const nodes = gridContainer?.querySelectorAll('.cyber-node');
+      if (!nodes || nodes.length === 0) return;
+
+      animate(nodes, {
+        translateY: [
+          { to: -14, duration: 220, ease: 'outSine' },
+          { to: 0, duration: 350, ease: 'outBounce' }
+        ],
+        scale: [
+          { to: 1.25, duration: 220 },
+          { to: 1, duration: 350 }
+        ],
+        delay: stagger(25, {
+          grid: [COLS, ROWS],
+          from: 'first',
+          axis: 'x'
+        })
+      });
+    }
+
+    function triggerScan() {
+      const nodes = gridContainer?.querySelectorAll('.cyber-node');
+      if (!nodes || nodes.length === 0) return;
+
+      createTimeline()
+        .add(nodes, {
+          scale: [
+            { to: 1.4, duration: 160 },
+            { to: 1, duration: 240 }
+          ],
+          backgroundColor: [
+            { to: 'hsl(142, 85%, 60%)', duration: 150 },
+            { to: 'hsl(142, 76%, 45%, 0.1)', duration: 350 }
+          ],
+          delay: stagger(30, {
+            grid: [COLS, ROWS],
+            from: 'last',
+            axis: 'y'
+          })
+        });
+    }
+
+    // Grid item click listener
+    gridContainer.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest('.cyber-node') as HTMLElement;
+      if (!target) return;
+      const index = parseInt(target.dataset.index || '0', 10);
+      triggerRipple(index);
+    });
+
+    // Grid item mouseover
+    gridContainer.addEventListener('mouseover', (e) => {
+      const target = (e.target as HTMLElement).closest('.cyber-node') as HTMLElement;
+      if (!target) return;
+
+      animate(target, {
+        scale: [1, 1.45, 1],
+        rotate: [0, 45, 0],
+        duration: 400,
+        ease: 'outBack'
+      });
+    });
+
+    // Control buttons
+    document.getElementById('btn-matrix-pulse')?.addEventListener('click', () => triggerRipple('center'));
+    document.getElementById('btn-matrix-wave')?.addEventListener('click', triggerWave);
+    document.getElementById('btn-matrix-scan')?.addEventListener('click', triggerScan);
+
+    // Initial subtle pulse
+    setTimeout(() => {
+      triggerRipple('center');
+    }, 600);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCyberMatrix);
+  } else {
+    initCyberMatrix();
+  }
+</script>

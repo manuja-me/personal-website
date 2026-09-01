@@ -1,20 +1,22 @@
 ---
+import AnimeDraggableTokens from './AnimeDraggableTokens.astro';
+
 const skills = ["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python", "Bash", "Docker", "AWS"];
 ---
 
-<section id="about" class="min-h-screen py-24 px-6 relative flex items-center">
+<section id="about" class="min-h-screen py-24 px-6 relative flex flex-col justify-center">
   <div class="container mx-auto max-w-6xl">
-    <div class="mb-16">
-      <div class="inline-block mb-4">
-        <span class="text-primary font-mono text-sm font-semibold">$ cat about.txt</span>
+    <div class="mb-16 about-header-anim">
+      <div class="inline-block mb-4 cursor-pointer group" id="about-cmd-badge">
+        <span class="text-primary font-mono text-sm font-semibold anime-decrypt-target" data-original-text="$ cat about.txt">$ cat about.txt</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground anime-decrypt-target cursor-pointer" data-original-text="About Me">
         About <span class="gradient-text">Me</span>
       </h2>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div>
+    <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
+      <div class="about-text-anim">
         <p class="text-lg text-foreground/90 leading-relaxed mb-6 font-mono">
           Passionate about exploring the depths of cybersecurity and the endless possibilities of Linux systems. 
           I specialize in identifying vulnerabilities, hardening systems, and building secure infrastructure.
@@ -23,39 +25,39 @@ const skills = ["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python",
           When I'm not breaking into systems (ethically, of course), you'll find me contributing to open-source 
           projects, writing security tools, or deep-diving into kernel exploits and reverse engineering.
         </p>
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-2 about-skills-container">
           {skills.map((skill) => (
-            <span class="px-3 py-1 text-sm font-mono bg-primary/10 text-primary border border-primary/25 rounded font-medium">
+            <span class="about-skill-pill px-3 py-1 text-sm font-mono bg-primary/10 text-primary border border-primary/25 rounded font-medium hover:border-primary hover:scale-105 transition-all cursor-default">
               {skill}
             </span>
           ))}
         </div>
       </div>
 
-      <div class="p-8 bg-card/80 backdrop-blur-sm border border-border/80 rounded-xl terminal-border shadow-sm">
+      <div class="about-terminal-card p-8 bg-card/80 backdrop-blur-sm border border-border/80 rounded-xl terminal-border shadow-sm">
         <div class="space-y-4 font-mono text-sm">
-          <div class="flex items-start gap-3">
+          <div class="terminal-row flex items-start gap-3">
             <span class="text-primary font-bold">→</span>
             <div>
               <span class="text-muted-foreground">Role:</span>
               <span class="text-foreground font-medium ml-2">Security Researcher</span>
             </div>
           </div>
-          <div class="flex items-start gap-3">
+          <div class="terminal-row flex items-start gap-3">
             <span class="text-primary font-bold">→</span>
             <div>
               <span class="text-muted-foreground">Focus:</span>
               <span class="text-foreground font-medium ml-2">Offensive Security</span>
             </div>
           </div>
-          <div class="flex items-start gap-3">
+          <div class="terminal-row flex items-start gap-3">
             <span class="text-primary font-bold">→</span>
             <div>
               <span class="text-muted-foreground">OS:</span>
               <span class="text-foreground font-medium ml-2">Arch Linux / Kali</span>
             </div>
           </div>
-          <div class="flex items-start gap-3">
+          <div class="terminal-row flex items-start gap-3">
             <span class="text-primary font-bold">→</span>
             <div>
               <span class="text-muted-foreground">Editor:</span>
@@ -65,5 +67,96 @@ const skills = ["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python",
         </div>
       </div>
     </div>
+
+    <!-- Physics Draggable Badges Component -->
+    <AnimeDraggableTokens />
   </div>
 </section>
+
+<script>
+  import { animate, createTimeline, stagger } from 'animejs';
+
+  function initAboutAnimations() {
+    const aboutSection = document.getElementById('about');
+    if (!aboutSection) return;
+
+    let hasAnimated = false;
+
+    function runEntrance() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      const tl = createTimeline({ defaults: { ease: 'outBack' } });
+
+      tl.add('.about-header-anim', {
+        opacity: [0, 1],
+        translateY: [25, 0],
+        duration: 600
+      })
+      .add('.about-text-anim', {
+        opacity: [0, 1],
+        translateX: [-30, 0],
+        duration: 600
+      }, '-=400')
+      .add('.about-skill-pill', {
+        scale: [0.6, 1],
+        opacity: [0, 1],
+        delay: stagger(50),
+        duration: 400
+      }, '-=300')
+      .add('.about-terminal-card', {
+        opacity: [0, 1],
+        translateX: [30, 0],
+        duration: 600
+      }, '-=500')
+      .add('.terminal-row', {
+        opacity: [0, 1],
+        translateX: [15, 0],
+        delay: stagger(70),
+        duration: 400
+      }, '-=300');
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runEntrance();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(aboutSection);
+    } else {
+      runEntrance();
+    }
+
+    // Decrypt on hover
+    const badge = document.getElementById('about-cmd-badge');
+    if (badge) {
+      badge.addEventListener('mouseenter', () => {
+        const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
+        if (!span) return;
+        const original = span.getAttribute('data-original-text') || span.textContent || '';
+        const chars = '01#$*&abcdef';
+        let iter = 0;
+        const int = setInterval(() => {
+          span.textContent = original
+            .split('')
+            .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
+            .join('');
+          if (iter >= original.length) clearInterval(int);
+          iter += 1/2;
+        }, 30);
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAboutAnimations);
+  } else {
+    initAboutAnimations();
+  }
+</script>
+

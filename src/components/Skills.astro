@@ -37,11 +37,11 @@ const expertise = [
 
 <section id="skills" class="min-h-screen py-24 px-6 relative bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent flex items-center">
   <div class="container mx-auto">
-    <div class="text-center mb-20">
-      <div class="inline-block mb-4">
-        <span class="text-primary font-mono text-sm font-semibold">$ ls -la /skills</span>
+    <div class="text-center mb-20 skills-header-anim">
+      <div class="inline-block mb-4 cursor-pointer group" id="skills-cmd-badge">
+        <span class="text-primary font-mono text-sm font-semibold anime-decrypt-target" data-original-text="$ ls -la /skills">$ ls -la /skills</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground anime-decrypt-target cursor-pointer" data-original-text="Core Expertise">
         Core <span class="gradient-text">Expertise</span>
       </h2>
       <p class="text-xl text-muted-foreground max-w-2xl mx-auto font-mono">
@@ -49,12 +49,12 @@ const expertise = [
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto" id="skills-grid-container">
       {expertise.map((item) => {
         const Icon = item.icon;
         return (
-          <div class="p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 rounded-xl transition-all duration-300 group shadow-sm hover:shadow-md">
-            <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-primary/30">
+          <div class="skill-card p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 rounded-xl transition-all duration-300 group shadow-sm hover:shadow-md cursor-pointer select-none">
+            <div class="skill-icon-wrapper w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 border border-primary/30 group-hover:bg-primary/20 transition-colors">
               <Icon class="w-7 h-7 text-primary" />
             </div>
             <h3 class="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">
@@ -69,3 +69,128 @@ const expertise = [
     </div>
   </div>
 </section>
+
+<script>
+  import { animate, createTimeline, createSpring, stagger } from 'animejs';
+
+  function initSkillsAnimations() {
+    const skillsSection = document.getElementById('skills');
+    if (!skillsSection) return;
+
+    let hasAnimated = false;
+
+    function runEntrance() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      const tl = createTimeline({ defaults: { ease: 'outBack' } });
+
+      tl.add('.skills-header-anim', {
+        opacity: [0, 1],
+        translateY: [30, 0],
+        duration: 600
+      })
+      .add('.skill-card', {
+        opacity: [0, 1],
+        translateY: [40, 0],
+        scale: [0.9, 1],
+        delay: stagger(90),
+        duration: 600
+      }, '-=300');
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runEntrance();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(skillsSection);
+    } else {
+      runEntrance();
+    }
+
+    // 3D Tilt + Spring Physics on Card Hover
+    const cards = document.querySelectorAll('.skill-card') as NodeListOf<HTMLElement>;
+    cards.forEach((card) => {
+      const icon = card.querySelector('.skill-icon-wrapper');
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const rotateX = (-y / rect.height) * 14;
+        const rotateY = (x / rect.width) * 14;
+
+        animate(card, {
+          rotateX: rotateX,
+          rotateY: rotateY,
+          translateZ: 20,
+          duration: 150,
+          ease: 'linear'
+        });
+
+        if (icon) {
+          animate(icon, {
+            scale: 1.15,
+            duration: 150
+          });
+        }
+      });
+
+      card.addEventListener('mouseleave', () => {
+        animate(card, {
+          rotateX: 0,
+          rotateY: 0,
+          translateZ: 0,
+          ease: createSpring({
+            stiffness: 220,
+            damping: 12
+          })
+        });
+
+        if (icon) {
+          animate(icon, {
+            scale: 1,
+            ease: createSpring({
+              stiffness: 220,
+              damping: 12
+            })
+          });
+        }
+      });
+    });
+
+    // Decrypt on badge hover
+    const badge = document.getElementById('skills-cmd-badge');
+    if (badge) {
+      badge.addEventListener('mouseenter', () => {
+        const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
+        if (!span) return;
+        const original = span.getAttribute('data-original-text') || span.textContent || '';
+        const chars = '01#$*&abcdef';
+        let iter = 0;
+        const int = setInterval(() => {
+          span.textContent = original
+            .split('')
+            .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
+            .join('');
+          if (iter >= original.length) clearInterval(int);
+          iter += 1/2;
+        }, 30);
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSkillsAnimations);
+  } else {
+    initSkillsAnimations();
+  }
+</script>
+
