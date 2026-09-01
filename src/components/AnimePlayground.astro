@@ -56,12 +56,12 @@ import { Play, Code, Sparkles, RefreshCw, Terminal, Eye, EyeOff, ShieldAlert } f
         </button>
 
         <button
-          id="hud-trigger-pulse"
+          id="hud-trigger-radar"
           type="button"
           class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-semibold text-xs transition-all hover:scale-102 active:scale-98 cursor-pointer"
         >
           <RefreshCw class="w-3.5 h-3.5" />
-          Matrix Pulse
+          Radar Scan
         </button>
 
         <button
@@ -70,16 +70,16 @@ import { Play, Code, Sparkles, RefreshCw, Terminal, Eye, EyeOff, ShieldAlert } f
           class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-semibold text-xs transition-all hover:scale-102 active:scale-98 cursor-pointer"
         >
           <ShieldAlert class="w-3.5 h-3.5" />
-          Spring Shake
+          Spring Cards
         </button>
 
         <button
-          id="hud-trigger-wave"
+          id="hud-trigger-laser"
           type="button"
           class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-semibold text-xs transition-all hover:scale-102 active:scale-98 cursor-pointer"
         >
           <Play class="w-3.5 h-3.5" />
-          Diagonal Wave
+          Laser Pulse
         </button>
       </div>
     </div>
@@ -183,71 +183,54 @@ import { Play, Code, Sparkles, RefreshCw, Terminal, Eye, EyeOff, ShieldAlert } f
       }
     });
 
-    // 2. Trigger Matrix Pulse
-    document.getElementById('hud-trigger-pulse')?.addEventListener('click', () => {
-      const nodes = document.querySelectorAll('.cyber-node');
-      if (nodes.length > 0) {
-        animate(nodes, {
-          scale: [
-            { to: 0.3, duration: 180 },
-            { to: 1.4, duration: 300, ease: 'outBack' },
-            { to: 1, duration: 300, ease: 'outElastic' }
-          ],
-          backgroundColor: [
-            { to: 'hsl(142, 80%, 55%)', duration: 180 },
-            { to: 'hsl(142, 76%, 45%, 0.1)', duration: 400 }
-          ],
-          delay: stagger(40, { grid: [14, 14], from: 'center' })
+    // 2. Trigger Radar Scan
+    document.getElementById('hud-trigger-radar')?.addEventListener('click', () => {
+      const radar = document.getElementById('hero-cyber-radar-svg');
+      if (radar) {
+        animate(radar, {
+          rotate: [0, 720],
+          scale: [1, 1.25, 1],
+          duration: 1200,
+          ease: 'inOutExpo'
         });
       }
 
       if (codeSnippet) {
-        codeSnippet.innerHTML = `<span class="text-secondary">animate</span>(<span class="text-amber-400">'.cyber-node'</span>, {\n  <span class="text-muted-foreground">scale:</span> [<span class="text-rose-400">0.3</span>, <span class="text-rose-400">1.4</span>, <span class="text-rose-400">1</span>],\n  <span class="text-muted-foreground">delay:</span> <span class="text-secondary">stagger</span>(<span class="text-rose-400">40</span>, {\n    <span class="text-muted-foreground">grid:</span> [<span class="text-rose-400">14</span>, <span class="text-rose-400">14</span>],\n    <span class="text-muted-foreground">from:</span> <span class="text-amber-400">'center'</span>\n  }),\n  <span class="text-muted-foreground">ease:</span> <span class="text-amber-400">'outElastic(1, .6)'</span>\n});`;
+        codeSnippet.innerHTML = `<span class="text-secondary">animate</span>(<span class="text-amber-400">'#hero-cyber-radar-svg'</span>, {\n  <span class="text-muted-foreground">rotate:</span> [<span class="text-rose-400">0</span>, <span class="text-rose-400">720</span>],\n  <span class="text-muted-foreground">scale:</span> [<span class="text-rose-400">1</span>, <span class="text-rose-400">1.25</span>, <span class="text-rose-400">1</span>],\n  <span class="text-muted-foreground">duration:</span> <span class="text-rose-400">1200</span>,\n  <span class="text-muted-foreground">ease:</span> <span class="text-amber-400">'inOutExpo'</span>\n});`;
       }
     });
 
-    // 3. Trigger Spring Shake
+    // 3. Trigger Spring Shake on Skill Cards
     document.getElementById('hud-trigger-spring')?.addEventListener('click', () => {
-      const cards = document.querySelectorAll('.group');
+      const cards = document.querySelectorAll('.skill-card');
       animate(cards, {
-        rotateZ: [0, -3, 3, -2, 2, 0],
-        translateY: [0, -8, 0],
+        rotateZ: [0, -4, 4, -2, 2, 0],
+        translateY: [0, -10, 0],
         duration: 800,
         ease: createSpring({
           stiffness: 220,
           damping: 8
         }),
-        delay: stagger(80)
+        delay: stagger(70)
       });
 
       if (codeSnippet) {
-        codeSnippet.innerHTML = `<span class="text-secondary">animate</span>(<span class="text-amber-400">'.security-cards'</span>, {\n  <span class="text-muted-foreground">rotateZ:</span> [<span class="text-rose-400">-3</span>, <span class="text-rose-400">3</span>, <span class="text-rose-400">0</span>],\n  <span class="text-muted-foreground">ease:</span> <span class="text-secondary">createSpring</span>({\n    <span class="text-muted-foreground">stiffness:</span> <span class="text-rose-400">220</span>,\n    <span class="text-muted-foreground">damping:</span> <span class="text-rose-400">8</span>\n  }),\n  <span class="text-muted-foreground">delay:</span> <span class="text-secondary">stagger</span>(<span class="text-rose-400">80</span>)\n});`;
+        codeSnippet.innerHTML = `<span class="text-secondary">animate</span>(<span class="text-amber-400">'.skill-card'</span>, {\n  <span class="text-muted-foreground">rotateZ:</span> [<span class="text-rose-400">-4</span>, <span class="text-rose-400">4</span>, <span class="text-rose-400">0</span>],\n  <span class="text-muted-foreground">ease:</span> <span class="text-secondary">createSpring</span>({\n    <span class="text-muted-foreground">stiffness:</span> <span class="text-rose-400">220</span>,\n    <span class="text-muted-foreground">damping:</span> <span class="text-rose-400">8</span>\n  }),\n  <span class="text-muted-foreground">delay:</span> <span class="text-secondary">stagger</span>(<span class="text-rose-400">70</span>)\n});`;
       }
     });
 
-    // 4. Trigger Diagonal Wave
-    document.getElementById('hud-trigger-wave')?.addEventListener('click', () => {
-      const nodes = document.querySelectorAll('.cyber-node');
-      if (nodes.length > 0) {
-        animate(nodes, {
-          translateY: [
-            { to: -16, duration: 220, ease: 'outSine' },
-            { to: 0, duration: 350, ease: 'outBounce' }
-          ],
-          scale: [
-            { to: 1.3, duration: 220 },
-            { to: 1, duration: 350 }
-          ],
-          delay: stagger(25, {
-            grid: [14, 14],
-            from: 'first',
-            axis: 'x'
-          })
-        });
-      }
+    // 4. Trigger Laser Pulse
+    document.getElementById('hud-trigger-laser')?.addEventListener('click', () => {
+      const lasers = document.querySelectorAll('#contact-top-laser, #contact-bottom-laser');
+      animate(lasers, {
+        scaleX: [1, 1.8, 1],
+        opacity: [0.4, 1, 0.4],
+        duration: 500,
+        ease: 'outQuad'
+      });
 
       if (codeSnippet) {
-        codeSnippet.innerHTML = `<span class="text-secondary">animate</span>(<span class="text-amber-400">'.cyber-node'</span>, {\n  <span class="text-muted-foreground">translateY:</span> [<span class="text-rose-400">-16</span>, <span class="text-rose-400">0</span>],\n  <span class="text-muted-foreground">delay:</span> <span class="text-secondary">stagger</span>(<span class="text-rose-400">25</span>, {\n    <span class="text-muted-foreground">grid:</span> [<span class="text-rose-400">14</span>, <span class="text-rose-400">14</span>],\n    <span class="text-muted-foreground">axis:</span> <span class="text-amber-400">'x'</span>\n  }),\n  <span class="text-muted-foreground">ease:</span> <span class="text-amber-400">'outBounce'</span>\n});`;
+        codeSnippet.innerHTML = `<span class="text-secondary">animate</span>(<span class="text-amber-400">'#contact-laser'</span>, {\n  <span class="text-muted-foreground">scaleX:</span> [<span class="text-rose-400">1</span>, <span class="text-rose-400">1.8</span>, <span class="text-rose-400">1</span>],\n  <span class="text-muted-foreground">opacity:</span> [<span class="text-rose-400">0.4</span>, <span class="text-rose-400">1</span>, <span class="text-rose-400">0.4</span>],\n  <span class="text-muted-foreground">duration:</span> <span class="text-rose-400">500</span>,\n  <span class="text-muted-foreground">ease:</span> <span class="text-amber-400">'outQuad'</span>\n});`;
       }
     });
   }
