@@ -1,24 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Skills from '../components/Skills.astro';
 import Projects from '../components/Projects.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import AnimePlayground from '../components/AnimePlayground.astro';
 ---
 
 <Layout>
   <main class="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary relative">
-    <!-- Theme Toggle - Fixed Position -->
-    <div class="fixed top-6 right-6 z-50">
-      <ThemeToggle />
-    </div>
-
-    <!-- Anime.js Interactive Studio HUD Controller -->
-    <AnimePlayground />
+    <!-- Floating Glass Navigation Bar -->
+    <Navbar />
 
     <!-- Hero Section -->
     <Hero />
@@ -26,18 +20,16 @@ import AnimePlayground from '../components/AnimePlayground.astro';
     <!-- About Section -->
     <About />
 
-    <!-- Skills / Expertise Section -->
+    <!-- Core Security Capabilities Section -->
     <Skills />
 
-    <!-- Projects Section -->
+    <!-- Project Timeline Roadmap Section -->
     <Projects />
 
-    <!-- Contact CTA Section -->
+    <!-- Secure Comms Contact Section -->
     <Contact />
 
     <!-- Footer -->
     <Footer />
   </main>
 </Layout>
-
-

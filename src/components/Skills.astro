@@ -1,68 +1,105 @@
 ---
-import { Shield, Terminal, Code, Globe, Server, Database } from 'lucide-astro';
+import { Shield, Terminal, Code, Globe, Server, Database, Sparkles } from 'lucide-astro';
 
 const expertise = [
   {
+    code: "SEC-01",
     icon: Shield,
     title: "Penetration Testing",
-    description: "Web app security assessments, network pentesting, and vulnerability analysis using industry-standard tools"
+    description: "Offensive web application security assessments, blackbox & whitebox testing, and vulnerability chaining.",
+    tools: ["Burp Suite Pro", "Metasploit", "OWASP ZAP", "SQLMap"]
   },
   {
+    code: "SYS-02",
     icon: Terminal,
-    title: "Linux Systems",
-    description: "System administration, shell scripting, kernel customization, and server hardening across distributions"
+    title: "Linux Hardening",
+    description: "System administration, kernel sysctl parameter tuning, strict user permission models, and compliance audits.",
+    tools: ["CIS Benchmarks", "AppArmor", "UFW / iptables", "systemd"]
   },
   {
+    code: "DEV-03",
     icon: Code,
-    title: "Security Tools",
-    description: "Developing custom exploitation tools, automation scripts, and security utilities in Python and Bash"
+    title: "Security Tooling",
+    description: "Building fast, custom vulnerability scanners, automation bots, and defensive auditing suites.",
+    tools: ["Rust", "Tauri v2", "Python 3", "Bash Scripting"]
   },
   {
+    code: "NET-04",
     icon: Globe,
-    title: "Network Security",
-    description: "Traffic analysis, IDS/IPS configuration, firewall management, and wireless security assessments"
+    title: "Network Recon",
+    description: "Deep packet inspection, service fingerprinting, protocol analysis, and firewall penetration testing.",
+    tools: ["Nmap", "Wireshark", "Scapy", "Zeek / Snort"]
   },
   {
+    code: "CLD-05",
     icon: Server,
-    title: "Cloud Security",
-    description: "Securing cloud infrastructure, container security, CI/CD pipeline hardening, and IAM configuration"
+    title: "Cloud & Container Sec",
+    description: "Hardening cloud architectures, Docker container security isolation, and CI/CD secret scanning.",
+    tools: ["Docker", "AWS IAM", "Trivy", "GitHub Actions"]
   },
   {
+    code: "FOR-06",
     icon: Database,
-    title: "Incident Response",
-    description: "Digital forensics, malware analysis, log analysis, and threat hunting to identify and mitigate attacks"
+    title: "Incident Forensics",
+    description: "Digital forensics, reverse engineering basic payloads, log analysis, and threat hunting.",
+    tools: ["Ghidra", "GDB", "Volatility", "YARA Rules"]
   }
 ];
 ---
 
-<section id="skills" class="min-h-screen py-24 px-6 relative bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent flex items-center">
-  <div class="container mx-auto">
+<section id="skills" class="min-h-screen py-28 px-6 relative bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent flex items-center">
+  <div class="container mx-auto max-w-6xl">
+    <!-- Header -->
     <div class="text-center mb-20 skills-header-anim">
-      <div class="inline-block mb-4 cursor-pointer group" id="skills-cmd-badge">
-        <span class="text-primary font-mono text-sm font-semibold anime-decrypt-target" data-original-text="$ ls -la /skills">$ ls -la /skills</span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-primary/10 border border-primary/30 text-primary font-mono text-xs font-semibold mb-4 cursor-pointer group" id="skills-cmd-badge">
+        <Sparkles class="w-3.5 h-3.5 text-primary" />
+        <span class="anime-decrypt-target" data-original-text="$ ls -la /capabilities/security">$ ls -la /capabilities/security</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground anime-decrypt-target cursor-pointer" data-original-text="Core Expertise">
-        Core <span class="gradient-text">Expertise</span>
+      <h2 class="text-4xl md:text-5xl font-black text-foreground anime-decrypt-target cursor-pointer tracking-tight" data-original-text="Core Security Capabilities">
+        Core Security <span class="gradient-text">Capabilities</span>
       </h2>
-      <p class="text-xl text-muted-foreground max-w-2xl mx-auto font-mono">
-        Building secure systems and breaking insecure ones
+      <p class="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto font-mono mt-3">
+        Engineered for defensive resilience and offensive precision
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto" id="skills-grid-container">
+    <!-- Capabilities Bento Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 max-w-6xl mx-auto" id="skills-grid-container">
       {expertise.map((item) => {
         const Icon = item.icon;
         return (
-          <div class="skill-card p-8 bg-card/90 backdrop-blur-sm border border-border/80 hover:border-primary/50 rounded-xl transition-all duration-300 group shadow-sm hover:shadow-md cursor-pointer select-none">
-            <div class="skill-icon-wrapper w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 border border-primary/30 group-hover:bg-primary/20 transition-colors">
-              <Icon class="w-7 h-7 text-primary" />
+          <div class="skill-card p-8 bg-card/85 dark:bg-card/50 backdrop-blur-xl border border-border/80 dark:border-primary/20 hover:border-primary/60 rounded-2xl transition-all duration-300 group shadow-md hover:shadow-xl relative flex flex-col justify-between overflow-hidden cursor-default select-none">
+            <!-- Subtle Top Accent Glow -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 group-hover:via-primary to-transparent transition-all"></div>
+
+            <div>
+              <!-- Header with Code & Icon -->
+              <div class="flex items-center justify-between mb-6">
+                <div class="skill-icon-wrapper w-12 h-12 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors shadow-inner">
+                  <Icon class="w-6 h-6 text-primary" />
+                </div>
+                <span class="text-xs font-mono font-bold text-muted-foreground group-hover:text-primary transition-colors px-2 py-0.5 rounded bg-muted/50 border border-border/60">
+                  {item.code}
+                </span>
+              </div>
+
+              <!-- Title & Description -->
+              <h3 class="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors font-mono tracking-tight">
+                {item.title}
+              </h3>
+              <p class="text-muted-foreground leading-relaxed font-mono text-xs sm:text-sm mb-6">
+                {item.description}
+              </p>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">
-              {item.title}
-            </h3>
-            <p class="text-muted-foreground leading-relaxed font-mono text-sm">
-              {item.description}
-            </p>
+
+            <!-- Key Tools Badges -->
+            <div class="pt-4 border-t border-border/50 flex flex-wrap gap-1.5">
+              {item.tools.map((t) => (
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-primary/5 dark:bg-primary/10 text-primary border border-primary/20 font-medium">
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
         );
       })}
@@ -83,20 +120,19 @@ const expertise = [
       if (hasAnimated) return;
       hasAnimated = true;
 
-      const tl = createTimeline({ defaults: { ease: 'outBack' } });
-
-      tl.add('.skills-header-anim', {
-        opacity: [0, 1],
-        translateY: [30, 0],
-        duration: 600
-      })
-      .add('.skill-card', {
-        opacity: [0, 1],
-        translateY: [40, 0],
-        scale: [0.9, 1],
-        delay: stagger(90),
-        duration: 600
-      }, '-=300');
+      createTimeline({ defaults: { ease: 'outBack' } })
+        .add('.skills-header-anim', {
+          opacity: [0, 1],
+          translateY: [30, 0],
+          duration: 600
+        })
+        .add('.skill-card', {
+          opacity: [0, 1],
+          translateY: [40, 0],
+          scale: [0.92, 1],
+          delay: stagger(80),
+          duration: 600
+        }, '-=300');
     }
 
     if ('IntersectionObserver' in window) {
@@ -114,33 +150,24 @@ const expertise = [
       runEntrance();
     }
 
-    // 3D Tilt + Spring Physics on Card Hover
+    // 3D Tilt Physics with Spring Reset
     const cards = document.querySelectorAll('.skill-card') as NodeListOf<HTMLElement>;
     cards.forEach((card) => {
-      const icon = card.querySelector('.skill-icon-wrapper');
-
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
 
-        const rotateX = (-y / rect.height) * 14;
-        const rotateY = (x / rect.width) * 14;
+        const rotateX = (-y / rect.height) * 12;
+        const rotateY = (x / rect.width) * 12;
 
         animate(card, {
           rotateX: rotateX,
           rotateY: rotateY,
-          translateZ: 20,
-          duration: 150,
+          translateZ: 15,
+          duration: 120,
           ease: 'linear'
         });
-
-        if (icon) {
-          animate(icon, {
-            scale: 1.15,
-            duration: 150
-          });
-        }
       });
 
       card.addEventListener('mouseleave', () => {
@@ -153,16 +180,6 @@ const expertise = [
             damping: 12
           })
         });
-
-        if (icon) {
-          animate(icon, {
-            scale: 1,
-            ease: createSpring({
-              stiffness: 220,
-              damping: 12
-            })
-          });
-        }
       });
     });
 
@@ -193,4 +210,3 @@ const expertise = [
     initSkillsAnimations();
   }
 </script>
-

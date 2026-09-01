@@ -1,0 +1,42 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { Terminal, Shield } from 'lucide-astro';
+---
+
+<header class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+  <nav class="pointer-events-auto flex items-center justify-between gap-6 px-5 py-2.5 rounded-full border border-border/80 dark:border-primary/30 bg-card/85 dark:bg-card/75 backdrop-blur-xl shadow-lg dark:shadow-[0_0_25px_-5px_hsl(var(--primary)/0.2)] max-w-4xl w-full transition-all duration-300">
+    <!-- Logo / Brand -->
+    <a href="#hero" class="flex items-center gap-2 group font-mono text-sm font-bold text-foreground hover:text-primary transition-colors">
+      <div class="w-7 h-7 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+        <Terminal class="w-4 h-4 text-primary" />
+      </div>
+      <span>manuja<span class="text-primary">.dev</span></span>
+    </a>
+
+    <!-- Nav Links -->
+    <div class="hidden md:flex items-center gap-1 font-mono text-xs font-medium text-muted-foreground">
+      <a href="#about" class="px-3 py-1.5 rounded-md hover:text-primary hover:bg-primary/10 transition-colors">
+        // about
+      </a>
+      <a href="#skills" class="px-3 py-1.5 rounded-md hover:text-primary hover:bg-primary/10 transition-colors">
+        // skills
+      </a>
+      <a href="#projects" class="px-3 py-1.5 rounded-md hover:text-primary hover:bg-primary/10 transition-colors">
+        // timeline
+      </a>
+      <a href="#contact" class="px-3 py-1.5 rounded-md hover:text-primary hover:bg-primary/10 transition-colors">
+        // contact
+      </a>
+    </div>
+
+    <!-- Status Beacon & Theme Toggle -->
+    <div class="flex items-center gap-3">
+      <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-600 dark:text-emerald-400">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="font-semibold">SEC_ONLINE</span>
+      </div>
+
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>

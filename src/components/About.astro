@@ -1,66 +1,96 @@
 ---
-const skills = ["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python", "Bash", "Docker", "AWS"];
+import { Shield, Terminal, Cpu, Server, Activity, CheckCircle2 } from 'lucide-astro';
+
+const skills = [
+  "Kali Linux", "Metasploit", "Burp Suite", "Wireshark",
+  "Python", "Bash", "Rust", "Tauri v2", "Docker", "AWS"
+];
+
+const telemetry = [
+  { label: "OPERATOR", value: "Manuja Medhankara", highlight: true },
+  { label: "FOCUS DOMAIN", value: "Offensive Security & Hardening", highlight: false },
+  { label: "PRIMARY OS", value: "Arch Linux / Kali (Custom Kernel)", highlight: false },
+  { label: "PRIMARY IDE", value: "Neovim (Lua Configured)", highlight: false },
+  { label: "AUDIT METHOD", value: "CIS Benchmarks & NIST 800-53", highlight: false },
+  { label: "INTEGRITY", value: "VERIFIED // 100% OPERATIONAL", highlight: true }
+];
 ---
 
-<section id="about" class="min-h-screen py-24 px-6 relative flex flex-col justify-center">
+<section id="about" class="min-h-screen py-28 px-6 relative flex flex-col justify-center">
   <div class="container mx-auto max-w-6xl">
+    <!-- Header -->
     <div class="mb-16 about-header-anim">
-      <div class="inline-block mb-4 cursor-pointer group" id="about-cmd-badge">
-        <span class="text-primary font-mono text-sm font-semibold anime-decrypt-target" data-original-text="$ cat about.txt">$ cat about.txt</span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-primary/10 border border-primary/30 text-primary font-mono text-xs font-semibold mb-4 cursor-pointer group" id="about-cmd-badge">
+        <Activity class="w-3.5 h-3.5 text-primary animate-pulse" />
+        <span class="anime-decrypt-target" data-original-text="$ cat /profile/overview.md">$ cat /profile/overview.md</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground anime-decrypt-target cursor-pointer" data-original-text="About Me">
-        About <span class="gradient-text">Me</span>
+      <h2 class="text-4xl md:text-5xl font-black text-foreground anime-decrypt-target cursor-pointer tracking-tight" data-original-text="Security Researcher & Systems Builder">
+        Security Researcher &amp; <span class="gradient-text">Systems Builder</span>
       </h2>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div class="about-text-anim">
-        <p class="text-lg text-foreground/90 leading-relaxed mb-6 font-mono">
-          Passionate about exploring the depths of cybersecurity and the endless possibilities of Linux systems. 
-          I specialize in identifying vulnerabilities, hardening systems, and building secure infrastructure.
-        </p>
-        <p class="text-lg text-muted-foreground leading-relaxed mb-6 font-mono">
-          When I'm not breaking into systems (ethically, of course), you'll find me contributing to open-source 
-          projects, writing security tools, or deep-diving into kernel exploits and reverse engineering.
-        </p>
-        <div class="flex flex-wrap gap-2 about-skills-container">
-          {skills.map((skill) => (
-            <span class="about-skill-pill px-3 py-1 text-sm font-mono bg-primary/10 text-primary border border-primary/25 rounded font-medium hover:border-primary hover:scale-105 transition-all cursor-default">
-              {skill}
-            </span>
-          ))}
+    <!-- Content Grid -->
+    <div class="grid lg:grid-cols-12 gap-10 items-stretch">
+      <!-- Left Narrative Bio (7 cols) -->
+      <div class="lg:col-span-7 flex flex-col justify-between space-y-6 about-text-anim">
+        <div class="p-8 rounded-2xl border border-border/80 dark:border-primary/25 bg-card/80 dark:bg-card/40 backdrop-blur-xl shadow-lg relative overflow-hidden">
+          <!-- Subtle Corner Accents -->
+          <div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-primary/40 rounded-tr-xl"></div>
+          
+          <p class="text-base sm:text-lg text-foreground/90 leading-relaxed mb-6 font-mono">
+            Passionate about exploring the depths of offensive security, vulnerability discovery, and system hardening across modern Linux ecosystems.
+          </p>
+          <p class="text-sm sm:text-base text-muted-foreground leading-relaxed font-mono">
+            When I'm not auditing web application postures or analyzing binaries, I build open-source security utilities, configure automated CIS compliance pipelines, and develop high-speed desktop security scanners with Rust and Tauri.
+          </p>
+
+          <div class="mt-8 pt-6 border-t border-border/50">
+            <h4 class="text-xs font-mono font-semibold text-primary uppercase tracking-wider mb-4">
+              // Core Security Toolchain
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              {skills.map((skill) => (
+                <span class="about-skill-pill px-3 py-1.5 text-xs font-mono bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 rounded-lg font-semibold transition-all hover:scale-105 cursor-default select-none shadow-sm">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="about-terminal-card p-8 bg-card/80 backdrop-blur-sm border border-border/80 rounded-xl terminal-border shadow-sm">
-        <div class="space-y-4 font-mono text-sm">
-          <div class="terminal-row flex items-start gap-3">
-            <span class="text-primary font-bold">→</span>
-            <div>
-              <span class="text-muted-foreground">Role:</span>
-              <span class="text-foreground font-medium ml-2">Security Researcher</span>
+      <!-- Right Telemetry Console (5 cols) -->
+      <div class="lg:col-span-5 about-terminal-anim">
+        <div class="h-full p-7 rounded-2xl border border-primary/35 bg-card/90 dark:bg-card/60 backdrop-blur-xl shadow-xl flex flex-col justify-between relative overflow-hidden">
+          <!-- Top Console Bar -->
+          <div>
+            <div class="flex items-center justify-between border-b border-border/60 pb-4 mb-6 font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-bold text-foreground">SYSTEM_TELEMETRY.LOG</span>
+              </div>
+              <span class="text-muted-foreground text-[11px]">[TTY_01]</span>
+            </div>
+
+            <!-- Telemetry Key-Value Pairs -->
+            <div class="space-y-4 font-mono text-xs">
+              {telemetry.map((item) => (
+                <div class="telemetry-row flex items-start justify-between gap-4 p-2 rounded-lg bg-background/40 hover:bg-primary/5 transition-colors border border-border/40">
+                  <span class="text-muted-foreground font-medium shrink-0">{item.label}:</span>
+                  <span class={`text-right font-semibold ${item.highlight ? 'text-primary' : 'text-foreground'}`}>
+                    {item.value}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
-          <div class="terminal-row flex items-start gap-3">
-            <span class="text-primary font-bold">→</span>
-            <div>
-              <span class="text-muted-foreground">Focus:</span>
-              <span class="text-foreground font-medium ml-2">Offensive Security</span>
-            </div>
-          </div>
-          <div class="terminal-row flex items-start gap-3">
-            <span class="text-primary font-bold">→</span>
-            <div>
-              <span class="text-muted-foreground">OS:</span>
-              <span class="text-foreground font-medium ml-2">Arch Linux / Kali</span>
-            </div>
-          </div>
-          <div class="terminal-row flex items-start gap-3">
-            <span class="text-primary font-bold">→</span>
-            <div>
-              <span class="text-muted-foreground">Editor:</span>
-              <span class="text-foreground font-medium ml-2">Neovim</span>
-            </div>
+
+          <!-- Bottom Console Status -->
+          <div class="mt-6 pt-4 border-t border-border/50 flex items-center justify-between font-mono text-[11px] text-muted-foreground">
+            <span class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
+              <CheckCircle2 class="w-3.5 h-3.5" /> All Checks Nominal
+            </span>
+            <span>Uptime: 99.9%</span>
           </div>
         </div>
       </div>
@@ -81,35 +111,34 @@ const skills = ["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python",
       if (hasAnimated) return;
       hasAnimated = true;
 
-      const tl = createTimeline({ defaults: { ease: 'outBack' } });
-
-      tl.add('.about-header-anim', {
-        opacity: [0, 1],
-        translateY: [25, 0],
-        duration: 600
-      })
-      .add('.about-text-anim', {
-        opacity: [0, 1],
-        translateX: [-30, 0],
-        duration: 600
-      }, '-=400')
-      .add('.about-skill-pill', {
-        scale: [0.6, 1],
-        opacity: [0, 1],
-        delay: stagger(50),
-        duration: 400
-      }, '-=300')
-      .add('.about-terminal-card', {
-        opacity: [0, 1],
-        translateX: [30, 0],
-        duration: 600
-      }, '-=500')
-      .add('.terminal-row', {
-        opacity: [0, 1],
-        translateX: [15, 0],
-        delay: stagger(70),
-        duration: 400
-      }, '-=300');
+      createTimeline({ defaults: { ease: 'outBack' } })
+        .add('.about-header-anim', {
+          opacity: [0, 1],
+          translateY: [25, 0],
+          duration: 600
+        })
+        .add('.about-text-anim', {
+          opacity: [0, 1],
+          translateX: [-25, 0],
+          duration: 600
+        }, '-=400')
+        .add('.about-skill-pill', {
+          scale: [0.7, 1],
+          opacity: [0, 1],
+          delay: stagger(40),
+          duration: 400
+        }, '-=300')
+        .add('.about-terminal-anim', {
+          opacity: [0, 1],
+          translateX: [25, 0],
+          duration: 600
+        }, '-=500')
+        .add('.telemetry-row', {
+          opacity: [0, 1],
+          translateY: [12, 0],
+          delay: stagger(50),
+          duration: 350
+        }, '-=300');
     }
 
     if ('IntersectionObserver' in window) {
@@ -127,7 +156,7 @@ const skills = ["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python",
       runEntrance();
     }
 
-    // Decrypt on hover
+    // Decrypt on badge hover
     const badge = document.getElementById('about-cmd-badge');
     if (badge) {
       badge.addEventListener('mouseenter', () => {
@@ -154,4 +183,3 @@ const skills = ["Kali Linux", "Metasploit", "Burp Suite", "Wireshark", "Python",
     initAboutAnimations();
   }
 </script>
-

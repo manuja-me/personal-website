@@ -1,5 +1,5 @@
 ---
-import { Github, ChevronDown, ExternalLink } from 'lucide-astro';
+import { Github, ChevronDown, ExternalLink, GitCommit, Sparkles } from 'lucide-astro';
 
 interface ProjectTimelineItem {
   id: string;
@@ -34,10 +34,10 @@ const projects: ProjectTimelineItem[] = [
   },
   {
     id: "linux-hardening",
-    title: "Linux Hardening Script",
+    title: "Linux Hardening Suite",
     url: "https://github.com/manuja-me",
     status: "in_development",
-    statusLabel: "Up Next / In Dev",
+    statusLabel: "In Active Dev",
     badgeColor: "text-amber-700 dark:text-amber-400 border-amber-600/30 dark:border-amber-500/30 bg-amber-500/10",
     phase: "Next Release",
     description: "Automated security hardening suite for Linux servers following CIS benchmarks with customizable rule sets and non-destructive audits.",
@@ -51,11 +51,11 @@ const projects: ProjectTimelineItem[] = [
   },
   {
     id: "network-scanner",
-    title: "Network Scanner Pro",
+    title: "Network Recon Pro",
     url: "https://github.com/manuja-me",
     status: "planned",
-    statusLabel: "Planned",
-    badgeColor: "text-primary border-primary/20 bg-primary/5",
+    statusLabel: "Planned Roadmap",
+    badgeColor: "text-cyan-700 dark:text-cyan-400 border-cyan-600/30 dark:border-cyan-500/30 bg-cyan-500/10",
     phase: "Roadmap",
     description: "Advanced network reconnaissance and asset discovery tool with service fingerprinting, vulnerability scanning, and automated reporting.",
     highlights: [
@@ -68,93 +68,97 @@ const projects: ProjectTimelineItem[] = [
 ];
 ---
 
-<section id="projects" class="min-h-screen py-24 px-6 relative flex items-center">
+<section id="projects" class="min-h-screen py-28 px-6 relative flex items-center">
   <div class="container mx-auto max-w-5xl">
     <!-- Section Header -->
-    <div class="mb-16 projects-header-anim">
-      <div class="inline-block mb-4 cursor-pointer group" id="projects-cmd-badge">
-        <span class="text-primary font-mono text-sm font-semibold anime-decrypt-target" data-original-text="$ git log --graph --timeline">$ git log --graph --timeline</span>
+    <div class="mb-20 projects-header-anim">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-primary/10 border border-primary/30 text-primary font-mono text-xs font-semibold mb-4 cursor-pointer group" id="projects-cmd-badge">
+        <GitCommit class="w-3.5 h-3.5 text-primary" />
+        <span class="anime-decrypt-target" data-original-text="$ git log --graph --security-roadmap">$ git log --graph --security-roadmap</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-foreground anime-decrypt-target cursor-pointer" data-original-text="Project Timeline">
-        Project <span class="gradient-text">Timeline</span>
+      <h2 class="text-4xl md:text-5xl font-black text-foreground anime-decrypt-target cursor-pointer tracking-tight" data-original-text="Security Tool Roadmap">
+        Security Tool <span class="gradient-text">Roadmap</span>
       </h2>
-      <p class="text-lg text-muted-foreground font-mono max-w-2xl">
-        A chronological roadmap of security tools, active development, and upcoming releases. Click any item to expand details.
+      <p class="text-base sm:text-lg text-muted-foreground font-mono mt-3 max-w-2xl">
+        Chronological development timeline of open-source tools, scanners, and active research
       </p>
     </div>
 
-    <!-- Timeline Container -->
-    <div class="relative border-l border-primary/20 dark:border-primary/25 ml-2 md:ml-3 pl-6 md:pl-8 space-y-6">
+    <!-- Modern Timeline Spine & Tree -->
+    <div class="relative border-l-2 border-primary/30 dark:border-primary/25 ml-3 md:ml-4 pl-7 md:pl-10 space-y-8">
       {projects.map((project) => (
         <div class="relative group timeline-item" data-project-id={project.id}>
-          <!-- Minimal Precision Node Dot on Timeline Spine -->
-          <div class="timeline-node absolute -left-[31px] md:-left-[39px] top-7 flex items-center justify-center pointer-events-none">
+          <!-- Timeline Beacon Node -->
+          <div class="timeline-node absolute -left-[37px] md:-left-[49px] top-7 flex items-center justify-center pointer-events-none">
             {project.status === 'completed' && (
               <div class="relative flex items-center justify-center">
-                <div class="w-3.5 h-3.5 rounded-full border-2 border-emerald-500 bg-background flex items-center justify-center shadow-[0_0_8px_rgba(16,185,129,0.5)]">
-                  <div class="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <div class="w-4 h-4 rounded-full border-2 border-emerald-500 bg-background flex items-center justify-center shadow-[0_0_12px_rgba(16,185,129,0.7)]">
+                  <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 </div>
               </div>
             )}
             {project.status === 'in_development' && (
               <div class="relative flex items-center justify-center">
-                <span class="animate-ping absolute inline-flex h-4 w-4 rounded-full bg-amber-400/40" />
-                <div class="w-3.5 h-3.5 rounded-full border-2 border-amber-500 bg-background flex items-center justify-center shadow-[0_0_8px_rgba(245,158,11,0.5)]">
-                  <div class="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                <span class="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-amber-400/40" />
+                <div class="w-4 h-4 rounded-full border-2 border-amber-500 bg-background flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.7)]">
+                  <div class="w-2 h-2 rounded-full bg-amber-500" />
                 </div>
               </div>
             )}
             {project.status === 'planned' && (
               <div class="relative flex items-center justify-center">
-                <div class="w-3.5 h-3.5 rounded-full border border-border/80 dark:border-primary/40 bg-background flex items-center justify-center">
-                  <div class="w-1 h-1 rounded-full bg-muted-foreground/50 dark:bg-primary/40" />
+                <div class="w-4 h-4 rounded-full border-2 border-cyan-500/60 bg-background flex items-center justify-center shadow-[0_0_8px_rgba(6,182,212,0.4)]">
+                  <div class="w-1.5 h-1.5 rounded-full bg-cyan-500/80" />
                 </div>
               </div>
             )}
           </div>
 
-          <!-- Expandable Card -->
-          <div class="timeline-card rounded-xl border border-border/80 bg-card/90 dark:bg-card/80 backdrop-blur-md hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-md overflow-hidden">
-            <!-- Card Header / Toggle Button (Minimized by Default) -->
+          <!-- Modern Glassmorphic Expandable Project Card -->
+          <div class="timeline-card rounded-2xl border border-border/80 dark:border-primary/20 bg-card/85 dark:bg-card/50 backdrop-blur-xl hover:border-primary/60 transition-all duration-300 shadow-md hover:shadow-xl overflow-hidden">
+            <!-- Card Header Button -->
             <button
               type="button"
-              class="w-full p-6 md:p-7 text-left flex items-start justify-between gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary timeline-toggle-btn"
+              class="w-full p-6 md:p-8 text-left flex items-start justify-between gap-5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary timeline-toggle-btn"
               aria-expanded="false"
               aria-controls={`details-${project.id}`}
             >
-              <div class="space-y-2 flex-1">
+              <div class="space-y-3 flex-1">
+                <!-- Status & Phase Header -->
                 <div class="flex flex-wrap items-center gap-2.5">
-                  <span class={`text-xs px-2.5 py-0.5 rounded-full border font-mono font-semibold ${project.badgeColor}`}>
+                  <span class={`text-xs px-3 py-1 rounded-full border font-mono font-bold ${project.badgeColor}`}>
                     {project.statusLabel}
                   </span>
-                  <span class="text-xs text-muted-foreground font-mono">
+                  <span class="text-xs text-muted-foreground font-mono font-semibold">
                     [{project.phase}]
                   </span>
                 </div>
 
-                <h3 class="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                <!-- Project Title -->
+                <h3 class="text-2xl md:text-3xl font-black text-foreground group-hover:text-primary transition-colors tracking-tight font-mono">
                   {project.title}
                 </h3>
 
-                <p class="text-sm text-muted-foreground font-mono leading-relaxed">
+                <!-- Short Overview -->
+                <p class="text-xs sm:text-sm text-muted-foreground font-mono leading-relaxed">
                   {project.description}
                 </p>
               </div>
 
-              <!-- Action & Expand Icon -->
-              <div class="flex items-center gap-2.5 shrink-0 pt-1">
+              <!-- Action & Animated Chevron -->
+              <div class="flex items-center gap-3 shrink-0 pt-1">
                 <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${project.title} on GitHub`}
-                  class="p-2 rounded-md hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
+                  class="p-2.5 rounded-xl border border-border/80 dark:border-primary/25 hover:border-primary text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
                   onclick="event.stopPropagation()"
                 >
                   <Github class="w-4 h-4" />
                 </a>
                 <div
-                  class="p-1.5 rounded-md bg-muted/50 text-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300 chevron-icon"
+                  class="p-2.5 rounded-xl bg-muted/60 text-foreground group-hover:bg-primary/15 group-hover:text-primary transition-all duration-300 chevron-icon"
                   title="Toggle details"
                 >
                   <ChevronDown class="w-4 h-4" />
@@ -162,32 +166,32 @@ const projects: ProjectTimelineItem[] = [
               </div>
             </button>
 
-            <!-- Collapsible Body Content (Hidden by default) -->
+            <!-- Collapsible Body Content -->
             <div
               id={`details-${project.id}`}
-              class="hidden overflow-hidden border-t border-border/40 timeline-details-content"
+              class="hidden overflow-hidden border-t border-border/50 timeline-details-content"
             >
-              <div class="p-6 md:p-7 pt-4 space-y-5 bg-primary/[0.02] details-inner-wrap">
+              <div class="p-6 md:p-8 pt-5 space-y-6 bg-primary/[0.02]">
                 <!-- Key Highlights -->
                 <div>
-                  <h4 class="text-xs font-mono font-semibold text-primary uppercase tracking-wider mb-3">
-                    // Key Features & Scope
+                  <h4 class="text-xs font-mono font-bold text-primary uppercase tracking-wider mb-4">
+                    // Key Features &amp; Security Scope
                   </h4>
-                  <ul class="space-y-2">
+                  <ul class="space-y-2.5">
                     {project.highlights.map((highlight) => (
-                      <li class="project-highlight-item flex items-start gap-2 text-sm text-foreground/90 font-mono">
-                        <span class="text-primary font-bold mt-0.5 text-xs">▹</span>
-                        <span>{highlight}</span>
+                      <li class="project-highlight-item flex items-start gap-2.5 text-xs sm:text-sm text-foreground/90 font-mono">
+                        <span class="text-primary font-black mt-0.5 text-sm">▹</span>
+                        <span class="leading-relaxed">{highlight}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <!-- Tech Badges & Direct Action Link -->
-                <div class="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-border/40">
-                  <div class="flex flex-wrap gap-1.5">
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-border/50">
+                  <div class="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span class="text-xs px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded font-mono font-medium">
+                      <span class="text-xs px-2.5 py-1 bg-primary/10 text-primary border border-primary/25 rounded-md font-mono font-semibold">
                         {tag}
                       </span>
                     ))}
@@ -197,7 +201,7 @@ const projects: ProjectTimelineItem[] = [
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-primary hover:underline group/link"
+                    class="inline-flex items-center gap-2 text-xs font-mono font-bold text-primary hover:underline group/link"
                   >
                     <span>View Repository</span>
                     <ExternalLink class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
@@ -213,7 +217,7 @@ const projects: ProjectTimelineItem[] = [
 </section>
 
 <script>
-  import { animate, createTimeline, stagger, createSpring } from 'animejs';
+  import { animate, createTimeline, stagger } from 'animejs';
 
   function initTimeline() {
     const projectsSection = document.getElementById('projects');
@@ -225,19 +229,18 @@ const projects: ProjectTimelineItem[] = [
       if (hasAnimated) return;
       hasAnimated = true;
 
-      const tl = createTimeline({ defaults: { ease: 'outBack' } });
-
-      tl.add('.projects-header-anim', {
-        opacity: [0, 1],
-        translateY: [30, 0],
-        duration: 600
-      })
-      .add('.timeline-item', {
-        opacity: [0, 1],
-        translateX: [-25, 0],
-        delay: stagger(120),
-        duration: 600
-      }, '-=300');
+      createTimeline({ defaults: { ease: 'outBack' } })
+        .add('.projects-header-anim', {
+          opacity: [0, 1],
+          translateY: [30, 0],
+          duration: 600
+        })
+        .add('.timeline-item', {
+          opacity: [0, 1],
+          translateX: [-25, 0],
+          delay: stagger(120),
+          duration: 600
+        }, '-=300');
     }
 
     if ('IntersectionObserver' in window) {
@@ -355,4 +358,3 @@ const projects: ProjectTimelineItem[] = [
     initTimeline();
   }
 </script>
-

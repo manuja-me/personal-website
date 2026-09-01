@@ -1,14 +1,39 @@
 ---
+import { Terminal, Shield, ArrowUp } from 'lucide-astro';
+
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="border-t border-border/80 py-12 px-6 bg-background">
-  <div class="container mx-auto text-center">
-    <p class="text-muted-foreground font-mono text-sm mb-4">
-      $ sudo rm -rf /vulnerabilities
-    </p>
-    <p class="text-muted-foreground text-sm">
-      &copy; {currentYear} Manuja Medhankara (@manuja_me) - Crafted with <span class="text-primary font-bold">&lt;/&gt;</span> and security in mind
-    </p>
+<footer class="border-t border-border/80 dark:border-primary/20 py-14 px-6 bg-card/40 backdrop-blur-md">
+  <div class="container mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-6 font-mono text-xs text-muted-foreground">
+    <!-- Brand & Copyright -->
+    <div class="flex items-center gap-3">
+      <div class="w-6 h-6 rounded bg-primary/10 border border-primary/30 flex items-center justify-center text-primary font-bold">
+        &gt;_
+      </div>
+      <div>
+        <span class="text-foreground font-semibold">Manuja Medhankara</span> &copy; {currentYear}
+      </div>
+    </div>
+
+    <!-- Terminal Command -->
+    <div class="text-center text-primary/80">
+      $ sudo harden --mode=enforce --all
+    </div>
+
+    <!-- Back to Top & Security Policy -->
+    <div class="flex items-center gap-4">
+      <a href="/security.txt" class="hover:text-primary transition-colors">
+        security.txt
+      </a>
+      <a
+        href="#hero"
+        class="flex items-center gap-1 hover:text-primary transition-colors p-1.5 rounded hover:bg-primary/10"
+        aria-label="Back to top"
+      >
+        <span>TOP</span>
+        <ArrowUp class="w-3.5 h-3.5" />
+      </a>
+    </div>
   </div>
 </footer>
