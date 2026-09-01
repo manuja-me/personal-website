@@ -280,8 +280,11 @@ const projects: ProjectTimelineItem[] = [
         if (nextState) {
           content.classList.remove('hidden');
           content.classList.add('block');
+          content.style.height = '0px';
+          content.style.opacity = '0';
           
           const fullHeight = content.scrollHeight;
+          const highlights = content.querySelectorAll('.project-highlight-item');
           
           animate(content, {
             height: [0, fullHeight],
@@ -293,11 +296,10 @@ const projects: ProjectTimelineItem[] = [
             }
           });
 
-          const highlights = content.querySelectorAll('.project-highlight-item');
           animate(highlights, {
             translateX: [-15, 0],
             opacity: [0, 1],
-            delay: stagger(40),
+            delay: stagger(35),
             duration: 300,
             ease: 'outBack'
           });
@@ -305,27 +307,42 @@ const projects: ProjectTimelineItem[] = [
           if (chevron) {
             animate(chevron, {
               rotate: 180,
-              duration: 250,
+              duration: 300,
               ease: 'outBack'
             });
           }
         } else {
-          const currentHeight = content.offsetHeight;
+          const currentHeight = content.scrollHeight || content.offsetHeight;
+          content.style.height = `${currentHeight}px`;
+          const highlights = content.querySelectorAll('.project-highlight-item');
+
+          // Reverse staggered item exit
+          animate(highlights, {
+            translateX: [0, -15],
+            opacity: [1, 0],
+            delay: stagger(25, { from: 'last' }),
+            duration: 250,
+            ease: 'inOutQuad'
+          });
+
+          // Smooth height & opacity collapse
           animate(content, {
             height: [currentHeight, 0],
             opacity: [1, 0],
-            duration: 250,
-            ease: 'inOutQuad',
+            duration: 350,
+            ease: 'outQuart',
             onComplete: () => {
               content.classList.remove('block');
               content.classList.add('hidden');
+              content.style.height = '';
+              content.style.opacity = '';
             }
           });
 
           if (chevron) {
             animate(chevron, {
               rotate: 0,
-              duration: 250,
+              duration: 300,
               ease: 'outBack'
             });
           }
