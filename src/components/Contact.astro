@@ -154,24 +154,32 @@ import { Mail, Github, Linkedin, ShieldCheck, ArrowUpRight } from 'lucide-astro'
       });
     });
 
-    // Decrypt on badge hover
+    // Decrypt on click
+    function runDecrypt(el: HTMLElement) {
+      if ((el as any)._decryptInterval) clearInterval((el as any)._decryptInterval);
+      const original = el.getAttribute('data-original-text') || el.textContent || '';
+      const chars = '01#$*&abcdef';
+      let iter = 0;
+      const int = setInterval(() => {
+        el.textContent = original
+          .split('')
+          .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
+          .join('');
+        if (iter >= original.length) {
+          clearInterval(int);
+          (el as any)._decryptInterval = null;
+        }
+        iter += 0.25;
+      }, 45);
+      (el as any)._decryptInterval = int;
+    }
+
     const badge = document.getElementById('contact-cmd-badge');
     if (badge) {
-      badge.addEventListener('mouseenter', () => {
-        const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
-        if (!span) return;
-        const original = span.getAttribute('data-original-text') || span.textContent || '';
-        const chars = '01#$*&abcdef';
-        let iter = 0;
-        const int = setInterval(() => {
-          span.textContent = original
-            .split('')
-            .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
-            .join('');
-          if (iter >= original.length) clearInterval(int);
-          iter += 1/2;
-        }, 30);
-      });
+      const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
+      if (span) {
+        badge.addEventListener('click', () => runDecrypt(span));
+      }
     }
   }
 

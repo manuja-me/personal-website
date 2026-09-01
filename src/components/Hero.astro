@@ -154,6 +154,10 @@ import { Shield, Terminal, Lock, Mail, Github, Linkedin, ArrowDown, Sparkles } f
 
     // 3. Kinetic Text Scramble Decryption
     function runDecryptEffect(el: HTMLElement) {
+      if ((el as any)._decryptInterval) {
+        clearInterval((el as any)._decryptInterval);
+      }
+
       const original = el.getAttribute('data-original-text') || el.textContent || '';
       const chars = '01ABCDEF#@!%&*{}_-+=/<>~';
       let iteration = 0;
@@ -170,25 +174,27 @@ import { Shield, Terminal, Lock, Mail, Github, Linkedin, ArrowDown, Sparkles } f
 
         if (iteration >= original.length) {
           clearInterval(interval);
+          (el as any)._decryptInterval = null;
         }
-        iteration += 1 / 3;
-      }, 30);
+        iteration += 0.25;
+      }, 45);
+
+      (el as any)._decryptInterval = interval;
     }
 
     const title = document.getElementById('hero-main-title');
     const whoami = document.getElementById('hero-whoami-badge');
 
     if (title) {
-      title.addEventListener('mouseenter', () => runDecryptEffect(title));
       title.addEventListener('click', () => runDecryptEffect(title));
-      setTimeout(() => runDecryptEffect(title), 400);
+      setTimeout(() => runDecryptEffect(title), 550);
     }
 
     if (whoami) {
       const span = whoami.querySelector('.anime-decrypt-target') as HTMLElement;
       if (span) {
-        whoami.addEventListener('mouseenter', () => runDecryptEffect(span));
         whoami.addEventListener('click', () => runDecryptEffect(span));
+        setTimeout(() => runDecryptEffect(span), 300);
       }
     }
 

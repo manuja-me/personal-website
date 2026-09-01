@@ -23,14 +23,16 @@ const projects: ProjectTimelineItem[] = [
     statusLabel: "Built & Released",
     badgeColor: "text-emerald-700 dark:text-emerald-400 border-emerald-600/30 dark:border-emerald-500/30 bg-emerald-500/10",
     phase: "v0.7 Active",
-    description: "Desktop Web Vulnerability & Security Posture Scanner. Conducts passive audits on security headers, cookie policies, client-side CVE dependency risks, and credential leaks with automated risk scoring.",
+    description: "Enterprise-grade desktop security workstation & non-intrusive vulnerability scanner. Conducts real-time attack surface evaluations, cryptographic audits, port discovery, and OWASP remediation blueprinting.",
     highlights: [
-      "Automated HTTP security header audits (CSP, HSTS, X-Frame-Options, COOP, Permissions-Policy)",
-      "Cookie security inspection (HttpOnly, Secure, SameSite attribute validation)",
-      "Client-side CVE dependency risk detection & sensitive key exposure scanning",
-      "Embedded SQLite history database with automated security health rating (0-100)"
+      "Safe & non-destructive passive audits: HTTP security headers, cookie hygiene, and SSL/TLS cryptographic posture",
+      "RCE & attack surface heuristics: detects dangerous query parameters (?cmd=, ?tpl=), CVE banner correlation, and debug consoles",
+      "High-speed async TCP port discovery with banner grabbing and target profile presets",
+      "DNS & anti-spoofing verification: DoH inspection for SPF (v=spf1), DMARC policies (p=reject), and DNSSEC integrity",
+      "Multi-source subdomain reconnaissance via Certificate Transparency logs (crt.sh) and passive DNS",
+      "1-Click AI remediation prompts (Antigravity, Claude, ChatGPT), continuous watchdog daemon, and local SQLite (WAL) privacy"
     ],
-    tags: ["Rust", "Tauri v2", "Svelte 5", "TypeScript", "SQLite"]
+    tags: ["Rust", "Tauri v2", "Svelte 5", "Tailwind CSS v4", "SQLite WAL"]
   },
   {
     id: "linux-hardening",
@@ -331,24 +333,32 @@ const projects: ProjectTimelineItem[] = [
       });
     });
 
-    // Decrypt on badge hover
+    // Decrypt on click
+    function runDecrypt(el: HTMLElement) {
+      if ((el as any)._decryptInterval) clearInterval((el as any)._decryptInterval);
+      const original = el.getAttribute('data-original-text') || el.textContent || '';
+      const chars = '01#$*&abcdef';
+      let iter = 0;
+      const int = setInterval(() => {
+        el.textContent = original
+          .split('')
+          .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
+          .join('');
+        if (iter >= original.length) {
+          clearInterval(int);
+          (el as any)._decryptInterval = null;
+        }
+        iter += 0.25;
+      }, 45);
+      (el as any)._decryptInterval = int;
+    }
+
     const badge = document.getElementById('projects-cmd-badge');
     if (badge) {
-      badge.addEventListener('mouseenter', () => {
-        const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
-        if (!span) return;
-        const original = span.getAttribute('data-original-text') || span.textContent || '';
-        const chars = '01#$*&abcdef';
-        let iter = 0;
-        const int = setInterval(() => {
-          span.textContent = original
-            .split('')
-            .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
-            .join('');
-          if (iter >= original.length) clearInterval(int);
-          iter += 1/2;
-        }, 30);
-      });
+      const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
+      if (span) {
+        badge.addEventListener('click', () => runDecrypt(span));
+      }
     }
   }
 
