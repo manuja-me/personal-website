@@ -74,12 +74,12 @@ import { Play, Code, Sparkles, RefreshCw, Terminal, Eye, EyeOff, ShieldAlert } f
         </button>
 
         <button
-          id="hud-trigger-scatter"
+          id="hud-trigger-wave"
           type="button"
           class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-semibold text-xs transition-all hover:scale-102 active:scale-98 cursor-pointer"
         >
           <Play class="w-3.5 h-3.5" />
-          Scatter Badges
+          Diagonal Wave
         </button>
       </div>
     </div>
@@ -225,27 +225,29 @@ import { Play, Code, Sparkles, RefreshCw, Terminal, Eye, EyeOff, ShieldAlert } f
       }
     });
 
-    // 4. Trigger Scatter Badges
-    document.getElementById('hud-trigger-scatter')?.addEventListener('click', () => {
-      const tokens = document.querySelectorAll('.physics-token');
-      if (tokens.length > 0) {
-        tokens.forEach((token) => {
-          const randX = (Math.random() - 0.5) * 200;
-          const randY = (Math.random() - 0.5) * 120;
-          const randRotate = (Math.random() - 0.5) * 60;
-
-          animate(token, {
-            x: randX,
-            y: randY,
-            rotate: randRotate,
-            ease: createSpring({ stiffness: 120, damping: 8 }),
-            duration: 600
-          });
+    // 4. Trigger Diagonal Wave
+    document.getElementById('hud-trigger-wave')?.addEventListener('click', () => {
+      const nodes = document.querySelectorAll('.cyber-node');
+      if (nodes.length > 0) {
+        animate(nodes, {
+          translateY: [
+            { to: -16, duration: 220, ease: 'outSine' },
+            { to: 0, duration: 350, ease: 'outBounce' }
+          ],
+          scale: [
+            { to: 1.3, duration: 220 },
+            { to: 1, duration: 350 }
+          ],
+          delay: stagger(25, {
+            grid: [14, 14],
+            from: 'first',
+            axis: 'x'
+          })
         });
       }
 
       if (codeSnippet) {
-        codeSnippet.innerHTML = `<span class="text-secondary">createDraggable</span>(<span class="text-amber-400">'.physics-token'</span>, {\n  <span class="text-muted-foreground">container:</span> <span class="text-amber-400">'#sandbox'</span>,\n  <span class="text-muted-foreground">releaseEase:</span> <span class="text-secondary">createSpring</span>({\n    <span class="text-muted-foreground">stiffness:</span> <span class="text-rose-400">140</span>,\n    <span class="text-muted-foreground">damping:</span> <span class="text-rose-400">10</span>\n  })\n});`;
+        codeSnippet.innerHTML = `<span class="text-secondary">animate</span>(<span class="text-amber-400">'.cyber-node'</span>, {\n  <span class="text-muted-foreground">translateY:</span> [<span class="text-rose-400">-16</span>, <span class="text-rose-400">0</span>],\n  <span class="text-muted-foreground">delay:</span> <span class="text-secondary">stagger</span>(<span class="text-rose-400">25</span>, {\n    <span class="text-muted-foreground">grid:</span> [<span class="text-rose-400">14</span>, <span class="text-rose-400">14</span>],\n    <span class="text-muted-foreground">axis:</span> <span class="text-amber-400">'x'</span>\n  }),\n  <span class="text-muted-foreground">ease:</span> <span class="text-amber-400">'outBounce'</span>\n});`;
       }
     });
   }
