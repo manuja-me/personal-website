@@ -155,43 +155,47 @@ const projects: ProjectTimelineItem[] = [
           <!-- Expandable Technical Drawer -->
           <div
             id={`details-${project.id}`}
-            class="hidden overflow-hidden border-t border-dashed border-border bg-card/60 px-4 sm:px-6 md:px-8 py-6 sm:py-8 project-details-content"
+            class="project-drawer grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden"
           >
-            <div class="space-y-5 sm:space-y-6 max-w-4xl">
-              <!-- Feature List -->
-              <div class="space-y-2.5 sm:space-y-3">
-                <div class="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider text-foreground">
-                  [ ARCHITECTURAL CAPABILITIES &amp; SECURITY SCOPE ]
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
-                  {project.highlights.map((highlight) => (
-                    <div class="project-highlight-item flex items-start gap-2 font-mono text-xs text-muted-foreground">
-                      <span class="text-primary font-bold shrink-0">―</span>
-                      <span class="leading-relaxed">{highlight}</span>
+            <div class="min-h-0 overflow-hidden">
+              <div class="border-t border-dashed border-border bg-card/60 px-4 sm:px-6 md:px-8 py-6 sm:py-8">
+                <div class="space-y-5 sm:space-y-6 max-w-4xl">
+                  <!-- Feature List -->
+                  <div class="space-y-2.5 sm:space-y-3">
+                    <div class="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider text-foreground">
+                      [ ARCHITECTURAL CAPABILITIES &amp; SECURITY SCOPE ]
                     </div>
-                  ))}
-                </div>
-              </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
+                      {project.highlights.map((highlight) => (
+                        <div class="project-highlight-item flex items-start gap-2 font-mono text-xs text-muted-foreground">
+                          <span class="text-primary font-bold shrink-0">―</span>
+                          <span class="leading-relaxed">{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-              <!-- Tech Stack & Direct URL -->
-              <div class="pt-4 sm:pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-                <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
-                  {project.tags.map((tag) => (
-                    <span class="px-2 py-0.5 border border-border bg-background text-foreground font-semibold">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                  <!-- Tech Stack & Direct URL -->
+                  <div class="pt-4 sm:pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+                    <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
+                      {project.tags.map((tag) => (
+                        <span class="px-2 py-0.5 border border-border bg-background text-foreground font-semibold">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
 
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-primary hover:underline group/link self-start sm:self-auto"
-                >
-                  <span>Repository</span>
-                  <ArrowUpRight class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                </a>
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-primary hover:underline group/link self-start sm:self-auto"
+                    >
+                      <span>Repository</span>
+                      <ArrowUpRight class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -241,14 +245,14 @@ const projects: ProjectTimelineItem[] = [
       runEntrance();
     }
 
-    // Smooth Drawer Accordion
+    // Flicker-Free Smooth Drawer Accordion
     const projectItems = document.querySelectorAll('.project-item');
     projectItems.forEach((item) => {
       const btn = item.querySelector('.project-toggle-btn');
-      const content = item.querySelector('.project-details-content') as HTMLElement;
+      const drawer = item.querySelector('.project-drawer') as HTMLElement;
       const chevron = item.querySelector('.chevron-icon');
 
-      if (!btn || !content) return;
+      if (!btn || !drawer) return;
 
       btn.addEventListener('click', (e) => {
         if ((e.target as HTMLElement).closest('a')) return;
@@ -259,29 +263,15 @@ const projects: ProjectTimelineItem[] = [
         btn.setAttribute('aria-expanded', nextState ? 'true' : 'false');
 
         if (nextState) {
-          content.classList.remove('hidden');
-          content.classList.add('block');
-          content.style.height = '0px';
-          content.style.opacity = '0';
+          drawer.classList.remove('grid-rows-[0fr]', 'opacity-0');
+          drawer.classList.add('grid-rows-[1fr]', 'opacity-100');
 
-          const fullHeight = content.scrollHeight;
-          const highlights = content.querySelectorAll('.project-highlight-item');
-
-          animate(content, {
-            height: [0, fullHeight],
-            opacity: [0, 1],
-            duration: 320,
-            ease: 'outQuart',
-            onComplete: () => {
-              content.style.height = 'auto';
-            }
-          });
-
+          const highlights = drawer.querySelectorAll('.project-highlight-item');
           animate(highlights, {
-            translateY: [8, 0],
+            translateY: [6, 0],
             opacity: [0, 1],
-            delay: stagger(25),
-            duration: 250,
+            delay: stagger(20),
+            duration: 220,
             ease: 'outExpo'
           });
 
@@ -293,21 +283,8 @@ const projects: ProjectTimelineItem[] = [
             });
           }
         } else {
-          const currentHeight = content.scrollHeight || content.offsetHeight;
-          content.style.height = `${currentHeight}px`;
-
-          animate(content, {
-            height: [currentHeight, 0],
-            opacity: [1, 0],
-            duration: 300,
-            ease: 'outQuart',
-            onComplete: () => {
-              content.classList.remove('block');
-              content.classList.add('hidden');
-              content.style.height = '';
-              content.style.opacity = '';
-            }
-          });
+          drawer.classList.remove('grid-rows-[1fr]', 'opacity-100');
+          drawer.classList.add('grid-rows-[0fr]', 'opacity-0');
 
           if (chevron) {
             animate(chevron, {

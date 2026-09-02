@@ -72,46 +72,48 @@ import { Menu, X } from 'lucide-astro';
   <!-- Mobile Dropdown Navigation Drawer -->
   <div
     id="mobile-menu-drawer"
-    class="hidden md:hidden border-t border-border bg-background/98 backdrop-blur-xl px-4 py-5 space-y-3 font-mono text-xs shadow-xl"
+    class="grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden md:hidden border-t border-border bg-background/98 backdrop-blur-xl"
   >
-    <div class="grid grid-cols-1 divide-y divide-border border border-border bg-card">
-      <a
-        href="#about"
-        class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
-      >
-        <span>ABOUT &amp; SPECIFICATIONS</span>
-        <span class="text-primary font-bold">[ 01 ]</span>
-      </a>
-      <a
-        href="#skills"
-        class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
-      >
-        <span>CAPABILITIES &amp; AUDITS</span>
-        <span class="text-primary font-bold">[ 02 ]</span>
-      </a>
-      <a
-        href="#projects"
-        class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
-      >
-        <span>SELECTED WORKS &amp; ROADMAP</span>
-        <span class="text-primary font-bold">[ 03 ]</span>
-      </a>
-      <a
-        href="#contact"
-        class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
-      >
-        <span>COMMUNICATIONS</span>
-        <span class="text-primary font-bold">[ 04 ]</span>
-      </a>
-    </div>
-
-    <!-- Mobile Telemetry Bar -->
-    <div class="pt-2 flex items-center justify-between text-[11px] text-muted-foreground font-mono">
-      <div class="flex items-center gap-2">
-        <span class="w-1.5 h-1.5 bg-emerald-500 animate-pulse inline-block"></span>
-        <span>STATUS: VERIFIED // ONLINE</span>
+    <div class="min-h-0 overflow-hidden px-4 py-5 space-y-3 font-mono text-xs shadow-xl">
+      <div class="grid grid-cols-1 divide-y divide-border border border-border bg-card">
+        <a
+          href="#about"
+          class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
+        >
+          <span>ABOUT &amp; SPECIFICATIONS</span>
+          <span class="text-primary font-bold">[ 01 ]</span>
+        </a>
+        <a
+          href="#skills"
+          class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
+        >
+          <span>CAPABILITIES &amp; AUDITS</span>
+          <span class="text-primary font-bold">[ 02 ]</span>
+        </a>
+        <a
+          href="#projects"
+          class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
+        >
+          <span>SELECTED WORKS &amp; ROADMAP</span>
+          <span class="text-primary font-bold">[ 03 ]</span>
+        </a>
+        <a
+          href="#contact"
+          class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
+        >
+          <span>COMMUNICATIONS</span>
+          <span class="text-primary font-bold">[ 04 ]</span>
+        </a>
       </div>
-      <span>LOC: COLOMBO [LK]</span>
+
+      <!-- Mobile Telemetry Bar -->
+      <div class="pt-2 flex items-center justify-between text-[11px] text-muted-foreground font-mono">
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-emerald-500 animate-pulse inline-block"></span>
+          <span>STATUS: VERIFIED // ONLINE</span>
+        </div>
+        <span>LOC: COLOMBO [LK]</span>
+      </div>
     </div>
   </div>
 </header>
@@ -135,48 +137,16 @@ import { Menu, X } from 'lucide-astro';
       toggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
 
       if (open) {
-        drawer?.classList.remove('hidden');
-        drawer?.classList.add('block');
+        drawer?.classList.remove('grid-rows-[0fr]', 'opacity-0');
+        drawer?.classList.add('grid-rows-[1fr]', 'opacity-100');
         if (iconOpen) iconOpen.classList.add('hidden');
         if (iconClose) {
           iconClose.classList.remove('hidden');
           iconClose.classList.add('flex');
         }
-
-        if (drawer) {
-          drawer.style.height = '0px';
-          drawer.style.opacity = '0';
-          const scrollH = drawer.scrollHeight;
-
-          animate(drawer, {
-            height: [0, scrollH],
-            opacity: [0, 1],
-            duration: 280,
-            ease: 'outQuart',
-            onComplete: () => {
-              drawer.style.height = 'auto';
-            }
-          });
-        }
       } else {
-        if (drawer) {
-          const curH = drawer.scrollHeight || drawer.offsetHeight;
-          drawer.style.height = `${curH}px`;
-
-          animate(drawer, {
-            height: [curH, 0],
-            opacity: [1, 0],
-            duration: 220,
-            ease: 'outQuart',
-            onComplete: () => {
-              drawer.classList.remove('block');
-              drawer.classList.add('hidden');
-              drawer.style.height = '';
-              drawer.style.opacity = '';
-            }
-          });
-        }
-
+        drawer?.classList.remove('grid-rows-[1fr]', 'opacity-100');
+        drawer?.classList.add('grid-rows-[0fr]', 'opacity-0');
         if (iconOpen) iconOpen.classList.remove('hidden');
         if (iconClose) {
           iconClose.classList.add('hidden');
