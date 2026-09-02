@@ -6,7 +6,7 @@ const currentYear = new Date().getFullYear();
 
 <footer class="w-full border-t border-border bg-background relative overflow-hidden">
   <!-- Giant Architectural Poster Wordmark -->
-  <div class="px-4 sm:px-6 lg:px-8 py-8 md:py-12 border-b border-border select-none overflow-hidden">
+  <div class="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 border-b border-border select-none overflow-hidden">
     <h2
       id="giant-footer-brand"
       class="text-[9.5vw] font-black tracking-tighter leading-none text-foreground hover:text-primary transition-colors duration-500 cursor-default uppercase whitespace-nowrap block"
@@ -16,29 +16,29 @@ const currentYear = new Date().getFullYear();
     </h2>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
     <!-- 4-Column Modular Swiss Directory -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-border">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-16 border-b border-border">
       <!-- Col 1: Brand & Discipline (5 cols) -->
-      <div class="lg:col-span-5 space-y-4">
+      <div class="lg:col-span-5 space-y-3 sm:space-y-4">
         <div class="flex items-center gap-2 font-mono text-xs font-bold text-foreground uppercase tracking-wider">
           <span class="w-2 h-2 bg-primary"></span>
           <span>DISCIPLINE &amp; RESEARCH</span>
         </div>
-        <p class="text-sm text-muted-foreground leading-relaxed max-w-sm">
+        <p class="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-sm">
           Cybersecurity specialist &amp; systems engineer. Focused on offensive penetration testing, defensive Linux kernel hardening, and high-performance security utilities.
         </p>
-        <div class="font-mono text-xs text-muted-foreground pt-2">
+        <div class="font-mono text-[11px] sm:text-xs text-muted-foreground pt-1 sm:pt-2">
           LOCATION: COLOMBO [LK] // UTC+05:30
         </div>
       </div>
 
       <!-- Col 2: Index (2 cols) -->
-      <div class="lg:col-span-2 space-y-3 font-mono text-xs">
-        <div class="font-bold text-foreground uppercase tracking-wider mb-4">
+      <div class="lg:col-span-2 space-y-2.5 sm:space-y-3 font-mono text-xs">
+        <div class="font-bold text-foreground uppercase tracking-wider mb-2 sm:mb-4">
           // INDEX
         </div>
-        <ul class="space-y-2 text-muted-foreground">
+        <ul class="space-y-1.5 sm:space-y-2 text-muted-foreground">
           <li>
             <a href="#hero" class="hover:text-primary transition-colors flex items-center gap-1.5">
               <span class="text-primary font-bold">00</span> Home
@@ -68,11 +68,11 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- Col 3: Repositories (3 cols) -->
-      <div class="lg:col-span-3 space-y-3 font-mono text-xs">
-        <div class="font-bold text-foreground uppercase tracking-wider mb-4">
+      <div class="lg:col-span-3 space-y-2.5 sm:space-y-3 font-mono text-xs">
+        <div class="font-bold text-foreground uppercase tracking-wider mb-2 sm:mb-4">
           // REPOSITORIES
         </div>
-        <ul class="space-y-2 text-muted-foreground">
+        <ul class="space-y-1.5 sm:space-y-2 text-muted-foreground">
           <li>
             <a
               href="https://github.com/manuja-me/vuln-radar"
@@ -121,9 +121,9 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- Col 4: Top & Security (2 cols) -->
-      <div class="lg:col-span-2 flex flex-col justify-between space-y-6 font-mono text-xs">
+      <div class="lg:col-span-2 flex flex-col justify-between space-y-4 sm:space-y-6 font-mono text-xs pt-4 md:pt-0 border-t md:border-t-0 border-border/50">
         <div class="space-y-2">
-          <div class="font-bold text-foreground uppercase tracking-wider mb-4">
+          <div class="font-bold text-foreground uppercase tracking-wider mb-2 sm:mb-4">
             // PROTOCOL
           </div>
           <a href="/security.txt" class="block text-muted-foreground hover:text-primary transition-colors">
@@ -139,7 +139,7 @@ const currentYear = new Date().getFullYear();
           <a
             id="footer-back-to-top"
             href="#hero"
-            class="swiss-magnetic-btn inline-flex items-center justify-between w-full p-3 border border-border bg-card hover:bg-secondary text-foreground font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            class="swiss-magnetic-btn inline-flex items-center justify-between w-full p-3 border border-border bg-card hover:bg-secondary text-foreground font-bold uppercase tracking-wider transition-colors cursor-pointer text-xs"
             aria-label="Back to top"
           >
             <span>TOP OF PAGE</span>
@@ -150,12 +150,12 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <!-- Bottom Meta Copyright Bar -->
-    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-muted-foreground">
+    <div class="pt-6 sm:pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 font-mono text-[11px] sm:text-xs text-muted-foreground">
       <div class="flex items-center gap-2">
         <span>&copy; {currentYear} MANUJA MEDHANKARA. ALL RIGHTS RESERVED.</span>
       </div>
 
-      <div class="flex items-center gap-3 text-[11px]">
+      <div class="flex items-center gap-3 text-[10px] sm:text-[11px]">
         <span>ASTRO + ANIME.JS</span>
         <span>/</span>
         <span>SWISS TYPOGRAPHIC STYLE</span>

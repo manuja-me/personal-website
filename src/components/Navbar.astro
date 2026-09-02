@@ -1,16 +1,17 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import { Menu, X } from 'lucide-astro';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border transition-colors">
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border transition-colors">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14">
     <!-- Brand / Identifier -->
-    <a href="#hero" class="flex items-center gap-3 group focus:outline-none focus-visible:ring-1 focus-visible:ring-primary">
-      <div class="w-5 h-5 bg-primary flex items-center justify-center text-white font-bold text-xs tracking-tighter select-none">
+    <a href="#hero" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-1 focus-visible:ring-primary">
+      <div class="w-5 h-5 bg-primary flex items-center justify-center text-white font-bold text-xs tracking-tighter select-none shrink-0">
         M
       </div>
-      <div class="flex items-baseline gap-2">
-        <span class="font-sans font-extrabold text-sm tracking-tight text-foreground group-hover:text-primary transition-colors uppercase">
+      <div class="flex items-baseline gap-1.5 sm:gap-2 overflow-hidden">
+        <span class="font-sans font-extrabold text-xs sm:text-sm tracking-tight text-foreground group-hover:text-primary transition-colors uppercase truncate">
           Manuja Medhankara
         </span>
         <span class="hidden sm:inline font-mono text-[10px] text-muted-foreground tracking-widest uppercase">
@@ -19,7 +20,7 @@ import ThemeToggle from './ThemeToggle.astro';
       </div>
     </a>
 
-    <!-- Nav Links (Numbered Swiss Index) -->
+    <!-- Desktop Nav Links (Numbered Swiss Index) -->
     <nav class="hidden md:flex items-center gap-8 font-mono text-xs font-semibold tracking-wider text-muted-foreground">
       <a href="#about" class="hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1">
         <span class="text-primary font-bold">01</span>
@@ -39,14 +40,131 @@ import ThemeToggle from './ThemeToggle.astro';
       </a>
     </nav>
 
-    <!-- Operational Telemetry & Theme Switch -->
-    <div class="flex items-center gap-4">
+    <!-- Operational Telemetry & Controls -->
+    <div class="flex items-center gap-2.5 sm:gap-4">
       <div class="hidden lg:flex items-center gap-2 border-l border-border pl-4 font-mono text-[11px] text-muted-foreground">
         <span class="w-1.5 h-1.5 bg-emerald-500 inline-block animate-pulse"></span>
-        <span class="tracking-widest uppercase">SYSTEMS: ONLINE</span>
+        <span class="tracking-widest uppercase">ONLINE</span>
       </div>
 
       <ThemeToggle />
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        class="md:hidden inline-flex items-center justify-center p-1.5 border border-border bg-card text-foreground hover:bg-secondary font-mono text-[11px] font-bold uppercase tracking-wider focus:outline-none focus-visible:ring-1 focus-visible:ring-primary cursor-pointer"
+      >
+        <span id="menu-icon-open" class="flex items-center gap-1">
+          <Menu class="w-4 h-4" />
+          <span class="text-[10px]">MENU</span>
+        </span>
+        <span id="menu-icon-close" class="hidden items-center gap-1 text-primary">
+          <X class="w-4 h-4" />
+          <span class="text-[10px]">CLOSE</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation Drawer -->
+  <div
+    id="mobile-menu-drawer"
+    class="hidden md:hidden border-t border-border bg-background/98 backdrop-blur-xl px-4 py-5 space-y-3 font-mono text-xs shadow-xl"
+  >
+    <div class="grid grid-cols-1 divide-y divide-border border border-border bg-card">
+      <a
+        href="#about"
+        class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
+      >
+        <span>ABOUT &amp; SPECIFICATIONS</span>
+        <span class="text-primary font-bold">[ 01 ]</span>
+      </a>
+      <a
+        href="#skills"
+        class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
+      >
+        <span>CAPABILITIES &amp; AUDITS</span>
+        <span class="text-primary font-bold">[ 02 ]</span>
+      </a>
+      <a
+        href="#projects"
+        class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
+      >
+        <span>SELECTED WORKS &amp; ROADMAP</span>
+        <span class="text-primary font-bold">[ 03 ]</span>
+      </a>
+      <a
+        href="#contact"
+        class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
+      >
+        <span>COMMUNICATIONS</span>
+        <span class="text-primary font-bold">[ 04 ]</span>
+      </a>
+    </div>
+
+    <!-- Mobile Telemetry Bar -->
+    <div class="pt-2 flex items-center justify-between text-[11px] text-muted-foreground font-mono">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 bg-emerald-500 animate-pulse inline-block"></span>
+        <span>STATUS: VERIFIED // ONLINE</span>
+      </div>
+      <span>LOC: COLOMBO [LK]</span>
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    function initMobileMenu() {
+      const toggle = document.getElementById('mobile-menu-toggle');
+      const drawer = document.getElementById('mobile-menu-drawer');
+      const iconOpen = document.getElementById('menu-icon-open');
+      const iconClose = document.getElementById('menu-icon-close');
+      const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+      if (!toggle || !drawer) return;
+
+      function setMenuState(open) {
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+          drawer.classList.remove('hidden');
+          if (iconOpen) iconOpen.classList.add('hidden');
+          if (iconClose) iconClose.classList.remove('hidden');
+          if (iconClose) iconClose.classList.add('flex');
+        } else {
+          drawer.classList.add('hidden');
+          if (iconOpen) iconOpen.classList.remove('hidden');
+          if (iconClose) iconClose.classList.add('hidden');
+          if (iconClose) iconClose.classList.remove('flex');
+        }
+      }
+
+      toggle.onclick = function (e) {
+        e.stopPropagation();
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        setMenuState(!isOpen);
+      };
+
+      navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          setMenuState(false);
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!drawer.contains(e.target) && !toggle.contains(e.target)) {
+          setMenuState(false);
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMobileMenu);
+    } else {
+      initMobileMenu();
+    }
+  })();
+</script>

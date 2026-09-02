@@ -2,39 +2,39 @@
 import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin } from 'lucide-astro';
 ---
 
-<section id="hero" class="relative pt-24 pb-16 md:pt-32 md:pb-24 border-b border-border overflow-hidden bg-background">
+<section id="hero" class="relative pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-24 border-b border-border overflow-hidden bg-background">
   <!-- Subtle Swiss Grid Background Pattern -->
   <div class="absolute inset-0 swiss-grid-pattern opacity-60 dark:opacity-30 pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <!-- Top Meta Index Bar -->
-    <div class="hero-anim-item flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-border font-mono text-xs text-muted-foreground uppercase tracking-wider">
-      <div class="flex items-center gap-3">
-        <span class="inline-flex items-center justify-center bg-primary text-white text-[10px] font-bold px-1.5 py-0.5">
+    <div class="hero-anim-item flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 pb-4 sm:pb-6 border-b border-border font-mono text-xs text-muted-foreground uppercase tracking-wider">
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+        <span class="inline-flex items-center justify-center bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 shrink-0">
           SYS.00
         </span>
         <span class="font-bold text-foreground">MANUJA MEDHANKARA</span>
         <span class="text-border">/</span>
-        <span>PORTFOLIO &amp; SPECIFICATION</span>
+        <span class="text-[11px] sm:text-xs">PORTFOLIO &amp; SPECIFICATION</span>
       </div>
 
-      <div class="flex items-center gap-4 text-[11px]">
+      <div class="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px]">
         <span>LOC: COLOMBO [LK]</span>
-        <span class="text-border">/</span>
+        <span class="text-border hidden sm:inline">/</span>
         <span class="text-primary font-semibold">STATUS: AVAILABLE FOR AUDITS</span>
       </div>
     </div>
 
     <!-- Main Typographic Hero Poster Block -->
-    <div class="py-12 md:py-16 border-b border-border">
-      <div class="hero-anim-item space-y-4">
-        <div class="inline-block font-mono text-xs font-bold tracking-widest text-primary uppercase">
+    <div class="py-8 sm:py-12 md:py-16 border-b border-border">
+      <div class="hero-anim-item space-y-3 sm:space-y-4">
+        <div class="inline-block font-mono text-[11px] sm:text-xs font-bold tracking-widest text-primary uppercase">
           // CYBERSECURITY SPECIALIST &amp; SYSTEMS BUILDER
         </div>
 
         <h1 
           id="hero-main-title"
-          class="text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] font-black uppercase tracking-tighter leading-[0.9] text-foreground select-none cursor-pointer anime-decrypt-target"
+          class="text-4xl sm:text-6xl md:text-8xl lg:text-[7.2rem] font-black uppercase tracking-tighter leading-[0.92] sm:leading-[0.9] text-foreground select-none cursor-pointer anime-decrypt-target break-words"
           data-original-text="MANUJA MEDHANKARA"
           title="Click to scramble / decrypt typography"
         >
@@ -44,34 +44,34 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
     </div>
 
     <!-- Asymmetric 3-Column Swiss Information Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-10 border-b border-border">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-8 sm:py-10 border-b border-border">
       <!-- Col 1: Specialization & Core Pillars (4 cols) -->
-      <div class="md:col-span-4 space-y-6 md:border-r md:border-border md:pr-8 hero-anim-item">
+      <div class="md:col-span-4 space-y-5 md:border-r md:border-border md:pr-8 border-b md:border-b-0 border-border pb-8 md:pb-0 hero-anim-item">
         <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
           [ 00.1 ] FOCUS DOMAINS
         </div>
         
-        <div class="space-y-2.5 font-mono text-xs">
+        <div class="space-y-2 font-mono text-xs">
           <div class="flex items-center gap-2 p-2.5 border border-border bg-card">
             <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
             <span class="font-bold text-foreground">Penetration Testing</span>
-            <span class="ml-auto text-muted-foreground">WEB / API</span>
+            <span class="ml-auto text-muted-foreground text-[11px]">WEB / API</span>
           </div>
           <div class="flex items-center gap-2 p-2.5 border border-border bg-card">
             <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
             <span class="font-bold text-foreground">Linux Hardening</span>
-            <span class="ml-auto text-muted-foreground">CIS / KERNEL</span>
+            <span class="ml-auto text-muted-foreground text-[11px]">CIS / KERNEL</span>
           </div>
           <div class="flex items-center gap-2 p-2.5 border border-border bg-card">
             <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
             <span class="font-bold text-foreground">Security Tooling</span>
-            <span class="ml-auto text-muted-foreground">RUST / TAURI</span>
+            <span class="ml-auto text-muted-foreground text-[11px]">RUST / TAURI</span>
           </div>
         </div>
       </div>
 
       <!-- Col 2: Engineering Philosophy Statement (5 cols) -->
-      <div class="md:col-span-5 space-y-4 md:border-r md:border-border md:pr-8 hero-anim-item">
+      <div class="md:col-span-5 space-y-4 md:border-r md:border-border md:pr-8 border-b md:border-b-0 border-border pb-8 md:pb-0 hero-anim-item">
         <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
           [ 00.2 ] MISSION &amp; PHILOSOPHY
         </div>
@@ -86,7 +86,7 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
       <!-- Col 3: Direct Action Matrix (3 cols) -->
       <div class="md:col-span-3 flex flex-col justify-between space-y-4 hero-anim-item">
         <div>
-          <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">
+          <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3 sm:mb-4">
             [ 00.3 ] DIRECT ACTIONS
           </div>
 
@@ -100,7 +100,7 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
           </a>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 pt-2">
+        <div class="grid grid-cols-2 gap-2 pt-1">
           <a
             href="https://github.com/manuja-me"
             target="_blank"
@@ -124,7 +124,7 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
     </div>
 
     <!-- Bottom Structural Index Anchor Bar -->
-    <div class="pt-6 flex items-center justify-between text-xs font-mono text-muted-foreground">
+    <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono text-muted-foreground">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 border border-primary"></span>
         <span>SCROLL DOWN FOR SPECIFICATIONS</span>
