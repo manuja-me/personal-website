@@ -6,43 +6,43 @@ const expertise = [
     code: "SEC.01",
     icon: Shield,
     title: "Penetration Testing",
-    description: "Offensive web application security assessments, blackbox & whitebox testing, and vulnerability chaining.",
-    tools: ["Burp Suite Pro", "Metasploit", "OWASP ZAP", "SQLMap"]
+    description: "Offensive web application security audits, vulnerability chaining, and comprehensive blackbox testing.",
+    tools: ["Burp Suite", "Metasploit", "OWASP ZAP", "SQLMap"]
   },
   {
     code: "SYS.02",
     icon: Terminal,
     title: "Linux Hardening",
     description: "System administration, kernel sysctl tuning, strict user permission models, and CIS compliance audits.",
-    tools: ["CIS Benchmarks", "AppArmor", "UFW / iptables", "systemd"]
+    tools: ["CIS Audits", "AppArmor", "iptables", "systemd"]
   },
   {
     code: "DEV.03",
     icon: Code,
     title: "Security Tooling",
     description: "Building fast, custom vulnerability scanners, automation bots, and defensive auditing suites.",
-    tools: ["Rust", "Tauri v2", "Python 3", "Bash Scripting"]
+    tools: ["Rust", "Tauri v2", "Python 3", "Bash"]
   },
   {
     code: "NET.04",
     icon: Globe,
     title: "Network Recon",
     description: "Deep packet inspection, service fingerprinting, protocol analysis, and firewall penetration testing.",
-    tools: ["Nmap", "Wireshark", "Scapy", "Zeek / Snort"]
+    tools: ["Nmap", "Wireshark", "Scapy", "Zeek"]
   },
   {
     code: "CLD.05",
     icon: Server,
     title: "Cloud & Container Sec",
     description: "Hardening cloud architectures, Docker container isolation, and CI/CD secret scanning pipelines.",
-    tools: ["Docker", "AWS IAM", "Trivy", "GitHub Actions"]
+    tools: ["Docker", "AWS IAM", "Trivy", "CI/CD Actions"]
   },
   {
     code: "FOR.06",
     icon: Database,
     title: "Incident Forensics",
     description: "Digital forensics, reverse engineering basic payloads, log analysis, and threat hunting.",
-    tools: ["Ghidra", "GDB", "Volatility", "YARA Rules"]
+    tools: ["Ghidra", "GDB", "Volatility", "YARA"]
   }
 ];
 ---
@@ -73,14 +73,14 @@ const expertise = [
       </p>
     </div>
 
-    <!-- Swiss 6-Module Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border bg-card">
+    <!-- Swiss 6-Module Grid with CSS Subgrid -->
+    <div class="skills-modular-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border bg-card">
       {expertise.map((item) => {
         const Icon = item.icon;
         return (
-          <div class="skill-cell p-5 sm:p-7 md:p-8 border-r border-b border-border hover:bg-secondary/40 transition-colors flex flex-col justify-between group">
+          <div class="skill-cell p-5 sm:p-7 md:p-8 border-r border-b border-border hover:bg-secondary/40 transition-colors grid grid-rows-[1fr_auto] group">
             <!-- Top Section: Header, Title & Description -->
-            <div class="space-y-3 sm:space-y-4 flex-1 flex flex-col justify-between pb-5 sm:pb-6">
+            <div class="space-y-3 sm:space-y-4 flex flex-col justify-between pb-5 sm:pb-6">
               <!-- Cell Header -->
               <div class="flex items-center justify-between font-mono text-xs">
                 <span class="font-bold text-primary tracking-wider">
@@ -89,19 +89,19 @@ const expertise = [
                 <Icon class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
 
-              <!-- Title & Description with consistent min-height for optical alignment -->
-              <div class="space-y-1.5 sm:space-y-2 flex-1">
+              <!-- Title & Description -->
+              <div class="space-y-1.5 sm:space-y-2">
                 <h4 class="text-base sm:text-lg font-bold uppercase tracking-tight text-foreground group-hover:text-primary transition-colors">
                   {item.title}
                 </h4>
-                <p class="text-xs sm:text-sm text-muted-foreground leading-relaxed min-h-[2.8rem] sm:min-h-[3.5rem]">
+                <p class="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   {item.description}
                 </p>
               </div>
             </div>
 
-            <!-- Tool Tags Container with perfectly aligned top border -->
-            <div class="pt-3.5 sm:pt-4 border-t border-border flex flex-wrap gap-1.5 font-mono text-[10px] min-h-[3.25rem] sm:min-h-[3.5rem] content-start">
+            <!-- Tool Tags Container with mathematically aligned top border -->
+            <div class="pt-3.5 sm:pt-4 border-t border-border flex flex-wrap gap-1.5 font-mono text-[10px] content-start">
               {item.tools.map((t) => (
                 <span class="swiss-action-trigger px-2 py-0.5 border border-border bg-background text-foreground font-medium hover:border-primary hover:text-primary transition-colors">
                   {t}
@@ -114,6 +114,29 @@ const expertise = [
     </div>
   </div>
 </section>
+
+<style>
+  @supports (grid-template-rows: subgrid) {
+    @media (min-width: 1024px) {
+      .skills-modular-grid {
+        grid-template-rows: repeat(2, auto auto);
+      }
+      .skill-cell {
+        grid-row: span 2;
+        grid-template-rows: subgrid;
+      }
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .skills-modular-grid {
+        grid-template-rows: repeat(3, auto auto);
+      }
+      .skill-cell {
+        grid-row: span 2;
+        grid-template-rows: subgrid;
+      }
+    }
+  }
+</style>
 
 <script>
   import { animate, createTimeline, stagger } from 'animejs';
