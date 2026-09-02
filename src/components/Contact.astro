@@ -1,68 +1,109 @@
 ---
-import { Mail, Github, Linkedin, ShieldCheck, ArrowUpRight } from 'lucide-astro';
+import { Mail, Github, Linkedin, ArrowUpRight, ShieldCheck, Key } from 'lucide-astro';
 ---
 
-<section id="contact" class="min-h-screen py-28 px-6 flex items-center relative overflow-hidden">
-  <!-- Background Accents -->
-  <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.04)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.04)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"></div>
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.12),transparent_70%)] pointer-events-none"></div>
-
-  <div class="container mx-auto max-w-4xl relative z-10">
-    <div class="contact-card-box relative overflow-hidden rounded-3xl border border-primary/40 bg-card/90 dark:bg-card/50 backdrop-blur-2xl shadow-2xl">
-      <!-- Animated Laser Lines Top & Bottom -->
-      <div id="contact-top-laser" class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-      <div id="contact-bottom-laser" class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-      
-      <div class="relative p-10 md:p-16 text-center contact-content-anim">
-        <!-- Badge -->
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-primary/10 border border-primary/30 text-primary font-mono text-xs font-semibold mb-6 cursor-pointer group" id="contact-cmd-badge">
-          <ShieldCheck class="w-3.5 h-3.5 text-primary" />
-          <span class="anime-decrypt-target" data-original-text="$ gpg --initiate-comms">$ gpg --initiate-comms</span>
-        </div>
-
-        <!-- Heading -->
-        <h2 class="text-4xl md:text-6xl font-black mb-6 text-foreground anime-decrypt-target cursor-pointer tracking-tight" data-original-text="Let's Build Something Secure Together">
-          Let's Build Something
-          <span class="block gradient-text mt-2">Secure Together</span>
+<section id="contact" class="py-24 md:py-32 border-b border-border bg-background relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Index Header -->
+    <div class="contact-anim-item flex items-baseline justify-between pb-6 border-b border-border mb-12">
+      <div class="flex items-center gap-3">
+        <span class="swiss-number">04</span>
+        <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-foreground">
+          // COMMUNICATIONS &amp; INQUIRIES
         </h2>
+      </div>
+      <span class="font-mono text-xs text-muted-foreground hidden sm:inline">
+        CHANNELS: ENCRYPTED &amp; OPEN
+      </span>
+    </div>
 
-        <!-- Subtitle -->
-        <p class="text-base sm:text-lg text-muted-foreground mb-10 max-w-xl mx-auto font-mono leading-relaxed">
-          Open for security consultations, penetration testing, systems engineering, and open-source collaborations.
+    <!-- Main Poster Card -->
+    <div class="border border-border bg-card p-8 sm:p-12 md:p-16 contact-anim-item space-y-12">
+      <!-- Big Poster Headline -->
+      <div class="space-y-4 max-w-3xl">
+        <span class="swiss-tag">CONTACT PROTOCOL</span>
+        <h3 class="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-foreground leading-[0.95]">
+          Let's Build Something <span class="text-primary">Secure</span> Together.
+        </h3>
+        <p class="text-sm sm:text-base text-muted-foreground max-w-2xl leading-relaxed">
+          Open for security consultations, penetration testing, systems engineering, compliance audits, and collaborative open-source tooling.
         </p>
+      </div>
 
-        <!-- Primary CTA -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <!-- Asymmetric Two-Column Channel Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 border-t border-border items-start">
+        <!-- Direct Email & PGP Box (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            [ PRIMARY DISPATCH CHANNEL ]
+          </div>
+
           <a
             id="contact-cta-btn"
             href="mailto:manuja.public@gmail.com?subject=Security%20Inquiry%20from%20Portfolio&body=Hi%20Manuja,%0A%0AI'm%20reaching%20out%20regarding..."
-            class="contact-magnetic-btn inline-flex items-center justify-center rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-mono font-bold px-8 py-4 text-base glow-terminal shadow-lg cursor-pointer transition-all duration-300 select-none w-full sm:w-auto"
+            class="swiss-magnetic-btn w-full inline-flex items-center justify-between p-6 sm:p-8 bg-primary text-primary-foreground hover:bg-swiss-redDark transition-colors group cursor-pointer select-none"
           >
-            <Mail class="mr-2 h-5 w-5" />
-            Launch Secure Email
+            <div>
+              <span class="font-mono text-[11px] tracking-wider uppercase block text-white/80 mb-1">
+                Direct Email Transmission
+              </span>
+              <span class="text-lg sm:text-2xl font-black font-sans uppercase tracking-tight block">
+                manuja.public@gmail.com
+              </span>
+            </div>
+            <ArrowUpRight class="w-6 h-6 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
           </a>
 
-          <div class="flex gap-3 w-full sm:w-auto justify-center">
+          <!-- PGP Key Box -->
+          <div class="p-4 border border-border bg-secondary/30 flex items-center justify-between font-mono text-xs">
+            <div class="flex items-center gap-2">
+              <Key class="w-4 h-4 text-primary" />
+              <span class="text-foreground font-semibold">PGP FINGERPRINT:</span>
+              <span class="text-muted-foreground">0x4E5AB5C</span>
+            </div>
+            <a href="/security.txt" class="text-primary font-bold hover:underline">
+              security.txt ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- External Profiles & SLA (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            [ VERIFIED NETWORKS ]
+          </div>
+
+          <div class="space-y-2">
             <a
               href="https://github.com/manuja-me"
               target="_blank"
               rel="noopener noreferrer"
-              class="contact-magnetic-btn inline-flex items-center justify-center gap-1.5 px-5 py-4 rounded-xl border border-border/80 dark:border-primary/30 hover:border-primary text-foreground hover:text-primary hover:bg-primary/10 bg-card/60 backdrop-blur-md font-mono text-xs font-semibold transition-all shadow-sm"
+              class="w-full flex items-center justify-between p-4 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors group"
             >
-              <Github class="w-4 h-4" />
-              <span>GitHub</span>
-              <ArrowUpRight class="w-3.5 h-3.5 opacity-60" />
+              <div class="flex items-center gap-3">
+                <Github class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                <span>GitHub Archive</span>
+              </div>
+              <span class="text-muted-foreground group-hover:text-foreground">@manuja-me ↗</span>
             </a>
+
             <a
               href="https://www.linkedin.com/in/manuja-medhankara-rc96"
               target="_blank"
               rel="noopener noreferrer"
-              class="contact-magnetic-btn inline-flex items-center justify-center gap-1.5 px-5 py-4 rounded-xl border border-border/80 dark:border-primary/30 hover:border-primary text-foreground hover:text-primary hover:bg-primary/10 bg-card/60 backdrop-blur-md font-mono text-xs font-semibold transition-all shadow-sm"
+              class="w-full flex items-center justify-between p-4 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors group"
             >
-              <Linkedin class="w-4 h-4" />
-              <span>LinkedIn</span>
-              <ArrowUpRight class="w-3.5 h-3.5 opacity-60" />
+              <div class="flex items-center gap-3">
+                <Linkedin class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                <span>LinkedIn Network</span>
+              </div>
+              <span class="text-muted-foreground group-hover:text-foreground">Connect ↗</span>
             </a>
+          </div>
+
+          <div class="p-3.5 border border-border bg-secondary/20 font-mono text-[11px] text-muted-foreground flex items-center justify-between">
+            <span>RESPONSE SLA</span>
+            <span class="font-bold text-foreground">&lt; 24 HOURS</span>
           </div>
         </div>
       </div>
@@ -71,9 +112,9 @@ import { Mail, Github, Linkedin, ShieldCheck, ArrowUpRight } from 'lucide-astro'
 </section>
 
 <script>
-  import { animate, createSpring, createTimeline } from 'animejs';
+  import { animate, createTimeline, createSpring, stagger } from 'animejs';
 
-  function initContactAnimations() {
+  function initContact() {
     const contactSection = document.getElementById('contact');
     if (!contactSection) return;
 
@@ -83,17 +124,16 @@ import { Mail, Github, Linkedin, ShieldCheck, ArrowUpRight } from 'lucide-astro'
       if (hasAnimated) return;
       hasAnimated = true;
 
-      createTimeline({ defaults: { ease: 'outBack' } })
-        .add('.contact-card-box', {
-          scale: [0.94, 1],
-          opacity: [0, 1],
-          duration: 700
-        })
-        .add('.contact-content-anim > *', {
-          translateY: [20, 0],
-          opacity: [0, 1],
-          duration: 500
-        }, '-=400');
+      const items = contactSection?.querySelectorAll('.contact-anim-item');
+      if (items && items.length > 0) {
+        createTimeline({ defaults: { ease: 'outExpo' } })
+          .add(items, {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            delay: stagger(90),
+            duration: 650
+          });
+      }
     }
 
     if ('IntersectionObserver' in window) {
@@ -104,40 +144,25 @@ import { Mail, Github, Linkedin, ShieldCheck, ArrowUpRight } from 'lucide-astro'
             observer.disconnect();
           }
         });
-      }, { threshold: 0.2 });
+      }, { threshold: 0.1 });
 
       observer.observe(contactSection);
     } else {
       runEntrance();
     }
 
-    // Laser Beam Animation
-    animate('#contact-top-laser', {
-      translateX: ['-100%', '100%'],
-      duration: 3500,
-      loop: true,
-      ease: 'inOutSine'
-    });
-
-    animate('#contact-bottom-laser', {
-      translateX: ['100%', '-100%'],
-      duration: 3500,
-      loop: true,
-      ease: 'inOutSine'
-    });
-
-    // Magnetic Button Spring Hover
-    const buttons = document.querySelectorAll('.contact-magnetic-btn') as NodeListOf<HTMLElement>;
-    buttons.forEach((btn) => {
+    // Magnetic Button Physics
+    const magneticButtons = document.querySelectorAll('.swiss-magnetic-btn') as NodeListOf<HTMLElement>;
+    magneticButtons.forEach((btn) => {
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
 
         animate(btn, {
-          x: x * 0.25,
-          y: y * 0.25,
-          duration: 150,
+          x: x * 0.15,
+          y: y * 0.15,
+          duration: 120,
           ease: 'outQuad'
         });
       });
@@ -147,45 +172,17 @@ import { Mail, Github, Linkedin, ShieldCheck, ArrowUpRight } from 'lucide-astro'
           x: 0,
           y: 0,
           ease: createSpring({
-            stiffness: 260,
-            damping: 10
+            stiffness: 300,
+            damping: 12
           })
         });
       });
     });
-
-    // Decrypt on click
-    function runDecrypt(el: HTMLElement) {
-      if ((el as any)._decryptInterval) clearInterval((el as any)._decryptInterval);
-      const original = el.getAttribute('data-original-text') || el.textContent || '';
-      const chars = '01#$*&abcdef';
-      let iter = 0;
-      const int = setInterval(() => {
-        el.textContent = original
-          .split('')
-          .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
-          .join('');
-        if (iter >= original.length) {
-          clearInterval(int);
-          (el as any)._decryptInterval = null;
-        }
-        iter += 0.25;
-      }, 45);
-      (el as any)._decryptInterval = int;
-    }
-
-    const badge = document.getElementById('contact-cmd-badge');
-    if (badge) {
-      const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
-      if (span) {
-        badge.addEventListener('click', () => runDecrypt(span));
-      }
-    }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initContactAnimations);
+    document.addEventListener('DOMContentLoaded', initContact);
   } else {
-    initContactAnimations();
+    initContact();
   }
 </script>

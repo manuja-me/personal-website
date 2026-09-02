@@ -1,93 +1,87 @@
 ---
-import { Terminal, Shield, ArrowUp, Github, Linkedin, Mail, ExternalLink, Activity, Lock } from 'lucide-astro';
+import { ArrowUp, ArrowUpRight, Shield, Terminal } from 'lucide-astro';
 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="w-full border-t border-border/80 dark:border-primary/25 pt-20 pb-10 px-6 sm:px-10 md:px-14 lg:px-16 xl:px-20 bg-card/60 dark:bg-card/40 backdrop-blur-2xl relative overflow-hidden">
-  <!-- Subtle Background Grid Accent -->
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.08),transparent_70%)] pointer-events-none"></div>
+<footer class="w-full border-t border-border bg-background relative overflow-hidden">
+  <!-- Giant Architectural Poster Wordmark -->
+  <div class="px-4 sm:px-6 lg:px-8 py-8 md:py-12 border-b border-border select-none overflow-hidden">
+    <h2
+      id="giant-footer-brand"
+      class="text-[9.5vw] font-black tracking-tighter leading-none text-foreground hover:text-primary transition-colors duration-500 cursor-default uppercase whitespace-nowrap block"
+      title="Manuja Medhankara"
+    >
+      MANUJA MEDHANKARA
+    </h2>
+  </div>
 
-  <div class="w-full relative z-10">
-    <!-- Top Footer Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-border/60 dark:border-primary/20">
-      <!-- Col 1: Brand & Security Mission (5 cols) -->
-      <div class="lg:col-span-5 space-y-5">
-        <div class="flex items-center gap-4">
-          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shadow-md shrink-0">
-            <Terminal class="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
-          </div>
-          <div>
-            <span class="text-2xl sm:text-3xl font-black font-mono tracking-tight text-foreground block leading-tight">
-              manuja<span class="text-primary">.dev</span>
-            </span>
-            <div class="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-1">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>DAEMON ACTIVE // STATUS OK</span>
-            </div>
-          </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- 4-Column Modular Swiss Directory -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-border">
+      <!-- Col 1: Brand & Discipline (5 cols) -->
+      <div class="lg:col-span-5 space-y-4">
+        <div class="flex items-center gap-2 font-mono text-xs font-bold text-foreground uppercase tracking-wider">
+          <span class="w-2 h-2 bg-primary"></span>
+          <span>DISCIPLINE &amp; RESEARCH</span>
         </div>
-
-        <p class="text-sm text-muted-foreground font-mono leading-relaxed max-w-sm">
-          Cybersecurity Specialist &amp; Linux Systems Builder. Exploring offensive security, vulnerability discovery, and hardening secure infrastructures.
+        <p class="text-sm text-muted-foreground leading-relaxed max-w-sm">
+          Cybersecurity specialist &amp; systems engineer. Focused on offensive penetration testing, defensive Linux kernel hardening, and high-performance security utilities.
         </p>
-
-        <!-- Command Pill -->
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-background/80 dark:bg-background/60 border border-border/80 dark:border-primary/20 text-xs font-mono text-muted-foreground">
-          <Lock class="w-3.5 h-3.5 text-primary" />
-          <span class="text-primary font-medium">$</span> sudo harden --mode=enforce
+        <div class="font-mono text-xs text-muted-foreground pt-2">
+          LOCATION: COLOMBO [LK] // UTC+05:30
         </div>
       </div>
 
-      <!-- Col 2: Navigation Links (2 cols) -->
-      <div class="lg:col-span-2 space-y-3 font-mono">
-        <h4 class="text-xs font-bold text-foreground uppercase tracking-wider mb-4 flex items-center gap-1.5">
-          <span class="text-primary">//</span> Navigation
-        </h4>
-        <ul class="space-y-2.5 text-xs text-muted-foreground">
+      <!-- Col 2: Index (2 cols) -->
+      <div class="lg:col-span-2 space-y-3 font-mono text-xs">
+        <div class="font-bold text-foreground uppercase tracking-wider mb-4">
+          // INDEX
+        </div>
+        <ul class="space-y-2 text-muted-foreground">
           <li>
-            <a href="#hero" class="hover:text-primary transition-colors flex items-center gap-1">
-              <span class="text-primary/60">01.</span> Home
+            <a href="#hero" class="hover:text-primary transition-colors flex items-center gap-1.5">
+              <span class="text-primary font-bold">00</span> Home
             </a>
           </li>
           <li>
-            <a href="#about" class="hover:text-primary transition-colors flex items-center gap-1">
-              <span class="text-primary/60">02.</span> About
+            <a href="#about" class="hover:text-primary transition-colors flex items-center gap-1.5">
+              <span class="text-primary font-bold">01</span> About
             </a>
           </li>
           <li>
-            <a href="#skills" class="hover:text-primary transition-colors flex items-center gap-1">
-              <span class="text-primary/60">03.</span> Capabilities
+            <a href="#skills" class="hover:text-primary transition-colors flex items-center gap-1.5">
+              <span class="text-primary font-bold">02</span> Capabilities
             </a>
           </li>
           <li>
-            <a href="#projects" class="hover:text-primary transition-colors flex items-center gap-1">
-              <span class="text-primary/60">04.</span> Roadmap
+            <a href="#projects" class="hover:text-primary transition-colors flex items-center gap-1.5">
+              <span class="text-primary font-bold">03</span> Works
             </a>
           </li>
           <li>
-            <a href="#contact" class="hover:text-primary transition-colors flex items-center gap-1">
-              <span class="text-primary/60">05.</span> Contact
+            <a href="#contact" class="hover:text-primary transition-colors flex items-center gap-1.5">
+              <span class="text-primary font-bold">04</span> Contact
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- Col 3: Repositories & Network (3 cols) -->
-      <div class="lg:col-span-3 space-y-3 font-mono">
-        <h4 class="text-xs font-bold text-foreground uppercase tracking-wider mb-4 flex items-center gap-1.5">
-          <span class="text-primary">//</span> Connected Repos
-        </h4>
-        <ul class="space-y-2.5 text-xs text-muted-foreground">
+      <!-- Col 3: Repositories (3 cols) -->
+      <div class="lg:col-span-3 space-y-3 font-mono text-xs">
+        <div class="font-bold text-foreground uppercase tracking-wider mb-4">
+          // REPOSITORIES
+        </div>
+        <ul class="space-y-2 text-muted-foreground">
           <li>
             <a
               href="https://github.com/manuja-me/vuln-radar"
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-primary transition-colors inline-flex items-center gap-1.5 group"
+              class="hover:text-primary transition-colors inline-flex items-center gap-1"
             >
               <span>VulnRadar Scanner</span>
-              <ExternalLink class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 opacity-60" />
+              <ArrowUpRight class="w-3 h-3 opacity-60" />
             </a>
           </li>
           <li>
@@ -95,10 +89,10 @@ const currentYear = new Date().getFullYear();
               href="https://github.com/manuja-me"
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-primary transition-colors inline-flex items-center gap-1.5 group"
+              class="hover:text-primary transition-colors inline-flex items-center gap-1"
             >
               <span>Linux Hardening Suite</span>
-              <ExternalLink class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 opacity-60" />
+              <ArrowUpRight class="w-3 h-3 opacity-60" />
             </a>
           </li>
           <li>
@@ -106,10 +100,10 @@ const currentYear = new Date().getFullYear();
               href="https://github.com/manuja-me"
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-primary transition-colors inline-flex items-center gap-1.5 group"
+              class="hover:text-primary transition-colors inline-flex items-center gap-1"
             >
               <span>GitHub Profile</span>
-              <ExternalLink class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 opacity-60" />
+              <ArrowUpRight class="w-3 h-3 opacity-60" />
             </a>
           </li>
           <li>
@@ -117,68 +111,54 @@ const currentYear = new Date().getFullYear();
               href="https://www.linkedin.com/in/manuja-medhankara-rc96"
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-primary transition-colors inline-flex items-center gap-1.5 group"
+              class="hover:text-primary transition-colors inline-flex items-center gap-1"
             >
               <span>LinkedIn Network</span>
-              <ExternalLink class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 opacity-60" />
+              <ArrowUpRight class="w-3 h-3 opacity-60" />
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- Col 4: System Telemetry & Back to Top (2 cols) -->
-      <div class="lg:col-span-2 flex flex-col justify-between space-y-4 font-mono">
-        <div>
-          <h4 class="text-xs font-bold text-foreground uppercase tracking-wider mb-4 flex items-center gap-1.5">
-            <span class="text-primary">//</span> Protocols
-          </h4>
-          <div class="space-y-2 text-xs text-muted-foreground">
-            <a href="/security.txt" class="block hover:text-primary transition-colors">
-              security.txt ↗
-            </a>
-            <span class="block text-[11px] text-muted-foreground/80">
-              PGP: 0x4E5AB5C
-            </span>
+      <!-- Col 4: Top & Security (2 cols) -->
+      <div class="lg:col-span-2 flex flex-col justify-between space-y-6 font-mono text-xs">
+        <div class="space-y-2">
+          <div class="font-bold text-foreground uppercase tracking-wider mb-4">
+            // PROTOCOL
           </div>
+          <a href="/security.txt" class="block text-muted-foreground hover:text-primary transition-colors">
+            security.txt ↗
+          </a>
+          <span class="block text-muted-foreground text-[11px]">
+            PGP: 0x4E5AB5C
+          </span>
         </div>
 
-        <!-- Back to Top Magnetic Button -->
+        <!-- Back to Top Button -->
         <div>
           <a
             id="footer-back-to-top"
             href="#hero"
-            class="magnetic-button inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border/80 dark:border-primary/30 hover:border-primary bg-background/80 dark:bg-background/60 text-foreground hover:text-primary transition-all text-xs font-semibold shadow-sm cursor-pointer"
+            class="swiss-magnetic-btn inline-flex items-center justify-between w-full p-3 border border-border bg-card hover:bg-secondary text-foreground font-bold uppercase tracking-wider transition-colors cursor-pointer"
             aria-label="Back to top"
           >
+            <span>TOP OF PAGE</span>
             <ArrowUp class="w-3.5 h-3.5 text-primary" />
-            <span>Top of Matrix</span>
           </a>
         </div>
       </div>
     </div>
 
-    <!-- Massive Giant Brand Name Section (Hero Brand Display) -->
-    <div class="py-0 text-right select-none overflow-hidden border-b border-border/60 dark:border-primary/20">
-      <h2
-        id="giant-footer-brand"
-        class="text-[6.5vw] sm:text-[7.5vw] md:text-[8vw] lg:text-[7.6vw] font-black tracking-tighter leading-none text-transparent bg-clip-text bg-gradient-to-b from-foreground/25 via-foreground/10 to-transparent dark:from-foreground/20 dark:via-primary/10 dark:to-transparent hover:from-primary hover:via-primary/70 hover:to-primary/20 transition-all duration-700 cursor-default uppercase font-mono whitespace-nowrap block"
-        title="Manuja Medhankara"
-      >
-        MANUJA MEDHANKARA
-      </h2>
-    </div>
-
     <!-- Bottom Meta Copyright Bar -->
-    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-muted-foreground">
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-muted-foreground">
       <div class="flex items-center gap-2">
-        <Shield class="w-3.5 h-3.5 text-primary" />
-        <span>&copy; {currentYear} Manuja Medhankara. All systems operational.</span>
+        <span>&copy; {currentYear} MANUJA MEDHANKARA. ALL RIGHTS RESERVED.</span>
       </div>
 
-      <div class="flex items-center gap-4 text-muted-foreground/80">
-        <span>Astro v5 + Anime.js v4</span>
-        <span>•</span>
-        <span>Zero-Trust Infrastructure</span>
+      <div class="flex items-center gap-3 text-[11px]">
+        <span>ASTRO + ANIME.JS</span>
+        <span>/</span>
+        <span>SWISS TYPOGRAPHIC STYLE</span>
       </div>
     </div>
   </div>
@@ -187,8 +167,7 @@ const currentYear = new Date().getFullYear();
 <script>
   import { animate, createSpring } from 'animejs';
 
-  function initFooterAnimations() {
-    // Magnetic Spring on Back to Top Button
+  function initFooter() {
     const backToTopBtn = document.getElementById('footer-back-to-top');
     if (backToTopBtn) {
       backToTopBtn.addEventListener('mousemove', (e) => {
@@ -197,9 +176,9 @@ const currentYear = new Date().getFullYear();
         const y = e.clientY - rect.top - rect.height / 2;
 
         animate(backToTopBtn, {
-          x: x * 0.25,
-          y: y * 0.25,
-          duration: 150,
+          x: x * 0.15,
+          y: y * 0.15,
+          duration: 120,
           ease: 'outQuad'
         });
       });
@@ -209,29 +188,17 @@ const currentYear = new Date().getFullYear();
           x: 0,
           y: 0,
           ease: createSpring({
-            stiffness: 260,
-            damping: 10
+            stiffness: 300,
+            damping: 12
           })
-        });
-      });
-    }
-
-    // Giant Brand Hover Kinetic Pulse
-    const brand = document.getElementById('giant-footer-brand');
-    if (brand) {
-      brand.addEventListener('mouseenter', () => {
-        animate(brand, {
-          scale: [1, 1.02, 1],
-          duration: 600,
-          ease: 'outBack'
         });
       });
     }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFooterAnimations);
+    document.addEventListener('DOMContentLoaded', initFooter);
   } else {
-    initFooterAnimations();
+    initFooter();
   }
 </script>

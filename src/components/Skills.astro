@@ -1,44 +1,44 @@
 ---
-import { Shield, Terminal, Code, Globe, Server, Database, Sparkles } from 'lucide-astro';
+import { Shield, Terminal, Code, Globe, Server, Database } from 'lucide-astro';
 
 const expertise = [
   {
-    code: "SEC-01",
+    code: "SEC.01",
     icon: Shield,
     title: "Penetration Testing",
     description: "Offensive web application security assessments, blackbox & whitebox testing, and vulnerability chaining.",
     tools: ["Burp Suite Pro", "Metasploit", "OWASP ZAP", "SQLMap"]
   },
   {
-    code: "SYS-02",
+    code: "SYS.02",
     icon: Terminal,
     title: "Linux Hardening",
-    description: "System administration, kernel sysctl parameter tuning, strict user permission models, and compliance audits.",
+    description: "System administration, kernel sysctl tuning, strict user permission models, and CIS compliance audits.",
     tools: ["CIS Benchmarks", "AppArmor", "UFW / iptables", "systemd"]
   },
   {
-    code: "DEV-03",
+    code: "DEV.03",
     icon: Code,
     title: "Security Tooling",
     description: "Building fast, custom vulnerability scanners, automation bots, and defensive auditing suites.",
     tools: ["Rust", "Tauri v2", "Python 3", "Bash Scripting"]
   },
   {
-    code: "NET-04",
+    code: "NET.04",
     icon: Globe,
     title: "Network Recon",
     description: "Deep packet inspection, service fingerprinting, protocol analysis, and firewall penetration testing.",
     tools: ["Nmap", "Wireshark", "Scapy", "Zeek / Snort"]
   },
   {
-    code: "CLD-05",
+    code: "CLD.05",
     icon: Server,
     title: "Cloud & Container Sec",
-    description: "Hardening cloud architectures, Docker container security isolation, and CI/CD secret scanning.",
+    description: "Hardening cloud architectures, Docker container isolation, and CI/CD secret scanning pipelines.",
     tools: ["Docker", "AWS IAM", "Trivy", "GitHub Actions"]
   },
   {
-    code: "FOR-06",
+    code: "FOR.06",
     icon: Database,
     title: "Incident Forensics",
     description: "Digital forensics, reverse engineering basic payloads, log analysis, and threat hunting.",
@@ -47,55 +47,62 @@ const expertise = [
 ];
 ---
 
-<section id="skills" class="min-h-screen py-28 px-6 relative bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent flex items-center">
-  <div class="container mx-auto max-w-6xl">
-    <!-- Header -->
-    <div class="text-center mb-20 skills-header-anim">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-primary/10 border border-primary/30 text-primary font-mono text-xs font-semibold mb-4 cursor-pointer group" id="skills-cmd-badge">
-        <Sparkles class="w-3.5 h-3.5 text-primary" />
-        <span class="anime-decrypt-target" data-original-text="$ ls -la /capabilities/security">$ ls -la /capabilities/security</span>
+<section id="skills" class="py-24 md:py-32 border-b border-border bg-background relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Index Header -->
+    <div class="skills-anim-item flex items-baseline justify-between pb-6 border-b border-border mb-12">
+      <div class="flex items-center gap-3">
+        <span class="swiss-number">02</span>
+        <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-foreground">
+          // CAPABILITIES &amp; AUDIT DOMAINS
+        </h2>
       </div>
-      <h2 class="text-4xl md:text-5xl font-black text-foreground anime-decrypt-target cursor-pointer tracking-tight" data-original-text="Core Security Capabilities">
-        Core Security <span class="gradient-text">Capabilities</span>
-      </h2>
-      <p class="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto font-mono mt-3">
-        Engineered for defensive resilience and offensive precision
+      <span class="font-mono text-xs text-muted-foreground hidden sm:inline">
+        MODULAR_GRID: 6_CELLS
+      </span>
+    </div>
+
+    <!-- Section Intro Header -->
+    <div class="max-w-3xl mb-12 space-y-3 skills-anim-item">
+      <span class="swiss-tag">AUDIT SCOPE</span>
+      <h3 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-foreground">
+        Offensive Precision &amp; Defensive Hardening
+      </h3>
+      <p class="text-sm sm:text-base text-muted-foreground leading-relaxed">
+        Systematic domain expertise organized for high-consequence enterprise environments and continuous compliance.
       </p>
     </div>
 
-    <!-- Capabilities Bento Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 max-w-6xl mx-auto" id="skills-grid-container">
+    <!-- Swiss 6-Module Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border bg-card">
       {expertise.map((item) => {
         const Icon = item.icon;
         return (
-          <div class="skill-card p-8 bg-card/85 dark:bg-card/50 backdrop-blur-xl border border-border/80 dark:border-primary/20 hover:border-primary/60 rounded-2xl transition-all duration-300 group shadow-md hover:shadow-xl relative flex flex-col justify-between overflow-hidden cursor-default select-none">
-            <!-- Subtle Top Accent Glow -->
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 group-hover:via-primary to-transparent transition-all"></div>
-
-            <div>
-              <!-- Header with Code & Icon -->
-              <div class="flex items-center justify-between mb-6">
-                <div class="skill-icon-wrapper w-12 h-12 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors shadow-inner">
-                  <Icon class="w-6 h-6 text-primary" />
-                </div>
-                <span class="text-xs font-mono font-bold text-muted-foreground group-hover:text-primary transition-colors px-2 py-0.5 rounded bg-muted/50 border border-border/60">
-                  {item.code}
+          <div class="skill-cell p-6 sm:p-8 border-r border-b border-border hover:bg-secondary/40 transition-colors flex flex-col justify-between space-y-6 group">
+            <div class="space-y-4">
+              <!-- Cell Header -->
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="font-bold text-primary tracking-wider">
+                  [ {item.code} ]
                 </span>
+                <Icon class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
 
               <!-- Title & Description -->
-              <h3 class="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors font-mono tracking-tight">
-                {item.title}
-              </h3>
-              <p class="text-muted-foreground leading-relaxed font-mono text-xs sm:text-sm mb-6">
-                {item.description}
-              </p>
+              <div class="space-y-2">
+                <h4 class="text-lg font-bold uppercase tracking-tight text-foreground group-hover:text-primary transition-colors">
+                  {item.title}
+                </h4>
+                <p class="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
             </div>
 
-            <!-- Key Tools Badges -->
-            <div class="pt-4 border-t border-border/50 flex flex-wrap gap-1.5">
+            <!-- Tool Tags -->
+            <div class="pt-4 border-t border-border flex flex-wrap gap-1.5 font-mono text-[10px]">
               {item.tools.map((t) => (
-                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-primary/5 dark:bg-primary/10 text-primary border border-primary/20 font-medium">
+                <span class="px-2 py-0.5 border border-border bg-background text-foreground font-medium">
                   {t}
                 </span>
               ))}
@@ -108,9 +115,9 @@ const expertise = [
 </section>
 
 <script>
-  import { animate, createTimeline, createSpring, stagger } from 'animejs';
+  import { animate, createTimeline, stagger } from 'animejs';
 
-  function initSkillsAnimations() {
+  function initSkills() {
     const skillsSection = document.getElementById('skills');
     if (!skillsSection) return;
 
@@ -120,19 +127,16 @@ const expertise = [
       if (hasAnimated) return;
       hasAnimated = true;
 
-      createTimeline({ defaults: { ease: 'outBack' } })
-        .add('.skills-header-anim', {
-          opacity: [0, 1],
-          translateY: [30, 0],
-          duration: 600
-        })
-        .add('.skill-card', {
-          opacity: [0, 1],
-          translateY: [40, 0],
-          scale: [0.92, 1],
-          delay: stagger(80),
-          duration: 600
-        }, '-=300');
+      const cells = skillsSection?.querySelectorAll('.skill-cell, .skills-anim-item');
+      if (cells && cells.length > 0) {
+        createTimeline({ defaults: { ease: 'outExpo' } })
+          .add(cells, {
+            opacity: [0, 1],
+            translateY: [15, 0],
+            delay: stagger(60),
+            duration: 600
+          });
+      }
     }
 
     if ('IntersectionObserver' in window) {
@@ -143,78 +147,17 @@ const expertise = [
             observer.disconnect();
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: 0.1 });
 
       observer.observe(skillsSection);
     } else {
       runEntrance();
     }
-
-    // 3D Tilt Physics with Spring Reset
-    const cards = document.querySelectorAll('.skill-card') as NodeListOf<HTMLElement>;
-    cards.forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-
-        const rotateX = (-y / rect.height) * 12;
-        const rotateY = (x / rect.width) * 12;
-
-        animate(card, {
-          rotateX: rotateX,
-          rotateY: rotateY,
-          translateZ: 15,
-          duration: 120,
-          ease: 'linear'
-        });
-      });
-
-      card.addEventListener('mouseleave', () => {
-        animate(card, {
-          rotateX: 0,
-          rotateY: 0,
-          translateZ: 0,
-          ease: createSpring({
-            stiffness: 220,
-            damping: 12
-          })
-        });
-      });
-    });
-
-    // Decrypt on click
-    function runDecrypt(el: HTMLElement) {
-      if ((el as any)._decryptInterval) clearInterval((el as any)._decryptInterval);
-      const original = el.getAttribute('data-original-text') || el.textContent || '';
-      const chars = '01#$*&abcdef';
-      let iter = 0;
-      const int = setInterval(() => {
-        el.textContent = original
-          .split('')
-          .map((c, i) => (c === ' ' ? ' ' : i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]))
-          .join('');
-        if (iter >= original.length) {
-          clearInterval(int);
-          (el as any)._decryptInterval = null;
-        }
-        iter += 0.25;
-      }, 45);
-      (el as any)._decryptInterval = int;
-    }
-
-    const badge = document.getElementById('skills-cmd-badge');
-    if (badge) {
-      const span = badge.querySelector('.anime-decrypt-target') as HTMLElement;
-      if (span) {
-        badge.addEventListener('click', () => runDecrypt(span));
-      }
-    }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSkillsAnimations);
+    document.addEventListener('DOMContentLoaded', initSkills);
   } else {
-    initSkillsAnimations();
+    initSkills();
   }
 </script>

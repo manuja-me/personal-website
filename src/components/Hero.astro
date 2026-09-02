@@ -1,169 +1,175 @@
 ---
-import ShaderBackground from './ShaderBackground.astro';
-import { Shield, Terminal, Lock, Mail, Github, Linkedin, ArrowDown, Sparkles } from 'lucide-astro';
+import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin } from 'lucide-astro';
 ---
 
-<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-12">
-  <!-- Hero Shader Background -->
-  <div class="absolute inset-0 z-0">
-    <ShaderBackground />
-  </div>
+<section id="hero" class="relative pt-24 pb-16 md:pt-32 md:pb-24 border-b border-border overflow-hidden bg-background">
+  <!-- Subtle Swiss Grid Background Pattern -->
+  <div class="absolute inset-0 swiss-grid-pattern opacity-60 dark:opacity-30 pointer-events-none"></div>
 
-  <!-- Radial & Gradient Dark Overlays -->
-  <div class="absolute inset-0 bg-gradient-to-b from-background/30 via-background/70 to-background z-10 pointer-events-none"></div>
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,hsl(var(--primary)/0.12),transparent_65%)] pointer-events-none z-10"></div>
-
-  <!-- Animated SVG Cyber Radar Reticle -->
-  <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none opacity-25 dark:opacity-35">
-    <svg id="hero-cyber-radar-svg" class="w-[640px] h-[640px] max-w-full" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle class="radar-drawable-circle text-primary" cx="300" cy="300" r="275" stroke="currentColor" stroke-width="1.5" stroke-dasharray="8 6" />
-      <circle class="radar-drawable-circle text-primary" cx="300" cy="300" r="190" stroke="currentColor" stroke-width="1.2" />
-      <circle class="radar-drawable-circle text-primary" cx="300" cy="300" r="110" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" />
-      <line class="radar-drawable-line text-primary" x1="25" y1="300" x2="575" y2="300" stroke="currentColor" stroke-width="1" opacity="0.6" />
-      <line class="radar-drawable-line text-primary" x1="300" y1="25" x2="300" y2="575" stroke="currentColor" stroke-width="1" opacity="0.6" />
-      <path class="radar-drawable-cross text-primary" d="M288 288 L312 312 M288 312 L312 288" stroke="currentColor" stroke-width="2" />
-    </svg>
-  </div>
-
-  <div class="relative z-20 container mx-auto px-6 text-center max-w-5xl">
-    <div>
-      <!-- Classified Level Badge -->
-      <div class="hero-anim-item inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-primary/40 bg-card/80 dark:bg-card/60 backdrop-blur-md shadow-sm cursor-pointer group hover:border-primary transition-all" id="hero-whoami-badge" title="Click to decrypt">
-        <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
-        <span class="text-primary text-xs font-mono font-semibold tracking-wider anime-decrypt-target" data-original-text="ACCESS_LEVEL_4 // SEC_RESEARCH">$ whoami</span>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Top Meta Index Bar -->
+    <div class="hero-anim-item flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-border font-mono text-xs text-muted-foreground uppercase tracking-wider">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center justify-center bg-primary text-white text-[10px] font-bold px-1.5 py-0.5">
+          SYS.00
+        </span>
+        <span class="font-bold text-foreground">MANUJA MEDHANKARA</span>
+        <span class="text-border">/</span>
+        <span>PORTFOLIO &amp; SPECIFICATION</span>
       </div>
 
-      <!-- Main Name Heading with Decryption -->
-      <h1 class="hero-anim-item text-5xl sm:text-6xl md:text-8xl font-black mb-4 tracking-tight text-foreground anime-decrypt-target select-none cursor-pointer drop-shadow-sm" id="hero-main-title" data-original-text="Manuja Medhankara" title="Click to scramble / decrypt">
-        Manuja Medhankara
-      </h1>
-
-      <!-- Handle Subtitle -->
-      <p class="hero-anim-item text-2xl md:text-3xl font-mono font-bold gradient-text mb-6">
-        @manuja_me
-      </p>
-
-      <!-- Tagline -->
-      <p class="hero-anim-item text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-mono">
-        Cybersecurity Specialist &amp; Linux Enthusiast <span class="animate-terminal-blink text-primary">_</span>
-        <br />
-        <span class="text-foreground font-medium text-base md:text-lg">Securing systems, one line of code at a time</span>
-      </p>
-
-      <!-- Security Focus Pills -->
-      <div class="hero-anim-item flex flex-wrap gap-3 justify-center items-center mb-12">
-        <div class="hero-pill inline-flex items-center rounded-xl border border-border/80 dark:border-primary/30 bg-card/70 dark:bg-card/50 backdrop-blur-md px-4 py-2 text-xs md:text-sm text-foreground font-mono font-semibold transition-all hover:border-primary hover:scale-105 shadow-sm">
-          <Shield class="w-4 h-4 mr-2 text-primary" />
-          Penetration Testing
-        </div>
-        <div class="hero-pill inline-flex items-center rounded-xl border border-border/80 dark:border-primary/30 bg-card/70 dark:bg-card/50 backdrop-blur-md px-4 py-2 text-xs md:text-sm text-foreground font-mono font-semibold transition-all hover:border-primary hover:scale-105 shadow-sm">
-          <Terminal class="w-4 h-4 mr-2 text-primary" />
-          Linux Hardening
-        </div>
-        <div class="hero-pill inline-flex items-center rounded-xl border border-border/80 dark:border-primary/30 bg-card/70 dark:bg-card/50 backdrop-blur-md px-4 py-2 text-xs md:text-sm text-foreground font-mono font-semibold transition-all hover:border-primary hover:scale-105 shadow-sm">
-          <Lock class="w-4 h-4 mr-2 text-primary" />
-          Offensive Security
-        </div>
+      <div class="flex items-center gap-4 text-[11px]">
+        <span>LOC: COLOMBO [LK]</span>
+        <span class="text-border">/</span>
+        <span class="text-primary font-semibold">STATUS: AVAILABLE FOR AUDITS</span>
       </div>
+    </div>
 
-      <!-- Action Buttons -->
-      <div class="hero-anim-item flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a
-          id="hero-cta-btn"
-          href="mailto:manuja.public@gmail.com?subject=Contact%20from%20Portfolio&body=Hello%20Manuja,%0A%0AI'm%20reaching%20out%20regarding..."
-          class="magnetic-button inline-flex items-center justify-center rounded-xl font-mono font-bold text-sm md:text-base px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground glow-terminal transition-all duration-300 shadow-lg cursor-pointer"
+    <!-- Main Typographic Hero Poster Block -->
+    <div class="py-12 md:py-16 border-b border-border">
+      <div class="hero-anim-item space-y-4">
+        <div class="inline-block font-mono text-xs font-bold tracking-widest text-primary uppercase">
+          // CYBERSECURITY SPECIALIST &amp; SYSTEMS BUILDER
+        </div>
+
+        <h1 
+          id="hero-main-title"
+          class="text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] font-black uppercase tracking-tighter leading-[0.9] text-foreground select-none cursor-pointer anime-decrypt-target"
+          data-original-text="MANUJA MEDHANKARA"
+          title="Click to scramble / decrypt typography"
         >
-          <Mail class="mr-2 h-4 w-4 md:h-5 md:w-5" />
-          Initialize Comms
-        </a>
+          MANUJA<br />MEDHANKARA
+        </h1>
+      </div>
+    </div>
 
-        <div class="flex gap-3">
+    <!-- Asymmetric 3-Column Swiss Information Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-10 border-b border-border">
+      <!-- Col 1: Specialization & Core Pillars (4 cols) -->
+      <div class="md:col-span-4 space-y-6 md:border-r md:border-border md:pr-8 hero-anim-item">
+        <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          [ 00.1 ] FOCUS DOMAINS
+        </div>
+        
+        <div class="space-y-2.5 font-mono text-xs">
+          <div class="flex items-center gap-2 p-2.5 border border-border bg-card">
+            <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
+            <span class="font-bold text-foreground">Penetration Testing</span>
+            <span class="ml-auto text-muted-foreground">WEB / API</span>
+          </div>
+          <div class="flex items-center gap-2 p-2.5 border border-border bg-card">
+            <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
+            <span class="font-bold text-foreground">Linux Hardening</span>
+            <span class="ml-auto text-muted-foreground">CIS / KERNEL</span>
+          </div>
+          <div class="flex items-center gap-2 p-2.5 border border-border bg-card">
+            <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
+            <span class="font-bold text-foreground">Security Tooling</span>
+            <span class="ml-auto text-muted-foreground">RUST / TAURI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 2: Engineering Philosophy Statement (5 cols) -->
+      <div class="md:col-span-5 space-y-4 md:border-r md:border-border md:pr-8 hero-anim-item">
+        <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          [ 00.2 ] MISSION &amp; PHILOSOPHY
+        </div>
+        <p class="text-base sm:text-lg text-foreground font-medium leading-snug tracking-tight">
+          Engineering resilient defensive architectures and conducting rigorous offensive security assessments. Committed to high-performance open-source tools and zero-trust verification.
+        </p>
+        <p class="font-mono text-xs text-muted-foreground leading-relaxed">
+          Primary research targets include attack surface discovery, cryptographic posture verification, and automated Linux compliance.
+        </p>
+      </div>
+
+      <!-- Col 3: Direct Action Matrix (3 cols) -->
+      <div class="md:col-span-3 flex flex-col justify-between space-y-4 hero-anim-item">
+        <div>
+          <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">
+            [ 00.3 ] DIRECT ACTIONS
+          </div>
+
+          <a
+            id="hero-cta-btn"
+            href="mailto:manuja.public@gmail.com?subject=Security%20Inquiry%20from%20Portfolio&body=Hello%20Manuja,%0A%0AI'm%20reaching%20out%20regarding..."
+            class="swiss-magnetic-btn w-full inline-flex items-center justify-between px-5 py-3.5 bg-primary text-primary-foreground font-mono text-xs font-bold uppercase tracking-wider hover:bg-swiss-redDark transition-colors group select-none shadow-sm cursor-pointer"
+          >
+            <span>Initiate Contact</span>
+            <ArrowUpRight class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 pt-2">
           <a
             href="https://github.com/manuja-me"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub Profile"
-            class="magnetic-button inline-flex items-center justify-center rounded-xl p-4 border border-border/80 dark:border-primary/30 hover:border-primary text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 dark:bg-card/50 backdrop-blur-md transition-all duration-300 cursor-pointer shadow-sm"
+            class="swiss-magnetic-btn inline-flex items-center justify-center gap-1.5 p-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
           >
-            <Github class="h-5 w-5" />
+            <Github class="w-3.5 h-3.5" />
+            <span>GitHub</span>
           </a>
           <a
             href="https://www.linkedin.com/in/manuja-medhankara-rc96"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn Profile"
-            class="magnetic-button inline-flex items-center justify-center rounded-xl p-4 border border-border/80 dark:border-primary/30 hover:border-primary text-foreground hover:text-primary hover:bg-primary/10 bg-card/70 dark:bg-card/50 backdrop-blur-md transition-all duration-300 cursor-pointer shadow-sm"
+            class="swiss-magnetic-btn inline-flex items-center justify-center gap-1.5 p-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
           >
-            <Linkedin class="h-5 w-5" />
+            <Linkedin class="w-3.5 h-3.5" />
+            <span>LinkedIn</span>
           </a>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Smooth Scroll Anchor Indicator -->
-  <div class="absolute bottom-6 left-0 right-0 z-20 flex justify-center">
-    <a
-      href="#about"
-      class="animate-bounce cursor-pointer p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-      aria-label="Scroll to about section"
-    >
-      <ArrowDown class="w-5 h-5 text-primary" />
-    </a>
+    <!-- Bottom Structural Index Anchor Bar -->
+    <div class="pt-6 flex items-center justify-between text-xs font-mono text-muted-foreground">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 border border-primary"></span>
+        <span>SCROLL DOWN FOR SPECIFICATIONS</span>
+      </div>
+
+      <a
+        href="#about"
+        class="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors font-bold uppercase"
+        aria-label="Proceed to About Section"
+      >
+        <span>INDEX 01</span>
+        <ArrowDown class="w-3.5 h-3.5 text-primary" />
+      </a>
+    </div>
   </div>
 </section>
 
 <script>
-  import { animate, createTimeline, createDrawable, createSpring, stagger } from 'animejs';
+  import { animate, createTimeline, createSpring, stagger } from 'animejs';
 
-  function initHeroAnimations() {
-    // 1. Staggered Entrance
+  function initHero() {
+    // Staggered Entrance Animation
     const heroItems = document.querySelectorAll('.hero-anim-item');
     if (heroItems.length > 0) {
-      createTimeline({ defaults: { ease: 'outBack' } })
+      createTimeline({ defaults: { ease: 'outExpo' } })
         .add(heroItems, {
           opacity: [0, 1],
-          translateY: [30, 0],
-          delay: stagger(100),
-          duration: 700
+          translateY: [20, 0],
+          delay: stagger(90),
+          duration: 650
         });
     }
 
-    // 2. Animated SVG Cyber Radar Lines (createDrawable)
-    const radarCircles = document.querySelectorAll('.radar-drawable-circle, .radar-drawable-line, .radar-drawable-cross');
-    if (radarCircles.length > 0) {
-      try {
-        const drawables = createDrawable(radarCircles);
-        animate(drawables, {
-          draw: ['0 0', '0 1', '1 1'],
-          duration: 3200,
-          delay: stagger(180),
-          loop: true,
-          direction: 'alternate',
-          ease: 'inOutSine'
-        });
-      } catch (e) {
-        animate('#hero-cyber-radar-svg', {
-          rotate: 360,
-          duration: 25000,
-          loop: true,
-          ease: 'linear'
-        });
-      }
-    }
-
-    // 3. Kinetic Text Scramble Decryption
+    // Typographic Kinetic Scramble
     function runDecryptEffect(el: HTMLElement) {
       if ((el as any)._decryptInterval) {
         clearInterval((el as any)._decryptInterval);
       }
 
-      const original = el.getAttribute('data-original-text') || el.textContent || '';
-      const chars = '01ABCDEF#@!%&*{}_-+=/<>~';
+      const original = el.getAttribute('data-original-text') || el.innerText || '';
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$*-_+/';
       let iteration = 0;
 
       const interval = setInterval(() => {
-        el.textContent = original
+        el.innerText = original
           .split('')
           .map((char, index) => {
             if (char === ' ' || char === '\n') return char;
@@ -176,30 +182,20 @@ import { Shield, Terminal, Lock, Mail, Github, Linkedin, ArrowDown, Sparkles } f
           clearInterval(interval);
           (el as any)._decryptInterval = null;
         }
-        iteration += 0.25;
-      }, 45);
+        iteration += 0.35;
+      }, 35);
 
       (el as any)._decryptInterval = interval;
     }
 
-    const title = document.getElementById('hero-main-title');
-    const whoami = document.getElementById('hero-whoami-badge');
-
-    if (title) {
-      title.addEventListener('click', () => runDecryptEffect(title));
-      setTimeout(() => runDecryptEffect(title), 550);
+    const mainTitle = document.getElementById('hero-main-title');
+    if (mainTitle) {
+      mainTitle.addEventListener('click', () => runDecryptEffect(mainTitle));
+      setTimeout(() => runDecryptEffect(mainTitle), 400);
     }
 
-    if (whoami) {
-      const span = whoami.querySelector('.anime-decrypt-target') as HTMLElement;
-      if (span) {
-        whoami.addEventListener('click', () => runDecryptEffect(span));
-        setTimeout(() => runDecryptEffect(span), 300);
-      }
-    }
-
-    // 4. Magnetic Spring Buttons
-    const magneticButtons = document.querySelectorAll('.magnetic-button') as NodeListOf<HTMLElement>;
+    // Magnetic Button Spring Physics
+    const magneticButtons = document.querySelectorAll('.swiss-magnetic-btn') as NodeListOf<HTMLElement>;
     magneticButtons.forEach((btn) => {
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
@@ -207,9 +203,9 @@ import { Shield, Terminal, Lock, Mail, Github, Linkedin, ArrowDown, Sparkles } f
         const y = e.clientY - rect.top - rect.height / 2;
 
         animate(btn, {
-          x: x * 0.28,
-          y: y * 0.28,
-          duration: 150,
+          x: x * 0.2,
+          y: y * 0.2,
+          duration: 120,
           ease: 'outQuad'
         });
       });
@@ -219,8 +215,8 @@ import { Shield, Terminal, Lock, Mail, Github, Linkedin, ArrowDown, Sparkles } f
           x: 0,
           y: 0,
           ease: createSpring({
-            stiffness: 260,
-            damping: 10
+            stiffness: 300,
+            damping: 12
           })
         });
       });
@@ -228,8 +224,8 @@ import { Shield, Terminal, Lock, Mail, Github, Linkedin, ArrowDown, Sparkles } f
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeroAnimations);
+    document.addEventListener('DOMContentLoaded', initHero);
   } else {
-    initHeroAnimations();
+    initHero();
   }
 </script>

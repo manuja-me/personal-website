@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "Manuja Medhankara | Cybersecurity Specialist & Linux Enthusiast",
-  description = "Cybersecurity specialist and Linux enthusiast focused on penetration testing, system hardening, and security research. Passionate about open-source and ethical hacking."
+  title = "Manuja Medhankara | Cybersecurity & Systems Engineer",
+  description = "Cybersecurity specialist and systems engineer focused on penetration testing, Linux hardening, and security tooling. Built with Swiss typography and architectural precision."
 } = Astro.props;
 ---
 
@@ -21,10 +21,10 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Manuja Medhankara" />
-    <meta name="theme-color" content="#080808" />
+    <meta name="theme-color" content="#09090B" />
 
     <!-- Security Headers & Policies -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self';" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -58,7 +58,7 @@ const {
       })();
     </script>
   </head>
-  <body class="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
+  <body class="min-h-screen bg-background text-foreground font-sans selection:bg-primary selection:text-white">
     <slot />
   </body>
 </html>
