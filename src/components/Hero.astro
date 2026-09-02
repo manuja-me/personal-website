@@ -34,11 +34,11 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
 
         <h1 
           id="hero-main-title"
-          class="text-4xl sm:text-6xl md:text-8xl lg:text-[7.2rem] font-black uppercase tracking-tighter leading-[0.92] sm:leading-[0.9] text-foreground select-none cursor-pointer anime-decrypt-target break-words"
-          data-original-text="MANUJA MEDHANKARA"
+          class="text-4xl sm:text-6xl md:text-8xl lg:text-[7.2rem] font-black uppercase tracking-tighter leading-[0.92] sm:leading-[0.9] text-foreground select-none cursor-pointer anime-decrypt-target"
           title="Click to scramble / decrypt typography"
         >
-          MANUJA<br />MEDHANKARA
+          <span class="decrypt-line block" data-value="MANUJA">MANUJA</span>
+          <span class="decrypt-line block" data-value="MEDHANKARA">MEDHANKARA</span>
         </h1>
       </div>
     </div>
@@ -158,40 +158,47 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
         });
     }
 
-    // Typographic Kinetic Scramble
+    // Typographic Kinetic Scramble (Fixed-Size Multi-Line Preserved)
     function runDecryptEffect(el: HTMLElement) {
-      if ((el as any)._decryptInterval) {
-        clearInterval((el as any)._decryptInterval);
-      }
+      const lineElements = el.querySelectorAll('.decrypt-line') as NodeListOf<HTMLElement>;
+      if (lineElements.length === 0) return;
 
-      const original = el.getAttribute('data-original-text') || el.innerText || '';
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$*-_+/';
-      let iteration = 0;
 
-      const interval = setInterval(() => {
-        el.innerText = original
-          .split('')
-          .map((char, index) => {
-            if (char === ' ' || char === '\n') return char;
-            if (index < iteration) return original[index];
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join('');
-
-        if (iteration >= original.length) {
-          clearInterval(interval);
-          (el as any)._decryptInterval = null;
+      lineElements.forEach((lineEl) => {
+        if ((lineEl as any)._decryptInterval) {
+          clearInterval((lineEl as any)._decryptInterval);
         }
-        iteration += 0.35;
-      }, 35);
 
-      (el as any)._decryptInterval = interval;
+        const original = lineEl.getAttribute('data-value') || lineEl.innerText.trim();
+        let iteration = 0;
+
+        const interval = setInterval(() => {
+          lineEl.innerText = original
+            .split('')
+            .map((char, index) => {
+              if (char === ' ') return ' ';
+              if (index < iteration) return original[index];
+              return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join('');
+
+          if (iteration >= original.length) {
+            clearInterval(interval);
+            lineEl.innerText = original;
+            (lineEl as any)._decryptInterval = null;
+          }
+          iteration += 0.4;
+        }, 30);
+
+        (lineEl as any)._decryptInterval = interval;
+      });
     }
 
     const mainTitle = document.getElementById('hero-main-title');
     if (mainTitle) {
       mainTitle.addEventListener('click', () => runDecryptEffect(mainTitle));
-      setTimeout(() => runDecryptEffect(mainTitle), 400);
+      setTimeout(() => runDecryptEffect(mainTitle), 350);
     }
 
     // Magnetic Button Spring Physics
