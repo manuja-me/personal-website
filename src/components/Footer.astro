@@ -139,7 +139,7 @@ const currentYear = new Date().getFullYear();
           <a
             id="footer-back-to-top"
             href="#hero"
-            class="swiss-magnetic-btn inline-flex items-center justify-between w-full p-3 border border-border bg-card hover:bg-secondary text-foreground font-bold uppercase tracking-wider transition-colors cursor-pointer text-xs"
+            class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-between w-full p-3 border border-border bg-card hover:bg-secondary text-foreground font-bold uppercase tracking-wider transition-colors cursor-pointer text-xs"
             aria-label="Back to top"
           >
             <span>TOP OF PAGE</span>
@@ -191,6 +191,14 @@ const currentYear = new Date().getFullYear();
             stiffness: 300,
             damping: 12
           })
+        });
+      });
+
+      backToTopBtn.addEventListener('click', (e) => {
+        animate(backToTopBtn, {
+          scale: [0.94, 1],
+          duration: 300,
+          ease: 'outBack'
         });
       });
     }

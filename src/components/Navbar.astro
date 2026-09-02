@@ -116,55 +116,116 @@ import { Menu, X } from 'lucide-astro';
   </div>
 </header>
 
-<script is:inline>
-  (function () {
-    function initMobileMenu() {
-      const toggle = document.getElementById('mobile-menu-toggle');
-      const drawer = document.getElementById('mobile-menu-drawer');
-      const iconOpen = document.getElementById('menu-icon-open');
-      const iconClose = document.getElementById('menu-icon-close');
-      const navLinks = document.querySelectorAll('.mobile-nav-link');
+<script>
+  import { animate } from 'animejs';
 
-      if (!toggle || !drawer) return;
+  function initNavbar() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const drawer = document.getElementById('mobile-menu-drawer');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    const navLinks = document.querySelectorAll('.mobile-nav-link');
 
-      function setMenuState(open) {
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        if (open) {
-          drawer.classList.remove('hidden');
-          if (iconOpen) iconOpen.classList.add('hidden');
-          if (iconClose) iconClose.classList.remove('hidden');
-          if (iconClose) iconClose.classList.add('flex');
-        } else {
-          drawer.classList.add('hidden');
-          if (iconOpen) iconOpen.classList.remove('hidden');
-          if (iconClose) iconClose.classList.add('hidden');
-          if (iconClose) iconClose.classList.remove('flex');
+    if (!toggle || !drawer) return;
+
+    let isMenuOpen = false;
+
+    function setMenuState(open: boolean) {
+      isMenuOpen = open;
+      toggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+      if (open) {
+        drawer?.classList.remove('hidden');
+        drawer?.classList.add('block');
+        if (iconOpen) iconOpen.classList.add('hidden');
+        if (iconClose) {
+          iconClose.classList.remove('hidden');
+          iconClose.classList.add('flex');
+        }
+
+        if (drawer) {
+          drawer.style.height = '0px';
+          drawer.style.opacity = '0';
+          const scrollH = drawer.scrollHeight;
+
+          animate(drawer, {
+            height: [0, scrollH],
+            opacity: [0, 1],
+            duration: 280,
+            ease: 'outQuart',
+            onComplete: () => {
+              drawer.style.height = 'auto';
+            }
+          });
+        }
+      } else {
+        if (drawer) {
+          const curH = drawer.scrollHeight || drawer.offsetHeight;
+          drawer.style.height = `${curH}px`;
+
+          animate(drawer, {
+            height: [curH, 0],
+            opacity: [1, 0],
+            duration: 220,
+            ease: 'outQuart',
+            onComplete: () => {
+              drawer.classList.remove('block');
+              drawer.classList.add('hidden');
+              drawer.style.height = '';
+              drawer.style.opacity = '';
+            }
+          });
+        }
+
+        if (iconOpen) iconOpen.classList.remove('hidden');
+        if (iconClose) {
+          iconClose.classList.add('hidden');
+          iconClose.classList.remove('flex');
         }
       }
+    }
 
-      toggle.onclick = function (e) {
-        e.stopPropagation();
-        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-        setMenuState(!isOpen);
-      };
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setMenuState(!isMenuOpen);
+    });
 
-      navLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          setMenuState(false);
-        });
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        setMenuState(false);
       });
+    });
 
-      document.addEventListener('click', (e) => {
-        if (!drawer.contains(e.target) && !toggle.contains(e.target)) {
-          setMenuState(false);
+    document.addEventListener('click', (e) => {
+      if (isMenuOpen && drawer && !drawer.contains(e.target as Node) && !toggle.contains(e.target as Node)) {
+        setMenuState(false);
+      }
+    });
+
+    // Smooth scroll indicator trigger for all nav links
+    const allAnchors = document.querySelectorAll('a[href^="#"]');
+    allAnchors.forEach((anchor) => {
+      anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          const numBadge = target.querySelector('.swiss-number');
+          if (numBadge) {
+            animate(numBadge, {
+              scale: [1, 1.4, 1],
+              duration: 400,
+              ease: 'outBack'
+            });
+          }
         }
       });
-    }
+    });
+  }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initMobileMenu);
-    } else {
-      initMobileMenu();
-    }
-  })();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavbar);
+  } else {
+    initNavbar();
+  }
 </script>

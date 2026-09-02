@@ -52,17 +52,17 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
         </div>
         
         <div class="space-y-2 font-mono text-xs">
-          <div class="flex items-center gap-2 p-2.5 border border-border bg-card">
+          <div class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors">
             <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
             <span class="font-bold text-foreground">Penetration Testing</span>
             <span class="ml-auto text-muted-foreground text-[11px]">WEB / API</span>
           </div>
-          <div class="flex items-center gap-2 p-2.5 border border-border bg-card">
+          <div class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors">
             <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
             <span class="font-bold text-foreground">Linux Hardening</span>
             <span class="ml-auto text-muted-foreground text-[11px]">CIS / KERNEL</span>
           </div>
-          <div class="flex items-center gap-2 p-2.5 border border-border bg-card">
+          <div class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors">
             <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
             <span class="font-bold text-foreground">Security Tooling</span>
             <span class="ml-auto text-muted-foreground text-[11px]">RUST / TAURI</span>
@@ -93,7 +93,7 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
           <a
             id="hero-cta-btn"
             href="mailto:manuja.public@gmail.com?subject=Security%20Inquiry%20from%20Portfolio&body=Hello%20Manuja,%0A%0AI'm%20reaching%20out%20regarding..."
-            class="swiss-magnetic-btn w-full inline-flex items-center justify-between px-5 py-3.5 bg-primary text-primary-foreground font-mono text-xs font-bold uppercase tracking-wider hover:bg-swiss-redDark transition-colors group select-none shadow-sm cursor-pointer"
+            class="swiss-magnetic-btn swiss-action-trigger w-full inline-flex items-center justify-between px-5 py-3.5 bg-primary text-primary-foreground font-mono text-xs font-bold uppercase tracking-wider hover:bg-swiss-redDark transition-colors group select-none shadow-sm cursor-pointer"
           >
             <span>Initiate Contact</span>
             <ArrowUpRight class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -105,7 +105,7 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
             href="https://github.com/manuja-me"
             target="_blank"
             rel="noopener noreferrer"
-            class="swiss-magnetic-btn inline-flex items-center justify-center gap-1.5 p-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
+            class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-center gap-1.5 p-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
           >
             <Github class="w-3.5 h-3.5" />
             <span>GitHub</span>
@@ -114,7 +114,7 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
             href="https://www.linkedin.com/in/manuja-medhankara-rc96"
             target="_blank"
             rel="noopener noreferrer"
-            class="swiss-magnetic-btn inline-flex items-center justify-center gap-1.5 p-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
+            class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-center gap-1.5 p-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
           >
             <Linkedin class="w-3.5 h-3.5" />
             <span>LinkedIn</span>
@@ -132,7 +132,7 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
 
       <a
         href="#about"
-        class="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors font-bold uppercase"
+        class="swiss-action-trigger inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors font-bold uppercase"
         aria-label="Proceed to About Section"
       >
         <span>INDEX 01</span>
@@ -203,8 +203,8 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
         const y = e.clientY - rect.top - rect.height / 2;
 
         animate(btn, {
-          x: x * 0.2,
-          y: y * 0.2,
+          x: x * 0.18,
+          y: y * 0.18,
           duration: 120,
           ease: 'outQuad'
         });
@@ -215,8 +215,27 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
           x: 0,
           y: 0,
           ease: createSpring({
-            stiffness: 300,
-            damping: 12
+            stiffness: 320,
+            damping: 14
+          })
+        });
+      });
+
+      // Click Trigger Action Spring Feedback
+      btn.addEventListener('mousedown', () => {
+        animate(btn, {
+          scale: 0.96,
+          duration: 100,
+          ease: 'outQuad'
+        });
+      });
+
+      btn.addEventListener('mouseup', () => {
+        animate(btn, {
+          scale: 1,
+          ease: createSpring({
+            stiffness: 400,
+            damping: 10
           })
         });
       });

@@ -103,7 +103,7 @@ const projects: ProjectTimelineItem[] = [
           <!-- Row Header Button -->
           <button
             type="button"
-            class="w-full py-5 sm:py-7 md:py-8 text-left flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-primary project-toggle-btn hover:bg-secondary/30 px-2 sm:px-4 -mx-2 sm:-mx-4 transition-colors"
+            class="swiss-action-trigger w-full py-5 sm:py-7 md:py-8 text-left flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-primary project-toggle-btn hover:bg-secondary/30 px-2 sm:px-4 -mx-2 sm:-mx-4 transition-colors"
             aria-expanded="false"
             aria-controls={`details-${project.id}`}
           >
@@ -136,7 +136,7 @@ const projects: ProjectTimelineItem[] = [
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="p-2 border border-border bg-card hover:bg-secondary text-foreground hover:text-primary transition-colors"
+                class="swiss-action-trigger p-2 border border-border bg-card hover:bg-secondary text-foreground hover:text-primary transition-colors"
                 aria-label={`View ${project.title} source on GitHub`}
                 onclick="event.stopPropagation()"
               >

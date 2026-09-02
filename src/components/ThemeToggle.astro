@@ -7,15 +7,15 @@ import { Sun, Moon } from 'lucide-astro';
   type="button"
   role="switch"
   aria-label="Toggle dark/light theme"
-  class="inline-flex items-center gap-2 border border-border bg-card hover:bg-secondary text-foreground px-2.5 py-1.5 font-mono text-[11px] font-semibold tracking-wider uppercase transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-primary cursor-pointer select-none"
+  class="swiss-action-trigger inline-flex items-center gap-2 border border-border bg-card hover:bg-secondary text-foreground px-2.5 py-1.5 font-mono text-[11px] font-semibold tracking-wider uppercase transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-primary cursor-pointer select-none"
 >
-  <span class="w-1.5 h-1.5 rounded-none bg-primary inline-block"></span>
+  <span id="theme-beacon" class="w-1.5 h-1.5 rounded-none bg-primary inline-block transition-transform duration-300"></span>
   <span id="theme-toggle-label-light" class="dark:hidden flex items-center gap-1.5">
-    <Sun class="h-3 w-3 text-primary" />
+    <Sun class="h-3 w-3 text-primary transition-transform duration-300" />
     <span>LIGHT</span>
   </span>
   <span id="theme-toggle-label-dark" class="hidden dark:flex items-center gap-1.5">
-    <Moon class="h-3 w-3 text-primary" />
+    <Moon class="h-3 w-3 text-primary transition-transform duration-300" />
     <span>DARK</span>
   </span>
 </button>
@@ -24,6 +24,7 @@ import { Sun, Moon } from 'lucide-astro';
   (function () {
     function initToggle() {
       const toggle = document.getElementById('theme-toggle');
+      const beacon = document.getElementById('theme-beacon');
       if (!toggle) return;
 
       function syncAria() {
@@ -34,6 +35,14 @@ import { Sun, Moon } from 'lucide-astro';
       syncAria();
 
       toggle.onclick = function () {
+        // Micro-bounce tactile feedback
+        if (beacon) {
+          beacon.style.transform = 'scale(1.8) rotate(45deg)';
+          setTimeout(() => {
+            beacon.style.transform = 'scale(1) rotate(0deg)';
+          }, 200);
+        }
+
         const isDark = document.documentElement.classList.toggle('dark');
         try {
           localStorage.setItem('theme', isDark ? 'dark' : 'light');

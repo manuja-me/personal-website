@@ -61,7 +61,7 @@ const specifications = [
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
             {toolchain.map((tool) => (
-              <div class="p-2 sm:p-2.5 border border-border bg-card font-mono text-[11px] sm:text-xs text-foreground font-semibold text-center hover:border-primary transition-colors cursor-default select-none">
+              <div class="tool-tag-item swiss-action-trigger p-2 sm:p-2.5 border border-border bg-card font-mono text-[11px] sm:text-xs text-foreground font-semibold text-center hover:border-primary hover:bg-secondary/50 transition-colors select-none">
                 {tool}
               </div>
             ))}
@@ -81,7 +81,7 @@ const specifications = [
         <!-- Key-Value Specifications -->
         <div class="divide-y divide-border font-mono text-xs">
           {specifications.map((spec) => (
-            <div class="py-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 sm:gap-2">
+            <div class="py-3 px-2 -mx-2 hover:bg-secondary/40 transition-colors flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 sm:gap-2">
               <span class="text-muted-foreground tracking-wider uppercase font-medium text-[11px] sm:text-xs">
                 {spec.label}
               </span>

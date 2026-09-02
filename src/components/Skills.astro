@@ -102,7 +102,7 @@ const expertise = [
             <!-- Tool Tags -->
             <div class="pt-3.5 sm:pt-4 border-t border-border flex flex-wrap gap-1.5 font-mono text-[10px]">
               {item.tools.map((t) => (
-                <span class="px-2 py-0.5 border border-border bg-background text-foreground font-medium">
+                <span class="swiss-action-trigger px-2 py-0.5 border border-border bg-background text-foreground font-medium hover:border-primary hover:text-primary transition-colors">
                   {t}
                 </span>
               ))}
@@ -153,6 +153,29 @@ const expertise = [
     } else {
       runEntrance();
     }
+
+    // Cell Hover / Interaction trigger
+    const skillCells = skillsSection.querySelectorAll('.skill-cell');
+    skillCells.forEach((cell) => {
+      const icon = cell.querySelector('svg');
+      if (!icon) return;
+
+      cell.addEventListener('mouseenter', () => {
+        animate(icon, {
+          translateY: -3,
+          duration: 180,
+          ease: 'outBack'
+        });
+      });
+
+      cell.addEventListener('mouseleave', () => {
+        animate(icon, {
+          translateY: 0,
+          duration: 180,
+          ease: 'outQuad'
+        });
+      });
+    });
   }
 
   if (document.readyState === 'loading') {

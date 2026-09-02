@@ -202,7 +202,34 @@
   }
 
   .swiss-number {
-    @apply font-mono font-bold text-xs tracking-widest text-primary;
+    @apply font-mono font-bold text-xs tracking-widest text-primary transition-transform duration-300;
+  }
+
+  /* Smooth Interactive Trigger Classes */
+  .swiss-action-trigger {
+    @apply transition-all duration-200 ease-out select-none cursor-pointer;
+  }
+
+  .swiss-action-trigger:active {
+    transform: scale(0.975);
+  }
+
+  /* Minimalist Swiss Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
   }
 }
 
