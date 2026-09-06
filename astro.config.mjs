@@ -5,9 +5,11 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://manuja.dev',
   output: 'static',
+  compressHTML: true,
   integrations: [
     tailwind({
       applyBaseStyles: false,
     }),
   ],
 });
+
