@@ -10,53 +10,43 @@ import { Menu, X } from 'lucide-astro';
       <div class="w-5 h-5 bg-primary flex items-center justify-center text-white font-bold text-xs tracking-tighter select-none shrink-0">
         M
       </div>
-      <div class="flex items-baseline gap-1.5 sm:gap-2 overflow-hidden">
-        <span class="font-sans font-extrabold text-xs sm:text-sm tracking-tight text-foreground group-hover:text-primary transition-colors uppercase truncate">
-          Manuja Medhankara
-        </span>
-        <span class="hidden sm:inline font-mono text-[10px] text-muted-foreground tracking-widest uppercase">
-          [SEC.ENG]
-        </span>
-      </div>
+      <span class="font-sans font-extrabold text-xs sm:text-sm tracking-tight text-foreground group-hover:text-primary transition-colors uppercase truncate">
+        Manuja Medhankara
+      </span>
     </a>
 
     <!-- Desktop Nav Links (Numbered Swiss Index) -->
     <nav class="hidden md:flex items-center gap-8 font-mono text-xs font-semibold tracking-wider text-muted-foreground">
       <a href="#about" class="nav-item-link hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1 border-b border-transparent">
         <span class="text-primary font-bold">01</span>
-        <span>ABOUT</span>
+        <span>About</span>
       </a>
       <a href="#skills" class="nav-item-link hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1 border-b border-transparent">
         <span class="text-primary font-bold">02</span>
-        <span>CAPABILITIES</span>
+        <span>Capabilities</span>
       </a>
       <a href="#projects" class="nav-item-link hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1 border-b border-transparent">
         <span class="text-primary font-bold">03</span>
-        <span>PROJECTS</span>
+        <span>Projects</span>
       </a>
       <a href="#contact" class="nav-item-link hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1 border-b border-transparent">
         <span class="text-primary font-bold">04</span>
-        <span>CONTACT</span>
+        <span>Contact</span>
       </a>
     </nav>
 
-    <!-- Operational Telemetry & Controls -->
+    <!-- Controls -->
     <div class="flex items-center gap-2.5 sm:gap-4">
       <a
         href="/resume.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden sm:inline-flex items-center gap-1.5 px-2 py-1 border border-border bg-card hover:border-primary text-foreground font-mono text-[11px] font-bold tracking-wider uppercase transition-colors"
+        class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 border border-border bg-card hover:border-primary text-foreground font-mono text-xs font-bold tracking-wider uppercase transition-colors"
         title="View Resume / CV"
       >
-        <span class="text-primary">CV</span>
+        <span class="text-primary">Resume</span>
         <span class="text-muted-foreground text-[10px]">↗</span>
       </a>
-
-      <div class="hidden lg:flex items-center gap-2 border-l border-border pl-4 font-mono text-[11px] text-muted-foreground">
-        <span class="w-1.5 h-1.5 bg-emerald-500 inline-block animate-pulse"></span>
-        <span class="tracking-widest uppercase">ONLINE</span>
-      </div>
 
       <ThemeToggle />
 
@@ -66,15 +56,15 @@ import { Menu, X } from 'lucide-astro';
         type="button"
         aria-label="Toggle navigation menu"
         aria-expanded="false"
-        class="md:hidden inline-flex items-center justify-center p-1.5 border border-border bg-card text-foreground hover:bg-secondary font-mono text-[11px] font-bold uppercase tracking-wider focus:outline-none focus-visible:ring-1 focus-visible:ring-primary cursor-pointer"
+        class="md:hidden inline-flex items-center justify-center p-1.5 border border-border bg-card text-foreground hover:bg-secondary font-mono text-xs font-bold uppercase tracking-wider focus:outline-none focus-visible:ring-1 focus-visible:ring-primary cursor-pointer"
       >
         <span id="menu-icon-open" class="flex items-center gap-1">
           <Menu class="w-4 h-4" />
-          <span class="text-[10px]">MENU</span>
+          <span class="text-[11px]">Menu</span>
         </span>
         <span id="menu-icon-close" class="hidden items-center gap-1 text-primary">
           <X class="w-4 h-4" />
-          <span class="text-[10px]">CLOSE</span>
+          <span class="text-[11px]">Close</span>
         </span>
       </button>
     </div>
@@ -91,29 +81,29 @@ import { Menu, X } from 'lucide-astro';
           href="#about"
           class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
         >
-          <span>ABOUT &amp; SPECIFICATIONS</span>
-          <span class="text-primary font-bold">[ 01 ]</span>
+          <span>About</span>
+          <span class="text-primary font-bold">01</span>
         </a>
         <a
           href="#skills"
           class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
         >
-          <span>CAPABILITIES &amp; AUDITS</span>
-          <span class="text-primary font-bold">[ 02 ]</span>
+          <span>Capabilities</span>
+          <span class="text-primary font-bold">02</span>
         </a>
         <a
           href="#projects"
           class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
         >
-          <span>PROJECTS &amp; ROADMAP</span>
-          <span class="text-primary font-bold">[ 03 ]</span>
+          <span>Projects</span>
+          <span class="text-primary font-bold">03</span>
         </a>
         <a
           href="#contact"
           class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
         >
-          <span>COMMUNICATIONS</span>
-          <span class="text-primary font-bold">[ 04 ]</span>
+          <span>Contact</span>
+          <span class="text-primary font-bold">04</span>
         </a>
         <a
           href="/resume.pdf"
@@ -121,33 +111,21 @@ import { Menu, X } from 'lucide-astro';
           rel="noopener noreferrer"
           class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-primary transition-colors font-bold"
         >
-          <span>VIEW RESUME / CV</span>
-          <span class="text-primary font-bold">[ PDF ↗ ]</span>
+          <span>Resume / CV</span>
+          <span class="text-primary font-bold">PDF ↗</span>
         </a>
-      </div>
-
-      <!-- Mobile Telemetry Bar -->
-      <div class="pt-2 flex items-center justify-between text-[11px] text-muted-foreground font-mono">
-        <div class="flex items-center gap-2">
-          <span class="w-1.5 h-1.5 bg-emerald-500 animate-pulse inline-block"></span>
-          <span>STATUS: VERIFIED // ONLINE</span>
-        </div>
-        <span>LOC: COLOMBO [LK]</span>
       </div>
     </div>
   </div>
 </header>
 
 <script>
-  import { animate } from 'animejs';
-
   function initNavbar() {
     const toggle = document.getElementById('mobile-menu-toggle');
     const drawer = document.getElementById('mobile-menu-drawer');
     const iconOpen = document.getElementById('menu-icon-open');
     const iconClose = document.getElementById('menu-icon-close');
     const navLinks = document.querySelectorAll('.mobile-nav-link');
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!toggle || !drawer) return;
 
@@ -199,26 +177,6 @@ import { Menu, X } from 'lucide-astro';
         setMenuState(false);
         toggle.focus();
       }
-    });
-
-    // Smooth scroll indicator trigger for all nav links
-    const allAnchors = document.querySelectorAll('a[href^="#"]');
-    allAnchors.forEach((anchor) => {
-      anchor.addEventListener('click', (e) => {
-        const href = anchor.getAttribute('href');
-        if (!href || href === '#') return;
-        const target = document.querySelector(href);
-        if (target && !prefersReducedMotion) {
-          const numBadge = target.querySelector('.swiss-number');
-          if (numBadge) {
-            animate(numBadge, {
-              scale: [1, 1.4, 1],
-              duration: 400,
-              ease: 'outBack'
-            });
-          }
-        }
-      });
     });
 
     // ScrollSpy: highlight active section in desktop navbar

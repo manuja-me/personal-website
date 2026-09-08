@@ -95,19 +95,11 @@
     color: hsl(var(--primary-foreground));
   }
 
-  /* Geist Sans & Geist Mono */
+  /* Geist Sans & Geist Mono (Streamlined) */
   @font-face {
     font-family: 'Geist';
     src: url('https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.1/files/geist-sans-latin-400-normal.woff2') format('woff2');
     font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'Geist';
-    src: url('https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.1/files/geist-sans-latin-500-normal.woff2') format('woff2');
-    font-weight: 500;
     font-style: normal;
     font-display: swap;
   }
@@ -122,24 +114,8 @@
 
   @font-face {
     font-family: 'Geist';
-    src: url('https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.1/files/geist-sans-latin-700-normal.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'Geist';
     src: url('https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.1/files/geist-sans-latin-800-normal.woff2') format('woff2');
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'Geist';
-    src: url('https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.1/files/geist-sans-latin-900-normal.woff2') format('woff2');
-    font-weight: 900;
+    font-weight: 800 900;
     font-style: normal;
     font-display: swap;
   }
@@ -155,7 +131,7 @@
   @font-face {
     font-family: 'Geist Mono';
     src: url('https://cdn.jsdelivr.net/npm/@fontsource/geist-mono@5.0.1/files/geist-mono-latin-600-normal.woff2') format('woff2');
-    font-weight: 600;
+    font-weight: 600 700;
     font-style: normal;
     font-display: swap;
   }

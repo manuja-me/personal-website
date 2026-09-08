@@ -1,250 +1,150 @@
 ---
-import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin, FileText, Copy, Check } from 'lucide-astro';
+import { ArrowUpRight, Github, Linkedin, FileText, Copy } from 'lucide-astro';
 ---
 
-<section id="hero" class="relative pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-24 border-b border-border overflow-hidden bg-background">
-  <!-- Subtle Swiss Grid Background Pattern -->
-  <div class="absolute inset-0 swiss-grid-pattern opacity-60 dark:opacity-30 pointer-events-none"></div>
+<section id="hero" class="relative pt-20 pb-12 sm:pt-28 sm:pb-16 md:pt-36 md:pb-20 border-b border-border bg-background">
+  <!-- Subtle Swiss Grid Pattern -->
+  <div class="absolute inset-0 swiss-grid-pattern opacity-40 dark:opacity-20 pointer-events-none"></div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <!-- Top Meta Index Bar -->
-    <div class="hero-anim-item flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 pb-4 sm:pb-6 border-b border-border font-mono text-xs text-muted-foreground uppercase tracking-wider">
-      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-        <span class="inline-flex items-center justify-center bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 shrink-0">
-          SYS.00
-        </span>
-        <span class="font-bold text-foreground">MANUJA MEDHANKARA</span>
-        <span class="text-border">/</span>
-        <span class="text-[11px] sm:text-xs">PORTFOLIO &amp; SPECIFICATION</span>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px]">
-        <span>LOC: COLOMBO [LK]</span>
-        <span class="text-border hidden sm:inline">/</span>
-        <span class="text-primary font-semibold">STATUS: AVAILABLE FOR AUDITS</span>
-      </div>
-    </div>
-
-    <!-- Main Typographic Hero Poster Block -->
-    <div class="py-8 sm:py-12 md:py-16 border-b border-border">
-      <div class="hero-anim-item space-y-3 sm:space-y-4">
-        <div class="inline-block font-mono text-[11px] sm:text-xs font-bold tracking-widest text-primary uppercase">
-          // CYBERSECURITY SPECIALIST &amp; SYSTEMS BUILDER
-        </div>
-
-        <h1 
-          id="hero-main-title"
-          class="text-4xl sm:text-6xl md:text-8xl lg:text-[7.2rem] font-black uppercase tracking-tighter leading-[0.92] sm:leading-[0.9] text-foreground cursor-pointer anime-decrypt-target"
-          title="Click to scramble / decrypt typography"
-        >
-          <span class="decrypt-line block" data-value="MANUJA">MANUJA</span>
-          <span class="decrypt-line block" data-value="MEDHANKARA">MEDHANKARA</span>
-        </h1>
-      </div>
-    </div>
-
-    <!-- Asymmetric 3-Column Swiss Information Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-8 sm:py-10 border-b border-border">
-      <!-- Col 1: Specialization & Core Pillars (4 cols) -->
-      <div class="md:col-span-4 space-y-5 md:border-r md:border-border md:pr-8 border-b md:border-b-0 border-border pb-8 md:pb-0 hero-anim-item">
-        <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          [ 00.1 ] FOCUS DOMAINS
-        </div>
-        
-        <div class="space-y-2 font-mono text-xs">
-          <a
-            href="#skill-sec-01"
-            class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors group/item"
-          >
-            <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
-            <span class="font-bold text-foreground group-hover/item:text-primary transition-colors">Penetration Testing</span>
-            <span class="ml-auto text-muted-foreground text-[11px]">WEB / API ↗</span>
-          </a>
-          <a
-            href="#skill-sys-02"
-            class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors group/item"
-          >
-            <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
-            <span class="font-bold text-foreground group-hover/item:text-primary transition-colors">Linux Hardening</span>
-            <span class="ml-auto text-muted-foreground text-[11px]">CIS / KERNEL ↗</span>
-          </a>
-          <a
-            href="#skill-dev-03"
-            class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors group/item"
-          >
-            <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
-            <span class="font-bold text-foreground group-hover/item:text-primary transition-colors">Security Tooling</span>
-            <span class="ml-auto text-muted-foreground text-[11px]">RUST / TAURI ↗</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Col 2: Engineering Philosophy Statement (5 cols) -->
-      <div class="md:col-span-5 space-y-4 md:border-r md:border-border md:pr-8 border-b md:border-b-0 border-border pb-8 md:pb-0 hero-anim-item">
-        <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          [ 00.2 ] MISSION &amp; PHILOSOPHY
-        </div>
-        <p class="text-base sm:text-lg text-foreground font-medium leading-snug tracking-tight">
-          Engineering resilient defensive architectures and conducting rigorous offensive security assessments. Committed to high-performance open-source tools and zero-trust verification.
-        </p>
-        <p class="font-mono text-xs text-muted-foreground leading-relaxed">
-          Primary research targets include attack surface discovery, cryptographic posture verification, and automated Linux compliance.
-        </p>
-      </div>
-
-      <!-- Col 3: Direct Action Matrix (3 cols) -->
-      <div class="md:col-span-3 flex flex-col justify-between space-y-4 hero-anim-item">
-        <div class="space-y-2">
-          <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3 sm:mb-4">
-            [ 00.3 ] DIRECT ACTIONS
-          </div>
-
-          <a
-            id="hero-cta-btn"
-            href="mailto:manuja.public@gmail.com?subject=Security%20Inquiry%20from%20Portfolio&body=Hello%20Manuja,%0A%0AI'm%20reaching%20out%20regarding..."
-            class="swiss-magnetic-btn swiss-action-trigger w-full inline-flex items-center justify-between px-5 py-3.5 bg-primary text-primary-foreground font-mono text-xs font-bold uppercase tracking-wider hover:bg-swiss-redDark transition-colors group select-none shadow-sm cursor-pointer"
-          >
-            <span>Initiate Contact</span>
-            <ArrowUpRight class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-
-          <!-- Secondary Action Bar: CV & Copy Email -->
-          <div class="grid grid-cols-2 gap-2 pt-1">
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-center gap-1.5 p-2.5 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
-              title="Download CV / Resume (PDF)"
-            >
-              <FileText class="w-3.5 h-3.5 text-primary" />
-              <span>Resume</span>
-            </a>
-
-            <button
-              id="hero-copy-email-btn"
-              type="button"
-              class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-center gap-1.5 p-2.5 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors cursor-pointer"
-              title="Copy Email to Clipboard"
-            >
-              <Copy class="w-3.5 h-3.5 text-primary" />
-              <span id="hero-copy-label">Copy Mail</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2 pt-1">
-          <a
-            href="https://github.com/manuja-me"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-center gap-1.5 p-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
-          >
-            <Github class="w-3.5 h-3.5" />
-            <span>GitHub</span>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/manuja-medhankara-rc96"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-center gap-1.5 p-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
-          >
-            <Linkedin class="w-3.5 h-3.5" />
-            <span>LinkedIn</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Structural Index Anchor Bar -->
-    <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono text-muted-foreground">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-12">
+    <!-- Top Status Bar -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 sm:pb-6 border-b border-border font-mono text-xs text-muted-foreground uppercase tracking-wider">
       <div class="flex items-center gap-2">
-        <span class="w-2 h-2 border border-primary"></span>
-        <span>SCROLL DOWN FOR SPECIFICATIONS</span>
+        <span class="w-2 h-2 bg-primary inline-block"></span>
+        <span>COLOMBO, SRI LANKA // UTC+05:30</span>
       </div>
 
-      <a
-        href="#about"
-        class="swiss-action-trigger inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors font-bold uppercase"
-        aria-label="Proceed to About Section"
+      <div class="flex items-center gap-2 text-foreground font-medium">
+        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full inline-block animate-pulse"></span>
+        <span>AVAILABLE FOR SECURITY AUDITS</span>
+      </div>
+    </div>
+
+    <!-- Main Typographic Poster Block -->
+    <div class="space-y-4 sm:space-y-6">
+      <div class="font-mono text-xs font-bold tracking-widest text-primary uppercase">
+        // CYBERSECURITY SPECIALIST &amp; SYSTEMS BUILDER
+      </div>
+
+      <h1 
+        id="hero-main-title"
+        class="text-4xl sm:text-6xl md:text-8xl lg:text-[6.8rem] font-black uppercase tracking-tighter leading-[0.92] text-foreground cursor-pointer select-text"
+        title="Click to scramble typography"
       >
-        <span>INDEX 01</span>
-        <ArrowDown class="w-3.5 h-3.5 text-primary" />
-      </a>
+        <span class="decrypt-line block" data-value="MANUJA">MANUJA</span>
+        <span class="decrypt-line block" data-value="MEDHANKARA">MEDHANKARA</span>
+      </h1>
+
+      <p class="text-base sm:text-xl text-muted-foreground font-normal max-w-3xl leading-relaxed pt-2">
+        Engineering resilient defensive architectures and conducting offensive vulnerability assessments. Specialized in penetration testing, Linux infrastructure hardening, and high-performance open-source security utilities.
+      </p>
+    </div>
+
+    <!-- Action & Connection Bar -->
+    <div class="pt-6 sm:pt-8 border-t border-border flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <!-- Direct Actions -->
+      <div class="flex flex-wrap items-center gap-2.5 sm:gap-3">
+        <a
+          href="mailto:manuja.public@gmail.com?subject=Security%20Inquiry%20from%20Portfolio"
+          class="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground font-mono text-xs font-bold uppercase tracking-wider hover:bg-swiss-redDark transition-colors shadow-sm"
+        >
+          <span>Initiate Contact</span>
+          <ArrowUpRight class="w-4 h-4" />
+        </a>
+
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase tracking-wider transition-colors"
+        >
+          <FileText class="w-3.5 h-3.5 text-primary" />
+          <span>Resume</span>
+        </a>
+
+        <button
+          id="hero-copy-email-btn"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-4 py-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+          title="Copy Email Address"
+        >
+          <Copy class="w-3.5 h-3.5 text-primary" />
+          <span id="hero-copy-label">Copy Email</span>
+        </button>
+      </div>
+
+      <!-- Social Links -->
+      <div class="flex items-center gap-2">
+        <a
+          href="https://github.com/manuja-me"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2.5 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-semibold uppercase transition-colors"
+        >
+          <Github class="w-3.5 h-3.5" />
+          <span>GitHub</span>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/manuja-medhankara-rc96"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2.5 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-semibold uppercase transition-colors"
+        >
+          <Linkedin class="w-3.5 h-3.5" />
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Inline Domains Indicator -->
+    <div class="pt-4 border-t border-border/60 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs font-mono text-muted-foreground">
+      <span class="font-bold text-foreground">DOMAINS:</span>
+      <a href="#skill-sec-01" class="hover:text-primary transition-colors">Penetration Testing</a>
+      <span class="text-border">/</span>
+      <a href="#skill-sys-02" class="hover:text-primary transition-colors">Linux Hardening</a>
+      <span class="text-border">/</span>
+      <a href="#skill-dev-03" class="hover:text-primary transition-colors">Security Tooling</a>
+      <span class="text-border">/</span>
+      <span class="text-muted-foreground">Zero-Trust Baseline</span>
     </div>
   </div>
 </section>
 
 <script>
-  import { animate, createTimeline, createSpring, stagger } from 'animejs';
-
   function initHero() {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Staggered Entrance Animation (only if reduced motion is false)
-    const heroItems = document.querySelectorAll('.hero-anim-item');
-    if (heroItems.length > 0) {
-      if (prefersReducedMotion) {
-        heroItems.forEach((el) => {
-          (el as HTMLElement).style.opacity = '1';
-        });
-      } else {
-        createTimeline({ defaults: { ease: 'outExpo' } })
-          .add(heroItems, {
-            opacity: [0, 1],
-            translateY: [20, 0],
-            delay: stagger(90),
-            duration: 650
-          });
-      }
-    }
-
-    // Typographic Kinetic Scramble (Fixed-Size Multi-Line Preserved)
-    function runDecryptEffect(el: HTMLElement) {
-      const lineElements = el.querySelectorAll('.decrypt-line') as NodeListOf<HTMLElement>;
-      if (lineElements.length === 0) return;
-
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$*-_+/';
-
-      lineElements.forEach((lineEl) => {
-        if ((lineEl as any)._decryptInterval) {
-          clearInterval((lineEl as any)._decryptInterval);
-        }
-
-        const original = lineEl.getAttribute('data-value') || lineEl.innerText.trim();
-        let iteration = 0;
-
-        const interval = setInterval(() => {
-          lineEl.innerText = original
-            .split('')
-            .map((char, index) => {
-              if (char === ' ') return ' ';
-              if (index < iteration) return original[index];
-              return chars[Math.floor(Math.random() * chars.length)];
-            })
-            .join('');
-
-          if (iteration >= original.length) {
-            clearInterval(interval);
-            lineEl.innerText = original;
-            (lineEl as any)._decryptInterval = null;
-          }
-          iteration += 0.4;
-        }, 30);
-
-        (lineEl as any)._decryptInterval = interval;
-      });
-    }
-
+    // Decrypt scramble effect on click
     const mainTitle = document.getElementById('hero-main-title');
     if (mainTitle) {
-      mainTitle.addEventListener('click', () => runDecryptEffect(mainTitle));
-      if (!prefersReducedMotion) {
-        setTimeout(() => runDecryptEffect(mainTitle), 350);
+      const lineElements = mainTitle.querySelectorAll('.decrypt-line') as NodeListOf<HTMLElement>;
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$*-_+/';
+
+      function runDecrypt() {
+        lineElements.forEach((lineEl) => {
+          const original = lineEl.getAttribute('data-value') || lineEl.innerText.trim();
+          let iteration = 0;
+          const interval = setInterval(() => {
+            lineEl.innerText = original
+              .split('')
+              .map((char, index) => {
+                if (char === ' ') return ' ';
+                if (index < iteration) return original[index];
+                return chars[Math.floor(Math.random() * chars.length)];
+              })
+              .join('');
+
+            if (iteration >= original.length) {
+              clearInterval(interval);
+              lineEl.innerText = original;
+            }
+            iteration += 0.5;
+          }, 30);
+        });
       }
+
+      mainTitle.addEventListener('click', runDecrypt);
     }
 
-    // Copy Email To Clipboard with Tactile Status Feedback
+    // 1-Click Copy Email
     const copyBtn = document.getElementById('hero-copy-email-btn');
     const copyLabel = document.getElementById('hero-copy-label');
     if (copyBtn && copyLabel) {
@@ -261,55 +161,6 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
         } catch (e) {
           copyLabel.innerText = 'ERR';
         }
-      });
-    }
-
-    // Magnetic Button Spring Physics
-    if (!prefersReducedMotion) {
-      const magneticButtons = document.querySelectorAll('.swiss-magnetic-btn') as NodeListOf<HTMLElement>;
-      magneticButtons.forEach((btn) => {
-        btn.addEventListener('mousemove', (e) => {
-          const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-
-          animate(btn, {
-            x: x * 0.18,
-            y: y * 0.18,
-            duration: 120,
-            ease: 'outQuad'
-          });
-        });
-
-        btn.addEventListener('mouseleave', () => {
-          animate(btn, {
-            x: 0,
-            y: 0,
-            ease: createSpring({
-              stiffness: 320,
-              damping: 14
-            })
-          });
-        });
-
-        // Click Trigger Action Spring Feedback
-        btn.addEventListener('mousedown', () => {
-          animate(btn, {
-            scale: 0.96,
-            duration: 100,
-            ease: 'outQuad'
-          });
-        });
-
-        btn.addEventListener('mouseup', () => {
-          animate(btn, {
-            scale: 1,
-            ease: createSpring({
-              stiffness: 400,
-              damping: 10
-            })
-          });
-        });
       });
     }
   }

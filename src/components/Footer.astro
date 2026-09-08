@@ -1,44 +1,47 @@
 ---
-import { ArrowUp, ArrowUpRight, Shield, Terminal } from 'lucide-astro';
+import { ArrowUp, ArrowUpRight } from 'lucide-astro';
 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="w-full border-t border-border bg-background relative overflow-hidden">
-  <!-- Giant Architectural Poster Wordmark -->
-  <div class="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 border-b border-border select-none overflow-hidden">
-    <h2
-      id="giant-footer-brand"
-      class="text-[9.5vw] font-black tracking-tighter leading-none text-foreground hover:text-primary transition-colors duration-500 cursor-default uppercase whitespace-nowrap block"
-      title="Manuja Medhankara"
-    >
-      MANUJA MEDHANKARA
-    </h2>
+<footer class="w-full border-t border-border bg-background relative">
+  <!-- Architectural Wordmark Banner -->
+  <div class="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 border-b border-border select-none">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+      <h2
+        class="text-3xl sm:text-5xl font-black tracking-tight leading-none text-foreground uppercase"
+      >
+        Manuja Medhankara
+      </h2>
+      <span class="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+        Cybersecurity &amp; Systems Engineering
+      </span>
+    </div>
   </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-    <!-- 4-Column Modular Swiss Directory -->
+    <!-- 4-Column Directory Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-16 border-b border-border">
-      <!-- Col 1: Brand & Discipline (5 cols) -->
-      <div class="lg:col-span-5 space-y-3 sm:space-y-4">
+      <!-- Col 1: Discipline & Location (5 cols) -->
+      <div class="lg:col-span-5 space-y-3">
         <div class="flex items-center gap-2 font-mono text-xs font-bold text-foreground uppercase tracking-wider">
-          <span class="w-2 h-2 bg-primary"></span>
-          <span>DISCIPLINE &amp; RESEARCH</span>
+          <span class="w-1.5 h-1.5 bg-primary"></span>
+          <span>Focus &amp; Discipline</span>
         </div>
         <p class="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-sm">
-          Cybersecurity specialist &amp; systems engineer. Focused on offensive penetration testing, defensive Linux kernel hardening, and high-performance security utilities.
+          Offensive penetration testing, Linux kernel hardening, zero-trust infrastructure, and high-performance security utilities.
         </p>
-        <div class="font-mono text-[11px] sm:text-xs text-muted-foreground pt-1 sm:pt-2">
-          LOCATION: COLOMBO [LK] // UTC+05:30
+        <div class="font-mono text-xs text-muted-foreground pt-1">
+          Colombo, LK &bull; UTC+05:30
         </div>
       </div>
 
-      <!-- Col 2: Index (2 cols) -->
-      <div class="lg:col-span-2 space-y-2.5 sm:space-y-3 font-mono text-xs">
-        <div class="font-bold text-foreground uppercase tracking-wider mb-2 sm:mb-4">
-          // INDEX
+      <!-- Col 2: Navigation (2 cols) -->
+      <div class="lg:col-span-2 space-y-2.5 font-mono text-xs">
+        <div class="font-bold text-foreground uppercase tracking-wider mb-2 sm:mb-3">
+          Navigation
         </div>
-        <ul class="space-y-1.5 sm:space-y-2 text-muted-foreground">
+        <ul class="space-y-1.5 text-muted-foreground">
           <li>
             <a href="#hero" class="hover:text-primary transition-colors flex items-center gap-1.5">
               <span class="text-primary font-bold">00</span> Home
@@ -68,11 +71,11 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- Col 3: Repositories (3 cols) -->
-      <div class="lg:col-span-3 space-y-2.5 sm:space-y-3 font-mono text-xs">
-        <div class="font-bold text-foreground uppercase tracking-wider mb-2 sm:mb-4">
-          // REPOSITORIES
+      <div class="lg:col-span-3 space-y-2.5 font-mono text-xs">
+        <div class="font-bold text-foreground uppercase tracking-wider mb-2 sm:mb-3">
+          Repositories
         </div>
-        <ul class="space-y-1.5 sm:space-y-2 text-muted-foreground">
+        <ul class="space-y-1.5 text-muted-foreground">
           <li>
             <a
               href="https://github.com/manuja-me/vuln-radar"
@@ -121,10 +124,10 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- Col 4: Top & Security (2 cols) -->
-      <div class="lg:col-span-2 flex flex-col justify-between space-y-4 sm:space-y-6 font-mono text-xs pt-4 md:pt-0 border-t md:border-t-0 border-border/50">
+      <div class="lg:col-span-2 flex flex-col justify-between space-y-4 font-mono text-xs pt-4 md:pt-0 border-t md:border-t-0 border-border/50">
         <div class="space-y-2">
-          <div class="font-bold text-foreground uppercase tracking-wider mb-2 sm:mb-4">
-            // PROTOCOL
+          <div class="font-bold text-foreground uppercase tracking-wider mb-2 sm:mb-3">
+            Security
           </div>
           <a href="/security.txt" class="block text-muted-foreground hover:text-primary transition-colors">
             security.txt ↗
@@ -137,12 +140,11 @@ const currentYear = new Date().getFullYear();
         <!-- Back to Top Button -->
         <div>
           <a
-            id="footer-back-to-top"
             href="#hero"
-            class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-between w-full p-3 border border-border bg-card hover:bg-secondary text-foreground font-bold uppercase tracking-wider transition-colors cursor-pointer text-xs"
+            class="swiss-action-trigger inline-flex items-center justify-between w-full p-2.5 border border-border bg-card hover:bg-secondary text-foreground font-bold uppercase tracking-wider transition-colors cursor-pointer text-xs"
             aria-label="Back to top"
           >
-            <span>TOP OF PAGE</span>
+            <span>Top of Page</span>
             <ArrowUp class="w-3.5 h-3.5 text-primary" />
           </a>
         </div>
@@ -150,64 +152,14 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <!-- Bottom Meta Copyright Bar -->
-    <div class="pt-6 sm:pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 font-mono text-[11px] sm:text-xs text-muted-foreground">
+    <div class="pt-6 sm:pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 font-mono text-xs text-muted-foreground">
       <div class="flex items-center gap-2">
-        <span>&copy; {currentYear} MANUJA MEDHANKARA. ALL RIGHTS RESERVED.</span>
+        <span>&copy; {currentYear} Manuja Medhankara. All rights reserved.</span>
       </div>
 
-      <div class="flex items-center gap-3 text-[10px] sm:text-[11px]">
-        <span>ASTRO + ANIME.JS</span>
-        <span>/</span>
-        <span>SWISS TYPOGRAPHIC STYLE</span>
+      <div class="flex items-center gap-2 text-[11px]">
+        <span>Designed with Swiss typography principles</span>
       </div>
     </div>
   </div>
 </footer>
-
-<script>
-  import { animate, createSpring } from 'animejs';
-
-  function initFooter() {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const backToTopBtn = document.getElementById('footer-back-to-top');
-    if (backToTopBtn && !prefersReducedMotion) {
-      backToTopBtn.addEventListener('mousemove', (e) => {
-        const rect = backToTopBtn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-
-        animate(backToTopBtn, {
-          x: x * 0.15,
-          y: y * 0.15,
-          duration: 120,
-          ease: 'outQuad'
-        });
-      });
-
-      backToTopBtn.addEventListener('mouseleave', () => {
-        animate(backToTopBtn, {
-          x: 0,
-          y: 0,
-          ease: createSpring({
-            stiffness: 300,
-            damping: 12
-          })
-        });
-      });
-
-      backToTopBtn.addEventListener('click', (e) => {
-        animate(backToTopBtn, {
-          scale: [0.94, 1],
-          duration: 300,
-          ease: 'outBack'
-        });
-      });
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFooter);
-  } else {
-    initFooter();
-  }
-</script>
