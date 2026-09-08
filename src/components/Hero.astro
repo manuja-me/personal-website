@@ -1,5 +1,5 @@
 ---
-import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin } from 'lucide-astro';
+import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin, FileText, Copy, Check } from 'lucide-astro';
 ---
 
 <section id="hero" class="relative pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-24 border-b border-border overflow-hidden bg-background">
@@ -34,7 +34,7 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
 
         <h1 
           id="hero-main-title"
-          class="text-4xl sm:text-6xl md:text-8xl lg:text-[7.2rem] font-black uppercase tracking-tighter leading-[0.92] sm:leading-[0.9] text-foreground select-none cursor-pointer anime-decrypt-target"
+          class="text-4xl sm:text-6xl md:text-8xl lg:text-[7.2rem] font-black uppercase tracking-tighter leading-[0.92] sm:leading-[0.9] text-foreground cursor-pointer anime-decrypt-target"
           title="Click to scramble / decrypt typography"
         >
           <span class="decrypt-line block" data-value="MANUJA">MANUJA</span>
@@ -52,21 +52,30 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
         </div>
         
         <div class="space-y-2 font-mono text-xs">
-          <div class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors">
+          <a
+            href="#skill-sec-01"
+            class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors group/item"
+          >
             <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
-            <span class="font-bold text-foreground">Penetration Testing</span>
-            <span class="ml-auto text-muted-foreground text-[11px]">WEB / API</span>
-          </div>
-          <div class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors">
+            <span class="font-bold text-foreground group-hover/item:text-primary transition-colors">Penetration Testing</span>
+            <span class="ml-auto text-muted-foreground text-[11px]">WEB / API ↗</span>
+          </a>
+          <a
+            href="#skill-sys-02"
+            class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors group/item"
+          >
             <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
-            <span class="font-bold text-foreground">Linux Hardening</span>
-            <span class="ml-auto text-muted-foreground text-[11px]">CIS / KERNEL</span>
-          </div>
-          <div class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors">
+            <span class="font-bold text-foreground group-hover/item:text-primary transition-colors">Linux Hardening</span>
+            <span class="ml-auto text-muted-foreground text-[11px]">CIS / KERNEL ↗</span>
+          </a>
+          <a
+            href="#skill-dev-03"
+            class="swiss-action-trigger flex items-center gap-2 p-2.5 border border-border bg-card hover:border-primary/60 transition-colors group/item"
+          >
             <span class="w-1.5 h-1.5 bg-primary shrink-0"></span>
-            <span class="font-bold text-foreground">Security Tooling</span>
-            <span class="ml-auto text-muted-foreground text-[11px]">RUST / TAURI</span>
-          </div>
+            <span class="font-bold text-foreground group-hover/item:text-primary transition-colors">Security Tooling</span>
+            <span class="ml-auto text-muted-foreground text-[11px]">RUST / TAURI ↗</span>
+          </a>
         </div>
       </div>
 
@@ -85,7 +94,7 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
 
       <!-- Col 3: Direct Action Matrix (3 cols) -->
       <div class="md:col-span-3 flex flex-col justify-between space-y-4 hero-anim-item">
-        <div>
+        <div class="space-y-2">
           <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3 sm:mb-4">
             [ 00.3 ] DIRECT ACTIONS
           </div>
@@ -98,6 +107,30 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
             <span>Initiate Contact</span>
             <ArrowUpRight class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
+
+          <!-- Secondary Action Bar: CV & Copy Email -->
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-center gap-1.5 p-2.5 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors"
+              title="Download CV / Resume (PDF)"
+            >
+              <FileText class="w-3.5 h-3.5 text-primary" />
+              <span>Resume</span>
+            </a>
+
+            <button
+              id="hero-copy-email-btn"
+              type="button"
+              class="swiss-magnetic-btn swiss-action-trigger inline-flex items-center justify-center gap-1.5 p-2.5 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase transition-colors cursor-pointer"
+              title="Copy Email to Clipboard"
+            >
+              <Copy class="w-3.5 h-3.5 text-primary" />
+              <span id="hero-copy-label">Copy Mail</span>
+            </button>
+          </div>
         </div>
 
         <div class="grid grid-cols-2 gap-2 pt-1">
@@ -146,16 +179,24 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
   import { animate, createTimeline, createSpring, stagger } from 'animejs';
 
   function initHero() {
-    // Staggered Entrance Animation
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Staggered Entrance Animation (only if reduced motion is false)
     const heroItems = document.querySelectorAll('.hero-anim-item');
     if (heroItems.length > 0) {
-      createTimeline({ defaults: { ease: 'outExpo' } })
-        .add(heroItems, {
-          opacity: [0, 1],
-          translateY: [20, 0],
-          delay: stagger(90),
-          duration: 650
+      if (prefersReducedMotion) {
+        heroItems.forEach((el) => {
+          (el as HTMLElement).style.opacity = '1';
         });
+      } else {
+        createTimeline({ defaults: { ease: 'outExpo' } })
+          .add(heroItems, {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            delay: stagger(90),
+            duration: 650
+          });
+      }
     }
 
     // Typographic Kinetic Scramble (Fixed-Size Multi-Line Preserved)
@@ -198,55 +239,79 @@ import { ArrowDown, ArrowUpRight, Shield, Terminal, Lock, Mail, Github, Linkedin
     const mainTitle = document.getElementById('hero-main-title');
     if (mainTitle) {
       mainTitle.addEventListener('click', () => runDecryptEffect(mainTitle));
-      setTimeout(() => runDecryptEffect(mainTitle), 350);
+      if (!prefersReducedMotion) {
+        setTimeout(() => runDecryptEffect(mainTitle), 350);
+      }
+    }
+
+    // Copy Email To Clipboard with Tactile Status Feedback
+    const copyBtn = document.getElementById('hero-copy-email-btn');
+    const copyLabel = document.getElementById('hero-copy-label');
+    if (copyBtn && copyLabel) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('manuja.public@gmail.com');
+          const original = copyLabel.innerText;
+          copyLabel.innerText = 'COPIED!';
+          copyBtn.classList.add('border-primary', 'text-primary');
+          setTimeout(() => {
+            copyLabel.innerText = original;
+            copyBtn.classList.remove('border-primary', 'text-primary');
+          }, 2000);
+        } catch (e) {
+          copyLabel.innerText = 'ERR';
+        }
+      });
     }
 
     // Magnetic Button Spring Physics
-    const magneticButtons = document.querySelectorAll('.swiss-magnetic-btn') as NodeListOf<HTMLElement>;
-    magneticButtons.forEach((btn) => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
+    if (!prefersReducedMotion) {
+      const magneticButtons = document.querySelectorAll('.swiss-magnetic-btn') as NodeListOf<HTMLElement>;
+      magneticButtons.forEach((btn) => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
 
-        animate(btn, {
-          x: x * 0.18,
-          y: y * 0.18,
-          duration: 120,
-          ease: 'outQuad'
+          animate(btn, {
+            x: x * 0.18,
+            y: y * 0.18,
+            duration: 120,
+            ease: 'outQuad'
+          });
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          animate(btn, {
+            x: 0,
+            y: 0,
+            ease: createSpring({
+              stiffness: 320,
+              damping: 14
+            })
+          });
+        });
+
+        // Click Trigger Action Spring Feedback
+        btn.addEventListener('mousedown', () => {
+          animate(btn, {
+            scale: 0.96,
+            duration: 100,
+            ease: 'outQuad'
+          });
+        });
+
+        btn.addEventListener('mouseup', () => {
+          animate(btn, {
+            scale: 1,
+            ease: createSpring({
+              stiffness: 400,
+              damping: 10
+            })
+          });
         });
       });
-
-      btn.addEventListener('mouseleave', () => {
-        animate(btn, {
-          x: 0,
-          y: 0,
-          ease: createSpring({
-            stiffness: 320,
-            damping: 14
-          })
-        });
-      });
-
-      // Click Trigger Action Spring Feedback
-      btn.addEventListener('mousedown', () => {
-        animate(btn, {
-          scale: 0.96,
-          duration: 100,
-          ease: 'outQuad'
-        });
-      });
-
-      btn.addEventListener('mouseup', () => {
-        animate(btn, {
-          scale: 1,
-          ease: createSpring({
-            stiffness: 400,
-            damping: 10
-          })
-        });
-      });
-    });
+    }
   }
 
   if (document.readyState === 'loading') {

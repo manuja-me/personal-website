@@ -1,0 +1,71 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 720 >>
+stream
+BT
+/F1 20 Tf
+50 720 Td
+(MANUJA MEDHANKARA) Tj
+/F2 10 Tf
+0 -18 Td
+(CYBERSECURITY SPECIALIST & SYSTEMS BUILDER // COLOMBO, SRI LANKA) Tj
+0 -14 Td
+(Email: manuja.public@gmail.com  |  GitHub: https://github.com/manuja-me) Tj
+0 -25 Td
+/F1 12 Tf
+(CORE COMPETENCIES & AUDIT DOMAINS) Tj
+/F2 9 Tf
+0 -15 Td
+(- Offensive Web & API Penetration Testing \(Burp Suite, OWASP ZAP, Metasploit\)) Tj
+0 -13 Td
+(- Linux Infrastructure Hardening & Kernel sysctl Tuning \(CIS Benchmarks, NIST 800-53\)) Tj
+0 -13 Td
+(- High-Performance Desktop Security Tooling \(Rust, Tauri v2, Svelte 5, SQLite\)) Tj
+0 -13 Td
+(- Network Reconnaissance & Packet Inspection \(Wireshark, Nmap, Scapy\)) Tj
+0 -25 Td
+/F1 12 Tf
+(KEY PROJECTS & WORKS) Tj
+/F2 9 Tf
+0 -15 Td
+(- VulnRadar Security Scanner: Desktop vulnerability workstation & automated auditor.) Tj
+0 -13 Td
+(- Linux Hardening Suite: Automated compliance checks & configuration rollback engine.) Tj
+0 -25 Td
+/F1 12 Tf
+(SYSTEM SPECIFICATIONS) Tj
+/F2 9 Tf
+0 -15 Td
+(OS: Arch Linux, Kali Linux, Qubes OS  |  Tooling: Rust, Python, Bash, Docker, AWS) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000244 00000 n 
+0000001017 00000 n 
+0000001099 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1176
+%%EOF

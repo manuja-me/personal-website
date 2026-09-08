@@ -70,7 +70,7 @@ const projects: ProjectTimelineItem[] = [
 ];
 ---
 
-<section id="projects" class="py-16 sm:py-24 md:py-32 border-b border-border bg-background relative">
+<section id="projects" class="scroll-mt-16 py-16 sm:py-24 md:py-32 border-b border-border bg-background relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Index Header -->
     <div class="projects-anim-item flex items-baseline justify-between pb-4 sm:pb-6 border-b border-border mb-8 sm:mb-12">
@@ -100,15 +100,15 @@ const projects: ProjectTimelineItem[] = [
     <div class="border-t border-border divide-y divide-border">
       {projects.map((project) => (
         <div class="project-item group" data-project-id={project.id}>
-          <!-- Row Header Button -->
-          <button
-            type="button"
-            class="swiss-action-trigger w-full py-5 sm:py-7 md:py-8 text-left flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-primary project-toggle-btn hover:bg-secondary/30 px-2 sm:px-4 -mx-2 sm:-mx-4 transition-colors"
-            aria-expanded="false"
-            aria-controls={`details-${project.id}`}
-          >
-            <!-- Left: Index + Title + Short Description -->
-            <div class="flex items-start gap-3 sm:gap-6 flex-1">
+          <!-- Row Header Container (Valid Semantic HTML without nested links in buttons) -->
+          <div class="w-full py-5 sm:py-7 md:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 hover:bg-secondary/30 px-2 sm:px-4 -mx-2 sm:-mx-4 transition-colors">
+            <!-- Left: Toggle Specs Button -->
+            <button
+              type="button"
+              class="project-toggle-btn text-left flex items-start gap-3 sm:gap-6 flex-1 cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-primary select-none"
+              aria-expanded="false"
+              aria-controls={`details-${project.id}`}
+            >
               <span class="font-mono font-bold text-base sm:text-lg text-primary shrink-0 pt-0.5">
                 {project.index}
               </span>
@@ -128,29 +128,34 @@ const projects: ProjectTimelineItem[] = [
                   {project.description}
                 </p>
               </div>
-            </div>
+            </button>
 
-            <!-- Right: Action Links & Toggle Indicator -->
+            <!-- Right: Action Links & Dedicated Specs Toggle -->
             <div class="flex items-center justify-between md:justify-end gap-3 sm:gap-4 shrink-0 pl-7 sm:pl-12 md:pl-0 pt-2 md:pt-0 border-t md:border-t-0 border-border/50">
               <a
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="swiss-action-trigger p-2 border border-border bg-card hover:bg-secondary text-foreground hover:text-primary transition-colors"
+                class="swiss-action-trigger p-2 border border-border bg-card hover:bg-secondary text-foreground hover:text-primary transition-colors inline-flex items-center justify-center"
                 aria-label={`View ${project.title} source on GitHub`}
-                onclick="event.stopPropagation()"
               >
                 <Github class="w-4 h-4" />
               </a>
 
-              <div class="flex items-center gap-1 font-mono text-xs text-muted-foreground group-hover:text-primary transition-colors">
+              <button
+                type="button"
+                class="project-specs-btn inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-primary border border-border bg-card px-2.5 py-1.5 transition-colors cursor-pointer select-none"
+                aria-expanded="false"
+                aria-controls={`details-${project.id}`}
+                aria-label={`Toggle specifications for ${project.title}`}
+              >
                 <span class="uppercase text-[11px] font-semibold">SPECS</span>
                 <div class="chevron-icon transition-transform duration-300">
                   <ChevronDown class="w-4 h-4" />
                 </div>
-              </div>
+              </button>
             </div>
-          </button>
+          </div>
 
           <!-- Expandable Technical Drawer -->
           <div
@@ -158,7 +163,29 @@ const projects: ProjectTimelineItem[] = [
             class="project-drawer grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden"
           >
             <div class="min-h-0 overflow-hidden">
-              <div class="border-t border-dashed border-border bg-card/60 px-4 sm:px-6 md:px-8 py-6 sm:py-8">
+              <div class="border-t border-dashed border-border bg-card/60 px-4 sm:px-6 md:px-8 py-6 sm:py-8 space-y-6">
+                <!-- Visual Terminal / Engine Preview for VulnRadar -->
+                {project.id === "vulnradar" && (
+                  <div class="border border-border bg-background p-3.5 sm:p-4 font-mono text-xs space-y-2 max-w-4xl shadow-sm">
+                    <div class="flex items-center justify-between border-b border-border pb-2 text-foreground font-bold text-[11px]">
+                      <span class="text-primary flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 bg-primary"></span>
+                        // VULNRADAR TELEMETRY ENGINE [EVALUATION LOG]
+                      </span>
+                      <span class="text-[10px] text-emerald-500 font-semibold">STATUS: PASSIVE_AUDIT_OK</span>
+                    </div>
+                    <div class="text-foreground font-semibold pt-1">
+                      $ vulnradar scan --target https://target.corp --mode passive --all
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 text-[11px] text-muted-foreground pt-1">
+                      <div>[+] TLS Handshake: TLS 1.3 / X25519 (0-RTT Verified)</div>
+                      <div>[+] Anti-Spoofing: DMARC p=reject, SPF v=spf1</div>
+                      <div class="text-emerald-500">[✓] CSP &amp; HSTS: max-age=31536000; includeSubDomains</div>
+                      <div>[+] Subdomain CT Log Recon: 14 assets discovered</div>
+                    </div>
+                  </div>
+                )}
+
                 <div class="space-y-5 sm:space-y-6 max-w-4xl">
                   <!-- Feature List -->
                   <div class="space-y-2.5 sm:space-y-3">
@@ -191,7 +218,7 @@ const projects: ProjectTimelineItem[] = [
                       rel="noopener noreferrer"
                       class="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-primary hover:underline group/link self-start sm:self-auto"
                     >
-                      <span>Repository</span>
+                      <span>View Source</span>
                       <ArrowUpRight class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                     </a>
                   </div>
@@ -212,6 +239,7 @@ const projects: ProjectTimelineItem[] = [
     const projectsSection = document.getElementById('projects');
     if (!projectsSection) return;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let hasAnimated = false;
 
     function runEntrance() {
@@ -220,13 +248,19 @@ const projects: ProjectTimelineItem[] = [
 
       const items = projectsSection?.querySelectorAll('.project-item, .projects-anim-item');
       if (items && items.length > 0) {
-        createTimeline({ defaults: { ease: 'outExpo' } })
-          .add(items, {
-            opacity: [0, 1],
-            translateY: [15, 0],
-            delay: stagger(70),
-            duration: 600
+        if (prefersReducedMotion) {
+          items.forEach((el) => {
+            (el as HTMLElement).style.opacity = '1';
           });
+        } else {
+          createTimeline({ defaults: { ease: 'outExpo' } })
+            .add(items, {
+              opacity: [0, 1],
+              translateY: [15, 0],
+              delay: stagger(70),
+              duration: 600
+            });
+        }
       }
     }
 
@@ -248,53 +282,62 @@ const projects: ProjectTimelineItem[] = [
     // Flicker-Free Smooth Drawer Accordion
     const projectItems = document.querySelectorAll('.project-item');
     projectItems.forEach((item) => {
-      const btn = item.querySelector('.project-toggle-btn');
+      const toggleBtn = item.querySelector('.project-toggle-btn');
+      const specsBtn = item.querySelector('.project-specs-btn');
       const drawer = item.querySelector('.project-drawer') as HTMLElement;
       const chevron = item.querySelector('.chevron-icon');
 
-      if (!btn || !drawer) return;
+      if (!drawer) return;
 
-      btn.addEventListener('click', (e) => {
-        if ((e.target as HTMLElement).closest('a')) return;
-
-        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      function toggleAccordion() {
+        const isExpanded = toggleBtn?.getAttribute('aria-expanded') === 'true';
         const nextState = !isExpanded;
 
-        btn.setAttribute('aria-expanded', nextState ? 'true' : 'false');
+        toggleBtn?.setAttribute('aria-expanded', nextState ? 'true' : 'false');
+        specsBtn?.setAttribute('aria-expanded', nextState ? 'true' : 'false');
 
         if (nextState) {
           drawer.classList.remove('grid-rows-[0fr]', 'opacity-0');
           drawer.classList.add('grid-rows-[1fr]', 'opacity-100');
 
-          const highlights = drawer.querySelectorAll('.project-highlight-item');
-          animate(highlights, {
-            translateY: [6, 0],
-            opacity: [0, 1],
-            delay: stagger(20),
-            duration: 220,
-            ease: 'outExpo'
-          });
-
-          if (chevron) {
-            animate(chevron, {
-              rotate: 180,
-              duration: 250,
+          if (!prefersReducedMotion) {
+            const highlights = drawer.querySelectorAll('.project-highlight-item');
+            animate(highlights, {
+              translateY: [6, 0],
+              opacity: [0, 1],
+              delay: stagger(20),
+              duration: 220,
               ease: 'outExpo'
             });
+
+            if (chevron) {
+              animate(chevron, {
+                rotate: 180,
+                duration: 250,
+                ease: 'outExpo'
+              });
+            }
+          } else if (chevron) {
+            chevron.setAttribute('style', 'transform: rotate(180deg);');
           }
         } else {
           drawer.classList.remove('grid-rows-[1fr]', 'opacity-100');
           drawer.classList.add('grid-rows-[0fr]', 'opacity-0');
 
-          if (chevron) {
+          if (!prefersReducedMotion && chevron) {
             animate(chevron, {
               rotate: 0,
               duration: 250,
               ease: 'outExpo'
             });
+          } else if (chevron) {
+            chevron.setAttribute('style', 'transform: rotate(0deg);');
           }
         }
-      });
+      }
+
+      toggleBtn?.addEventListener('click', toggleAccordion);
+      specsBtn?.addEventListener('click', toggleAccordion);
     });
   }
 

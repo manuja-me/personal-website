@@ -22,19 +22,19 @@ import { Menu, X } from 'lucide-astro';
 
     <!-- Desktop Nav Links (Numbered Swiss Index) -->
     <nav class="hidden md:flex items-center gap-8 font-mono text-xs font-semibold tracking-wider text-muted-foreground">
-      <a href="#about" class="hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1">
+      <a href="#about" class="nav-item-link hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1 border-b border-transparent">
         <span class="text-primary font-bold">01</span>
         <span>ABOUT</span>
       </a>
-      <a href="#skills" class="hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1">
+      <a href="#skills" class="nav-item-link hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1 border-b border-transparent">
         <span class="text-primary font-bold">02</span>
         <span>CAPABILITIES</span>
       </a>
-      <a href="#projects" class="hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1">
+      <a href="#projects" class="nav-item-link hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1 border-b border-transparent">
         <span class="text-primary font-bold">03</span>
-        <span>TIMELINE</span>
+        <span>PROJECTS</span>
       </a>
-      <a href="#contact" class="hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1">
+      <a href="#contact" class="nav-item-link hover:text-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-1 border-b border-transparent">
         <span class="text-primary font-bold">04</span>
         <span>CONTACT</span>
       </a>
@@ -42,6 +42,17 @@ import { Menu, X } from 'lucide-astro';
 
     <!-- Operational Telemetry & Controls -->
     <div class="flex items-center gap-2.5 sm:gap-4">
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:inline-flex items-center gap-1.5 px-2 py-1 border border-border bg-card hover:border-primary text-foreground font-mono text-[11px] font-bold tracking-wider uppercase transition-colors"
+        title="View Resume / CV"
+      >
+        <span class="text-primary">CV</span>
+        <span class="text-muted-foreground text-[10px]">↗</span>
+      </a>
+
       <div class="hidden lg:flex items-center gap-2 border-l border-border pl-4 font-mono text-[11px] text-muted-foreground">
         <span class="w-1.5 h-1.5 bg-emerald-500 inline-block animate-pulse"></span>
         <span class="tracking-widest uppercase">ONLINE</span>
@@ -94,7 +105,7 @@ import { Menu, X } from 'lucide-astro';
           href="#projects"
           class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold"
         >
-          <span>SELECTED WORKS &amp; ROADMAP</span>
+          <span>PROJECTS &amp; ROADMAP</span>
           <span class="text-primary font-bold">[ 03 ]</span>
         </a>
         <a
@@ -103,6 +114,15 @@ import { Menu, X } from 'lucide-astro';
         >
           <span>COMMUNICATIONS</span>
           <span class="text-primary font-bold">[ 04 ]</span>
+        </a>
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mobile-nav-link flex items-center justify-between p-3.5 hover:bg-secondary text-primary transition-colors font-bold"
+        >
+          <span>VIEW RESUME / CV</span>
+          <span class="text-primary font-bold">[ PDF ↗ ]</span>
         </a>
       </div>
 
@@ -127,6 +147,7 @@ import { Menu, X } from 'lucide-astro';
     const iconOpen = document.getElementById('menu-icon-open');
     const iconClose = document.getElementById('menu-icon-close');
     const navLinks = document.querySelectorAll('.mobile-nav-link');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!toggle || !drawer) return;
 
@@ -172,6 +193,14 @@ import { Menu, X } from 'lucide-astro';
       }
     });
 
+    // Keyboard a11y: Escape closes menu
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        setMenuState(false);
+        toggle.focus();
+      }
+    });
+
     // Smooth scroll indicator trigger for all nav links
     const allAnchors = document.querySelectorAll('a[href^="#"]');
     allAnchors.forEach((anchor) => {
@@ -179,7 +208,7 @@ import { Menu, X } from 'lucide-astro';
         const href = anchor.getAttribute('href');
         if (!href || href === '#') return;
         const target = document.querySelector(href);
-        if (target) {
+        if (target && !prefersReducedMotion) {
           const numBadge = target.querySelector('.swiss-number');
           if (numBadge) {
             animate(numBadge, {
@@ -191,6 +220,36 @@ import { Menu, X } from 'lucide-astro';
         }
       });
     });
+
+    // ScrollSpy: highlight active section in desktop navbar
+    const sections = document.querySelectorAll('section[id]');
+    const desktopLinks = document.querySelectorAll('.nav-item-link');
+
+    if ('IntersectionObserver' in window && sections.length > 0 && desktopLinks.length > 0) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const currentId = entry.target.getAttribute('id');
+            desktopLinks.forEach((link) => {
+              const href = link.getAttribute('href');
+              if (href === `#${currentId}`) {
+                link.classList.add('text-foreground', '!border-primary');
+                link.classList.remove('text-muted-foreground', 'border-transparent');
+              } else {
+                link.classList.remove('text-foreground', '!border-primary');
+                link.classList.add('text-muted-foreground', 'border-transparent');
+              }
+            });
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach((s) => observer.observe(s));
+    }
   }
 
   if (document.readyState === 'loading') {

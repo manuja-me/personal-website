@@ -47,7 +47,7 @@ const expertise = [
 ];
 ---
 
-<section id="skills" class="py-16 sm:py-24 md:py-32 border-b border-border bg-background relative">
+<section id="skills" class="scroll-mt-16 py-16 sm:py-24 md:py-32 border-b border-border bg-background relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Index Header -->
     <div class="skills-anim-item flex items-baseline justify-between pb-4 sm:pb-6 border-b border-border mb-8 sm:mb-12">
@@ -77,8 +77,9 @@ const expertise = [
     <div class="skills-modular-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border bg-card">
       {expertise.map((item) => {
         const Icon = item.icon;
+        const cellId = 'skill-' + item.code.toLowerCase().replace('.', '-');
         return (
-          <div class="skill-cell p-5 sm:p-7 md:p-8 border-r border-b border-border hover:bg-secondary/40 transition-colors grid grid-rows-[1fr_auto] group">
+          <div id={cellId} class="skill-cell scroll-mt-24 p-5 sm:p-7 md:p-8 border-r border-b border-border hover:bg-secondary/40 transition-colors grid grid-rows-[1fr_auto] group">
             <!-- Top Section: Header, Title & Description -->
             <div class="space-y-3 sm:space-y-4 flex flex-col justify-between pb-5 sm:pb-6">
               <!-- Cell Header -->
@@ -103,7 +104,7 @@ const expertise = [
             <!-- Tool Tags Container with mathematically aligned top border -->
             <div class="pt-3.5 sm:pt-4 border-t border-border flex flex-wrap gap-1.5 font-mono text-[10px] content-start">
               {item.tools.map((t) => (
-                <span class="swiss-action-trigger px-2 py-0.5 border border-border bg-background text-foreground font-medium hover:border-primary hover:text-primary transition-colors">
+                <span class="px-2 py-0.5 border border-border bg-background/80 text-muted-foreground font-medium select-none">
                   {t}
                 </span>
               ))}
@@ -145,6 +146,7 @@ const expertise = [
     const skillsSection = document.getElementById('skills');
     if (!skillsSection) return;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let hasAnimated = false;
 
     function runEntrance() {
@@ -153,13 +155,19 @@ const expertise = [
 
       const cells = skillsSection?.querySelectorAll('.skill-cell, .skills-anim-item');
       if (cells && cells.length > 0) {
-        createTimeline({ defaults: { ease: 'outExpo' } })
-          .add(cells, {
-            opacity: [0, 1],
-            translateY: [15, 0],
-            delay: stagger(60),
-            duration: 600
+        if (prefersReducedMotion) {
+          cells.forEach((el) => {
+            (el as HTMLElement).style.opacity = '1';
           });
+        } else {
+          createTimeline({ defaults: { ease: 'outExpo' } })
+            .add(cells, {
+              opacity: [0, 1],
+              translateY: [15, 0],
+              delay: stagger(60),
+              duration: 600
+            });
+        }
       }
     }
 
@@ -178,28 +186,30 @@ const expertise = [
       runEntrance();
     }
 
-    // Cell Hover / Interaction trigger
-    const skillCells = skillsSection.querySelectorAll('.skill-cell');
-    skillCells.forEach((cell) => {
-      const icon = cell.querySelector('svg');
-      if (!icon) return;
+    // Cell Hover / Interaction trigger (only if motion is enabled)
+    if (!prefersReducedMotion) {
+      const skillCells = skillsSection.querySelectorAll('.skill-cell');
+      skillCells.forEach((cell) => {
+        const icon = cell.querySelector('svg');
+        if (!icon) return;
 
-      cell.addEventListener('mouseenter', () => {
-        animate(icon, {
-          translateY: -3,
-          duration: 180,
-          ease: 'outBack'
+        cell.addEventListener('mouseenter', () => {
+          animate(icon, {
+            translateY: -3,
+            duration: 180,
+            ease: 'outBack'
+          });
+        });
+
+        cell.addEventListener('mouseleave', () => {
+          animate(icon, {
+            translateY: 0,
+            duration: 180,
+            ease: 'outQuad'
+          });
         });
       });
-
-      cell.addEventListener('mouseleave', () => {
-        animate(icon, {
-          translateY: 0,
-          duration: 180,
-          ease: 'outQuad'
-        });
-      });
-    });
+    }
   }
 
   if (document.readyState === 'loading') {

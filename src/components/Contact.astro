@@ -1,8 +1,8 @@
 ---
-import { Mail, Github, Linkedin, ArrowUpRight, ShieldCheck, Key } from 'lucide-astro';
+import { Mail, Github, Linkedin, ArrowUpRight, ShieldCheck, Key, Copy, Check } from 'lucide-astro';
 ---
 
-<section id="contact" class="py-16 sm:py-24 md:py-32 border-b border-border bg-background relative">
+<section id="contact" class="scroll-mt-16 py-16 sm:py-24 md:py-32 border-b border-border bg-background relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Index Header -->
     <div class="contact-anim-item flex items-baseline justify-between pb-4 sm:pb-6 border-b border-border mb-8 sm:mb-12">
@@ -34,8 +34,17 @@ import { Mail, Github, Linkedin, ArrowUpRight, ShieldCheck, Key } from 'lucide-a
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 pt-6 sm:pt-8 border-t border-border items-start">
         <!-- Direct Email & PGP Box (7 cols) -->
         <div class="lg:col-span-7 space-y-4 sm:space-y-6">
-          <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            [ PRIMARY DISPATCH CHANNEL ]
+          <div class="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center justify-between">
+            <span>[ PRIMARY DISPATCH CHANNEL ]</span>
+            <button
+              id="contact-copy-email-btn"
+              type="button"
+              class="inline-flex items-center gap-1.5 px-2 py-1 border border-border bg-card hover:bg-secondary text-foreground text-[11px] font-mono font-bold uppercase transition-colors cursor-pointer select-none"
+              title="Copy Email Address"
+            >
+              <Copy class="w-3 h-3 text-primary" />
+              <span id="contact-copy-email-label">Copy Email</span>
+            </button>
           </div>
 
           <a
@@ -60,6 +69,15 @@ import { Mail, Github, Linkedin, ArrowUpRight, ShieldCheck, Key } from 'lucide-a
               <Key class="w-4 h-4 text-primary shrink-0" />
               <span class="text-foreground font-semibold">PGP FINGERPRINT:</span>
               <span class="text-muted-foreground">0x4E5AB5C</span>
+              <button
+                id="contact-copy-pgp-btn"
+                type="button"
+                class="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 border border-border bg-card hover:text-primary transition-colors cursor-pointer"
+                title="Copy PGP Fingerprint"
+              >
+                <Copy class="w-2.5 h-2.5 text-primary" />
+                <span id="contact-copy-pgp-label">COPY</span>
+              </button>
             </div>
             <a href="/security.txt" class="swiss-action-trigger text-primary font-bold hover:underline">
               security.txt ↗
@@ -118,6 +136,7 @@ import { Mail, Github, Linkedin, ArrowUpRight, ShieldCheck, Key } from 'lucide-a
     const contactSection = document.getElementById('contact');
     if (!contactSection) return;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let hasAnimated = false;
 
     function runEntrance() {
@@ -126,13 +145,19 @@ import { Mail, Github, Linkedin, ArrowUpRight, ShieldCheck, Key } from 'lucide-a
 
       const items = contactSection?.querySelectorAll('.contact-anim-item');
       if (items && items.length > 0) {
-        createTimeline({ defaults: { ease: 'outExpo' } })
-          .add(items, {
-            opacity: [0, 1],
-            translateY: [20, 0],
-            delay: stagger(90),
-            duration: 650
+        if (prefersReducedMotion) {
+          items.forEach((el) => {
+            (el as HTMLElement).style.opacity = '1';
           });
+        } else {
+          createTimeline({ defaults: { ease: 'outExpo' } })
+            .add(items, {
+              opacity: [0, 1],
+              translateY: [20, 0],
+              delay: stagger(90),
+              duration: 650
+            });
+        }
       }
     }
 
@@ -151,33 +176,74 @@ import { Mail, Github, Linkedin, ArrowUpRight, ShieldCheck, Key } from 'lucide-a
       runEntrance();
     }
 
-    // Magnetic Button Physics
-    const magneticButtons = document.querySelectorAll('.swiss-magnetic-btn') as NodeListOf<HTMLElement>;
-    magneticButtons.forEach((btn) => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
+    // 1-Click Copy Handlers for Email & PGP
+    const copyEmailBtn = document.getElementById('contact-copy-email-btn');
+    const copyEmailLabel = document.getElementById('contact-copy-email-label');
+    if (copyEmailBtn && copyEmailLabel) {
+      copyEmailBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('manuja.public@gmail.com');
+          const original = copyEmailLabel.innerText;
+          copyEmailLabel.innerText = 'COPIED // OK';
+          copyEmailBtn.classList.add('border-primary', 'text-primary');
+          setTimeout(() => {
+            copyEmailLabel.innerText = original;
+            copyEmailBtn.classList.remove('border-primary', 'text-primary');
+          }, 2000);
+        } catch (e) {
+          copyEmailLabel.innerText = 'ERR';
+        }
+      });
+    }
 
-        animate(btn, {
-          x: x * 0.15,
-          y: y * 0.15,
-          duration: 120,
-          ease: 'outQuad'
+    const copyPgpBtn = document.getElementById('contact-copy-pgp-btn');
+    const copyPgpLabel = document.getElementById('contact-copy-pgp-label');
+    if (copyPgpBtn && copyPgpLabel) {
+      copyPgpBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('0x4E5AB5C');
+          const original = copyPgpLabel.innerText;
+          copyPgpLabel.innerText = 'COPIED';
+          copyPgpBtn.classList.add('text-primary');
+          setTimeout(() => {
+            copyPgpLabel.innerText = original;
+            copyPgpBtn.classList.remove('text-primary');
+          }, 2000);
+        } catch (e) {
+          copyPgpLabel.innerText = 'ERR';
+        }
+      });
+    }
+
+    // Magnetic Button Physics (only when motion is enabled)
+    if (!prefersReducedMotion) {
+      const magneticButtons = document.querySelectorAll('.swiss-magnetic-btn') as NodeListOf<HTMLElement>;
+      magneticButtons.forEach((btn) => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+
+          animate(btn, {
+            x: x * 0.15,
+            y: y * 0.15,
+            duration: 120,
+            ease: 'outQuad'
+          });
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          animate(btn, {
+            x: 0,
+            y: 0,
+            ease: createSpring({
+              stiffness: 300,
+              damping: 12
+            })
+          });
         });
       });
-
-      btn.addEventListener('mouseleave', () => {
-        animate(btn, {
-          x: 0,
-          y: 0,
-          ease: createSpring({
-            stiffness: 300,
-            damping: 12
-          })
-        });
-      });
-    });
+    }
   }
 
   if (document.readyState === 'loading') {
