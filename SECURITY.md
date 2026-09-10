@@ -21,7 +21,7 @@ The application implements defense-in-depth security policies via HTML `<meta>` 
 
 | Header | Configuration / Value | Purpose |
 |---|---|---|
-| **Content-Security-Policy (CSP)** | `default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';` | Mitigates XSS, injection, and unauthorized data exfiltration. |
+| **Content-Security-Policy (CSP)** | `default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';` | Mitigates XSS, injection, and unauthorized data exfiltration while permitting Cloudflare Insights and Google Analytics. |
 | **Strict-Transport-Security (HSTS)** | `max-age=31536000; includeSubDomains; preload` | Forces HTTPS and prevents SSL-stripping / MitM attacks. |
 | **X-Frame-Options** | `DENY` | Prevents iframe embedding and clickjacking attacks. |
 | **X-Content-Type-Options** | `nosniff` | Disables MIME type sniffing. |
