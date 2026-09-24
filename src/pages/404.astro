@@ -4,7 +4,11 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 import { ArrowLeft } from 'lucide-astro';
 ---
 
-<Layout title="404 — Route Not Found | Manuja Medhankara">
+<Layout 
+  title="404 — Route Not Found | Manuja Medhankara"
+  description="The requested resource was not found on manuja.dev. Return to the home directory."
+  noindex={true}
+>
   <div class="relative min-h-screen flex flex-col justify-between p-6 md:p-12 bg-background text-foreground font-sans">
     <!-- Top Index Bar -->
     <div class="flex items-center justify-between border-b border-border pb-6">

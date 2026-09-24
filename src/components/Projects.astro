@@ -17,16 +17,16 @@ const projects: ProjectItem[] = [
     index: "01",
     title: "VulnRadar Security Scanner",
     url: "https://github.com/manuja-me/vuln-radar",
-    status: "v0.7 RELEASED",
+    status: "v1.0.0 RELEASED",
     statusColor: "text-emerald-500 border-emerald-500/30",
     description: "Desktop security workstation and non-intrusive vulnerability auditor. Evaluates web attack surfaces, cryptographic posture, HTTP security headers, and generates 1-click remediation blueprints.",
     highlights: [
       "Passive audits for SSL/TLS, DMARC/SPF, and HTTP header hygiene",
-      "Attack surface heuristics detecting debug endpoints and parameter reflection",
-      "High-speed async TCP port discovery with banner inspection",
-      "Subdomain reconnaissance via Certificate Transparency logs (crt.sh)"
+      "RCE risk heuristics detecting parameter abuse (?cmd=, ?tpl=) & CVE correlation",
+      "AI-powered 1-click prompt generator for Antigravity & LLM remediation",
+      "High-speed async TCP port discovery & crt.sh subdomain reconnaissance"
     ],
-    tags: ["Rust", "Tauri v2", "Svelte 5", "SQLite WAL"]
+    tags: ["Rust", "Tauri v2", "Svelte 5", "Tailwind v4", "SQLite WAL"]
   },
   {
     index: "02",
@@ -71,13 +71,13 @@ const projects: ProjectItem[] = [
     <!-- Clean Projects List -->
     <div class="border-t border-border divide-y divide-border">
       {projects.map((project) => (
-        <div class="py-8 sm:py-10 space-y-6">
+        <article class="py-8 sm:py-10 space-y-6" itemscope itemtype="https://schema.org/SoftwareApplication">
           <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-3">
             <div class="flex items-baseline gap-3 sm:gap-4">
               <span class="font-mono font-bold text-base text-primary">
                 {project.index}
               </span>
-              <h3 class="text-xl sm:text-2xl font-bold uppercase tracking-tight text-foreground">
+              <h3 class="text-xl sm:text-2xl font-bold uppercase tracking-tight text-foreground" itemprop="name">
                 {project.title}
               </h3>
             </div>
@@ -93,6 +93,7 @@ const projects: ProjectItem[] = [
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-1.5 px-3 py-1 border border-border bg-card hover:bg-secondary text-foreground hover:text-primary transition-colors font-semibold uppercase text-[11px]"
                 aria-label={`View ${project.title} on GitHub`}
+                itemprop="url"
               >
                 <Github class="w-3.5 h-3.5" />
                 <span>Source ↗</span>
@@ -100,7 +101,7 @@ const projects: ProjectItem[] = [
             </div>
           </div>
 
-          <p class="text-sm sm:text-base text-muted-foreground max-w-3xl leading-relaxed">
+          <p class="text-sm sm:text-base text-muted-foreground max-w-3xl leading-relaxed" itemprop="description">
             {project.description}
           </p>
 
@@ -120,7 +121,7 @@ const projects: ProjectItem[] = [
               </span>
             ))}
           </div>
-        </div>
+        </article>
       ))}
     </div>
   </div>

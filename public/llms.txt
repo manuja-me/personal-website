@@ -1,0 +1,35 @@
+# Manuja Medhankara
+
+> Cybersecurity Specialist & Systems Engineer based in Colombo, Sri Lanka (UTC+05:30).
+
+Manuja Medhankara engineers resilient defensive architectures, conducts offensive web application penetration testing, and builds high-performance open-source security utilities in Rust, Tauri, Python, and Bash.
+
+## Core Specializations
+
+- **Penetration Testing**: Offensive web application security auditing, vulnerability chaining, blackbox & whitebox testing, OWASP Top 10 mitigation, REST/GraphQL API security analysis.
+- **Linux Infrastructure Hardening**: Kernel sysctl tuning, AppArmor/SELinux profiles, strict user privilege models, firewall policies (nftables/iptables), and automated compliance auditing aligned with CIS Benchmarks and NIST 800-53 baselines.
+- **Security Tooling & Software Engineering**: Engineering high-speed custom vulnerability scanners, automation daemons, and desktop defensive tooling using Rust, Tauri v2, SQLite WAL, Python, and Bash.
+- **Network Reconnaissance & Forensics**: Protocol analysis, service fingerprinting, attack surface mapping, packet capture inspection (Wireshark, Scapy), and digital forensics.
+
+## Selected Open Source Projects
+
+- **[VulnRadar](https://github.com/manuja-me/vuln-radar)**: Desktop security workstation and non-intrusive vulnerability auditor built with Rust, Tauri v2, and Svelte 5. Features passive audits for SSL/TLS, DMARC/SPF, HTTP headers, RCE parameter heuristics, AI-assisted remediation prompts, and async TCP port discovery.
+- **[Linux Hardening Suite](https://github.com/manuja-me)**: Automated compliance evaluation and system hardening framework for Linux systems (Arch, Debian, Ubuntu) adhering to CIS Benchmarks and NIST 800-53.
+- **[Network Recon Pro](https://github.com/manuja-me)**: Asset discovery and protocol analysis framework featuring service fingerprinting and CVE catalog correlation.
+
+## Key Technical Specifications
+
+- **Primary Environments**: Arch Linux (custom hardened kernel), Kali Linux, Qubes OS
+- **Toolchain**: Burp Suite, Metasploit, Wireshark, Nmap, Ghidra, GDB, Docker, Trivy
+- **Languages**: Rust, Python, Bash, TypeScript, SQL
+- **Standards & Baselines**: CIS Benchmarks, NIST SP 800-53, OWASP ASVS
+
+## Canonical Profiles & Contact
+
+- **Website**: https://manuja.dev
+- **GitHub**: https://github.com/manuja-me
+- **LinkedIn**: https://www.linkedin.com/in/manuja-medhankara-rc96
+- **X / Twitter**: https://x.com/manuja_me
+- **Email**: manuja.public@gmail.com
+- **PGP Fingerprint**: 0x4E5AB5C
+- **Security Policy**: https://manuja.dev/.well-known/security.txt
