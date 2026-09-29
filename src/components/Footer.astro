@@ -5,17 +5,84 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer class="w-full border-t border-border bg-background relative">
-  <!-- Architectural Wordmark Banner -->
-  <div class="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 border-b border-border select-none">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
-      <h2
-        class="text-3xl sm:text-5xl font-black tracking-tight leading-none text-foreground uppercase"
-      >
-        Manuja Medhankara
-      </h2>
-      <span class="font-mono text-xs text-muted-foreground uppercase tracking-wider">
-        Cybersecurity &amp; Systems Engineering
-      </span>
+  <!-- Architectural Wordmark Banner: Filled with Monumental & Overlapping Watermark Typography -->
+  <div class="relative overflow-hidden border-b border-border bg-card/30 dark:bg-card/20 select-none py-12 sm:py-16 md:py-24">
+    <!-- Subtle Swiss Grid Texture -->
+    <div class="absolute inset-0 swiss-grid-pattern opacity-30 dark:opacity-15 pointer-events-none"></div>
+
+    <!-- Background Multi-Row Watermark Texture (Fills Section Vertically & Horizontally) -->
+    <div 
+      aria-hidden="true" 
+      class="absolute inset-0 overflow-hidden pointer-events-none select-none opacity-[0.04] dark:opacity-[0.055] flex flex-col justify-between py-2 sm:py-4"
+    >
+      <div class="whitespace-nowrap font-sans font-black text-5xl sm:text-7xl md:text-9xl uppercase tracking-tighter leading-none -translate-x-12">
+        MANUJA MEDHANKARA &bull; MANUJA MEDHANKARA &bull; MANUJA MEDHANKARA &bull; MANUJA MEDHANKARA
+      </div>
+      <div class="whitespace-nowrap font-sans font-black text-6xl sm:text-8xl md:text-[10rem] uppercase tracking-tighter leading-none translate-x-16">
+        MEDHANKARA MANUJA &bull; MEDHANKARA MANUJA &bull; MEDHANKARA MANUJA &bull; MEDHANKARA MANUJA
+      </div>
+      <div class="whitespace-nowrap font-sans font-black text-5xl sm:text-7xl md:text-9xl uppercase tracking-tighter leading-none -translate-x-28">
+        MANUJA MEDHANKARA &bull; MANUJA MEDHANKARA &bull; MANUJA MEDHANKARA &bull; MANUJA MEDHANKARA
+      </div>
+    </div>
+
+    <!-- Floating Ghost Outline Overlapping Layer -->
+    <div
+      aria-hidden="true"
+      class="absolute top-1/2 -translate-y-1/2 left-0 right-0 overflow-hidden whitespace-nowrap pointer-events-none select-none z-0"
+    >
+      <div class="font-sans font-black text-6xl sm:text-8xl md:text-[10rem] lg:text-[12rem] uppercase tracking-tighter text-transparent [-webkit-text-stroke:1px_rgba(0,0,0,0.08)] dark:[-webkit-text-stroke:1px_rgba(255,255,255,0.08)] translate-y-6 sm:translate-y-8 translate-x-4 sm:translate-x-8">
+        MANUJA MEDHANKARA &bull; MANUJA MEDHANKARA
+      </div>
+    </div>
+
+    <!-- Foreground Content Container -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+      <!-- Top Status & Specification Tag -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 sm:pb-4 border-b border-border/60 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 bg-primary inline-block"></span>
+          <span class="font-bold text-foreground">MANUJA MEDHANKARA</span>
+          <span class="text-border">/</span>
+          <span>SYSTEM DOSSIER</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-foreground font-semibold">COLOMBO, LK</span>
+          <span>&bull;</span>
+          <span>CYBERSECURITY &amp; SYSTEMS ENGINEERING</span>
+        </div>
+      </div>
+
+      <!-- Monumental Foreground Wordmark with Overlapping Accent Shadow -->
+      <div class="relative py-2 sm:py-4">
+        <!-- Direct Overlapping Outline Shadow Layer -->
+        <div
+          aria-hidden="true"
+          class="absolute -top-1 sm:-top-2 left-1 sm:left-2 font-sans font-black text-4xl sm:text-6xl md:text-8xl lg:text-[7.6rem] xl:text-[8.8rem] uppercase tracking-tighter leading-[0.88] text-transparent [-webkit-text-stroke:1.5px_hsl(var(--primary)/0.25)] dark:[-webkit-text-stroke:1.5px_hsl(var(--primary)/0.35)] pointer-events-none select-none"
+        >
+          MANUJA MEDHANKARA
+        </div>
+
+        <!-- Primary High-Contrast Heading -->
+        <h2
+          class="relative font-sans text-4xl sm:text-6xl md:text-8xl lg:text-[7.5rem] xl:text-[8.7rem] font-black tracking-tighter leading-[0.88] text-foreground uppercase select-text group"
+        >
+          <span class="text-foreground inline-block transition-transform duration-300 group-hover:translate-x-1">MANUJA</span>
+          <span class="text-primary inline-block transition-transform duration-300 group-hover:-translate-x-1 ml-1.5 sm:ml-3 md:ml-5">MEDHANKARA</span>
+        </h2>
+      </div>
+
+      <!-- Bottom Domain Capabilities Strip -->
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 pt-3 border-t border-border/50 font-mono text-[11px] text-muted-foreground uppercase">
+        <span class="text-foreground font-bold tracking-wider">DOMAINS:</span>
+        <span class="hover:text-primary transition-colors">PENETRATION TESTING</span>
+        <span class="text-border">/</span>
+        <span class="hover:text-primary transition-colors">LINUX HARDENING</span>
+        <span class="text-border">/</span>
+        <span class="hover:text-primary transition-colors">OFFENSIVE RESEARCH</span>
+        <span class="text-border">/</span>
+        <span class="hover:text-primary transition-colors">RUST &amp; TAURI SYSTEMS</span>
+      </div>
     </div>
   </div>
 
