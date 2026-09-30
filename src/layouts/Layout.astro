@@ -258,8 +258,8 @@ const schemaGraph = {
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self';" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
 
-    <!-- JSON-LD Structured Data Schema.org Graph -->
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaGraph)} />
+    <!-- JSON-LD Structured Data Schema.org Graph (Escaped against HTML script breakouts) -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaGraph).replace(/</g, '\\u003c')} />
 
     <!-- Instant theme initialization to prevent flash -->
     <script is:inline>
