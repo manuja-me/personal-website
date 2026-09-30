@@ -1,11 +1,13 @@
+import { siteConfig } from '../data/site';
+
 export const prerender = true;
 
 export async function GET() {
-  const content = `Contact: mailto:manuja.public@gmail.com
+  const content = `Contact: mailto:${siteConfig.email}
 Expires: 2027-12-31T23:59:59.000Z
 Preferred-Languages: en
-Canonical: https://manuja.dev/.well-known/security.txt
-Policy: https://manuja.dev/#contact
+Canonical: ${siteConfig.url}/.well-known/security.txt
+Policy: ${siteConfig.url}/#contact
 `;
 
   return new Response(content, {

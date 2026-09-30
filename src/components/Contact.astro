@@ -1,5 +1,6 @@
 ---
-import { Mail, Github, Linkedin, ArrowUpRight, Key, Copy } from 'lucide-astro';
+import { Github, Linkedin, ArrowUpRight, Key, Copy } from 'lucide-astro';
+import { siteConfig } from '../data/site';
 ---
 
 <section id="contact" class="scroll-mt-16 py-16 sm:py-24 border-b border-border bg-background relative">
@@ -36,19 +37,20 @@ import { Mail, Github, Linkedin, ArrowUpRight, Key, Copy } from 'lucide-astro';
           <div class="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
             <span>Direct Email</span>
             <button
-              id="contact-copy-email-btn"
               type="button"
               class="inline-flex items-center gap-1.5 px-2.5 py-1 border border-border bg-card hover:bg-secondary text-foreground text-xs font-mono transition-colors cursor-pointer select-none"
               title="Copy Email Address"
+              data-copy={siteConfig.email}
+              data-copied-text="Copied!"
             >
               <Copy class="w-3 h-3 text-primary" />
-              <span id="contact-copy-email-label">Copy Email</span>
+              <span data-copy-label>Copy Email</span>
             </button>
           </div>
 
           <a
             id="contact-cta-btn"
-            href="mailto:manuja.public@gmail.com?subject=Security%20Inquiry%20from%20Portfolio&body=Hi%20Manuja,%0A%0AI'm%20reaching%20out%20regarding..."
+            href={`mailto:${siteConfig.email}?subject=Security%20Inquiry%20from%20Portfolio&body=Hi%20Manuja,%0A%0AI'm%20reaching%20out%20regarding...`}
             class="swiss-action-trigger w-full inline-flex items-center justify-between p-5 sm:p-6 bg-primary text-primary-foreground hover:bg-swiss-redDark transition-colors group cursor-pointer select-none"
           >
             <div class="min-w-0 pr-3">
@@ -56,7 +58,7 @@ import { Mail, Github, Linkedin, ArrowUpRight, Key, Copy } from 'lucide-astro';
                 Click to send email
               </span>
               <span class="text-base sm:text-xl font-bold font-mono tracking-tight block break-all">
-                manuja.public@gmail.com
+                {siteConfig.email}
               </span>
             </div>
             <ArrowUpRight class="w-5 h-5 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -67,15 +69,16 @@ import { Mail, Github, Linkedin, ArrowUpRight, Key, Copy } from 'lucide-astro';
             <div class="flex items-center gap-2 flex-wrap">
               <Key class="w-4 h-4 text-primary shrink-0" />
               <span class="text-foreground font-semibold">PGP Fingerprint:</span>
-              <span class="text-muted-foreground">0x4E5AB5C</span>
+              <span class="text-muted-foreground">{siteConfig.pgp}</span>
               <button
-                id="contact-copy-pgp-btn"
                 type="button"
                 class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 border border-border bg-card hover:text-primary transition-colors cursor-pointer"
                 title="Copy PGP Fingerprint"
+                data-copy={siteConfig.pgp}
+                data-copied-text="Copied"
               >
                 <Copy class="w-2.5 h-2.5 text-primary" />
-                <span id="contact-copy-pgp-label">Copy</span>
+                <span data-copy-label>Copy</span>
               </button>
             </div>
             <a href="/security.txt" class="swiss-action-trigger text-primary font-bold hover:underline">
@@ -92,7 +95,7 @@ import { Mail, Github, Linkedin, ArrowUpRight, Key, Copy } from 'lucide-astro';
 
           <div class="space-y-2">
             <a
-              href="https://github.com/manuja-me"
+              href={siteConfig.socials.github}
               target="_blank"
               rel="noopener noreferrer"
               class="swiss-action-trigger w-full flex items-center justify-between p-3.5 sm:p-4 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-semibold transition-colors group"
@@ -101,11 +104,11 @@ import { Mail, Github, Linkedin, ArrowUpRight, Key, Copy } from 'lucide-astro';
                 <Github class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                 <span>GitHub</span>
               </div>
-              <span class="text-muted-foreground group-hover:text-foreground">@manuja-me ↗</span>
+              <span class="text-muted-foreground group-hover:text-foreground">@{siteConfig.username} ↗</span>
             </a>
 
             <a
-              href="https://www.linkedin.com/in/manuja-medhankara-rc96"
+              href={siteConfig.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               class="swiss-action-trigger w-full flex items-center justify-between p-3.5 sm:p-4 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-semibold transition-colors group"
@@ -122,51 +125,3 @@ import { Mail, Github, Linkedin, ArrowUpRight, Key, Copy } from 'lucide-astro';
     </div>
   </div>
 </section>
-
-<script>
-  function initContact() {
-    const copyEmailBtn = document.getElementById('contact-copy-email-btn');
-    const copyEmailLabel = document.getElementById('contact-copy-email-label');
-    if (copyEmailBtn && copyEmailLabel) {
-      copyEmailBtn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText('manuja.public@gmail.com');
-          const original = copyEmailLabel.innerText;
-          copyEmailLabel.innerText = 'Copied!';
-          copyEmailBtn.classList.add('border-primary', 'text-primary');
-          setTimeout(() => {
-            copyEmailLabel.innerText = original;
-            copyEmailBtn.classList.remove('border-primary', 'text-primary');
-          }, 2000);
-        } catch (e) {
-          copyEmailLabel.innerText = 'Failed';
-        }
-      });
-    }
-
-    const copyPgpBtn = document.getElementById('contact-copy-pgp-btn');
-    const copyPgpLabel = document.getElementById('contact-copy-pgp-label');
-    if (copyPgpBtn && copyPgpLabel) {
-      copyPgpBtn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText('0x4E5AB5C');
-          const original = copyPgpLabel.innerText;
-          copyPgpLabel.innerText = 'Copied';
-          copyPgpBtn.classList.add('text-primary');
-          setTimeout(() => {
-            copyPgpLabel.innerText = original;
-            copyPgpBtn.classList.remove('text-primary');
-          }, 2000);
-        } catch (e) {
-          copyPgpLabel.innerText = 'Failed';
-        }
-      });
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initContact);
-  } else {
-    initContact();
-  }
-</script>

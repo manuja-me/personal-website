@@ -1,5 +1,6 @@
 ---
 import { ArrowUpRight, Github, Linkedin, FileText, Copy } from 'lucide-astro';
+import { siteConfig } from '../data/site';
 ---
 
 <section id="hero" class="relative pt-20 pb-12 sm:pt-28 sm:pb-16 md:pt-36 md:pb-20 border-b border-border bg-background">
@@ -11,12 +12,12 @@ import { ArrowUpRight, Github, Linkedin, FileText, Copy } from 'lucide-astro';
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 sm:pb-6 border-b border-border font-mono text-xs text-muted-foreground uppercase tracking-wider">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 bg-primary inline-block"></span>
-        <span>COLOMBO, SRI LANKA // UTC+05:30</span>
+        <span>{siteConfig.location.toUpperCase()} // {siteConfig.timezone}</span>
       </div>
 
       <div class="flex items-center gap-2 text-foreground font-medium">
         <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full inline-block animate-pulse"></span>
-        <span>AVAILABLE FOR SECURITY AUDITS</span>
+        <span>{siteConfig.availability}</span>
       </div>
     </div>
 
@@ -36,7 +37,7 @@ import { ArrowUpRight, Github, Linkedin, FileText, Copy } from 'lucide-astro';
       </h1>
 
       <p class="text-base sm:text-xl text-muted-foreground font-normal max-w-3xl leading-relaxed pt-2">
-        Engineering resilient defensive architectures and conducting offensive vulnerability assessments. Specialized in penetration testing, Linux infrastructure hardening, and high-performance open-source security utilities.
+        {siteConfig.description}
       </p>
     </div>
 
@@ -45,9 +46,9 @@ import { ArrowUpRight, Github, Linkedin, FileText, Copy } from 'lucide-astro';
       <!-- Direct Actions -->
       <div class="flex flex-wrap items-center gap-2.5 sm:gap-3">
         <a
-          href="mailto:manuja.public@gmail.com?subject=Security%20Inquiry%20from%20Portfolio"
+          href={`mailto:${siteConfig.email}?subject=Security%20Inquiry%20from%20Portfolio`}
           class="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground font-mono text-xs font-bold uppercase tracking-wider hover:bg-swiss-redDark transition-colors shadow-sm"
-          aria-label="Send security inquiry email to Manuja Medhankara"
+          aria-label={`Send security inquiry email to ${siteConfig.author}`}
         >
           <span>Initiate Contact</span>
           <ArrowUpRight class="w-4 h-4" />
@@ -58,42 +59,43 @@ import { ArrowUpRight, Github, Linkedin, FileText, Copy } from 'lucide-astro';
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-2 px-4 py-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase tracking-wider transition-colors"
-          aria-label="Open Manuja Medhankara's resume in PDF format"
+          aria-label={`Open ${siteConfig.author}'s resume in PDF format`}
         >
           <FileText class="w-3.5 h-3.5 text-primary" />
           <span>Resume</span>
         </a>
 
         <button
-          id="hero-copy-email-btn"
           type="button"
           class="inline-flex items-center gap-1.5 px-4 py-3 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
           title="Copy Email Address"
-          aria-label="Copy Manuja Medhankara's email address to clipboard"
+          aria-label={`Copy ${siteConfig.author}'s email address to clipboard`}
+          data-copy={siteConfig.email}
+          data-copied-text="COPIED!"
         >
           <Copy class="w-3.5 h-3.5 text-primary" />
-          <span id="hero-copy-label">Copy Email</span>
+          <span data-copy-label>Copy Email</span>
         </button>
       </div>
 
       <!-- Social Links -->
       <div class="flex items-center gap-2">
         <a
-          href="https://github.com/manuja-me"
+          href={siteConfig.socials.github}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 px-3.5 py-2.5 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-semibold uppercase transition-colors"
-          aria-label="Visit Manuja Medhankara's GitHub profile"
+          aria-label={`Visit ${siteConfig.author}'s GitHub profile`}
         >
           <Github class="w-3.5 h-3.5" />
           <span>GitHub</span>
         </a>
         <a
-          href="https://www.linkedin.com/in/manuja-medhankara-rc96"
+          href={siteConfig.socials.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 px-3.5 py-2.5 border border-border bg-card hover:bg-secondary text-foreground font-mono text-xs font-semibold uppercase transition-colors"
-          aria-label="Visit Manuja Medhankara's LinkedIn profile"
+          aria-label={`Visit ${siteConfig.author}'s LinkedIn profile`}
         >
           <Linkedin class="w-3.5 h-3.5" />
           <span>LinkedIn</span>
@@ -149,25 +151,6 @@ import { ArrowUpRight, Github, Linkedin, FileText, Copy } from 'lucide-astro';
       mainTitle.addEventListener('click', runDecrypt);
     }
 
-    // 1-Click Copy Email
-    const copyBtn = document.getElementById('hero-copy-email-btn');
-    const copyLabel = document.getElementById('hero-copy-label');
-    if (copyBtn && copyLabel) {
-      copyBtn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText('manuja.public@gmail.com');
-          const original = copyLabel.innerText;
-          copyLabel.innerText = 'COPIED!';
-          copyBtn.classList.add('border-primary', 'text-primary');
-          setTimeout(() => {
-            copyLabel.innerText = original;
-            copyBtn.classList.remove('border-primary', 'text-primary');
-          }, 2000);
-        } catch (e) {
-          copyLabel.innerText = 'ERR';
-        }
-      });
-    }
   }
 
   if (document.readyState === 'loading') {

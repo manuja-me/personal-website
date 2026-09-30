@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { siteConfig, projects } from '../data/site';
 
 interface Props {
   title?: string;
@@ -13,9 +14,9 @@ interface Props {
 }
 
 const {
-  title = "Manuja Medhankara | Cybersecurity Specialist & Systems Engineer",
-  description = "Cybersecurity specialist and systems engineer focused on penetration testing, Linux infrastructure hardening, and high-performance open-source security engineering.",
-  keywords = "Manuja Medhankara, Cybersecurity Specialist, Penetration Testing, Systems Engineer, Linux Hardening, VulnRadar, CIS Benchmarks, NIST 800-53, Application Security, Ethical Hacking, Rust, Tauri, Security Tooling, Sri Lanka, Colombo, Offensive Security, Network Reconnaissance, Vulnerability Assessment",
+  title = siteConfig.title,
+  description = siteConfig.description,
+  keywords = siteConfig.keywords,
   image = "/og-image.png",
   imageAlt = "Manuja Medhankara — Cybersecurity Specialist & Systems Engineer",
   ogType = "profile",
@@ -23,7 +24,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://manuja.dev';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || siteConfig.url;
 const canonicalURL = canonical || new URL(Astro.url.pathname, siteUrl).toString();
 const imageURL = new URL(image, siteUrl).toString();
 const robotsContent = noindex 
@@ -38,7 +39,7 @@ const schemaGraph = {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       "url": siteUrl,
-      "name": "Manuja Medhankara",
+      "name": siteConfig.author,
       "description": "Cybersecurity Specialist & Systems Engineer Portfolio",
       "publisher": { "@id": `${siteUrl}/#person` },
       "inLanguage": "en-US"
@@ -64,8 +65,8 @@ const schemaGraph = {
     {
       "@type": "Person",
       "@id": `${siteUrl}/#person`,
-      "name": "Manuja Medhankara",
-      "alternateName": ["manuja-me", "manuja_me", "Manuja"],
+      "name": siteConfig.author,
+      "alternateName": [siteConfig.username, siteConfig.shortName],
       "givenName": "Manuja",
       "familyName": "Medhankara",
       "gender": "Male",
@@ -73,11 +74,11 @@ const schemaGraph = {
       "description": description,
       "url": siteUrl,
       "image": imageURL,
-      "email": "mailto:manuja.public@gmail.com",
+      "email": `mailto:${siteConfig.email}`,
       "sameAs": [
-        "https://github.com/manuja-me",
-        "https://www.linkedin.com/in/manuja-medhankara-rc96",
-        "https://x.com/manuja_me"
+        siteConfig.socials.github,
+        siteConfig.socials.linkedin,
+        siteConfig.socials.twitter
       ],
       "address": {
         "@type": "PostalAddress",
@@ -134,46 +135,20 @@ const schemaGraph = {
       "@type": "ItemList",
       "@id": `${siteUrl}/#projects-list`,
       "name": "Featured Cybersecurity Tools & Projects",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "SoftwareApplication",
-            "name": "VulnRadar Security Scanner",
-            "description": "Desktop security workstation and non-intrusive vulnerability auditor evaluating web attack surfaces, cryptographic posture, and HTTP headers.",
-            "applicationCategory": "SecurityApplication",
-            "operatingSystem": "Linux, macOS, Windows",
-            "softwareVersion": "1.0.0",
-            "url": "https://github.com/manuja-me/vuln-radar",
-            "author": { "@id": `${siteUrl}/#person` }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "Linux Hardening Suite",
-            "description": "Automated compliance and hardening engine for Linux infrastructure aligned with CIS Benchmarks and NIST 800-53 baselines.",
-            "programmingLanguage": ["Bash", "Python"],
-            "codeRepository": "https://github.com/manuja-me",
-            "author": { "@id": `${siteUrl}/#person` }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "Network Recon Pro",
-            "description": "Asset discovery and protocol analysis framework featuring service fingerprinting and CVE correlation.",
-            "programmingLanguage": ["Python"],
-            "codeRepository": "https://github.com/manuja-me",
-            "author": { "@id": `${siteUrl}/#person` }
-          }
+      "itemListElement": projects.map((p, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "item": {
+          "@type": p.schemaType,
+          "name": p.title,
+          "description": p.description,
+          ...(p.version ? { "softwareVersion": p.version } : {}),
+          ...(p.operatingSystem ? { "operatingSystem": p.operatingSystem, "applicationCategory": "SecurityApplication" } : {}),
+          ...(p.programmingLanguage ? { "programmingLanguage": p.programmingLanguage } : {}),
+          ...(p.schemaType === 'SoftwareSourceCode' ? { "codeRepository": p.url } : { "url": p.url }),
+          "author": { "@id": `${siteUrl}/#person` }
         }
-      ]
+      }))
     },
     {
       "@type": "BreadcrumbList",
@@ -305,5 +280,34 @@ const schemaGraph = {
   </head>
   <body class="min-h-screen bg-background text-foreground font-sans selection:bg-primary selection:text-white">
     <slot />
+
+    <!-- Global Delegated Clipboard Copy Controller -->
+    <script>
+      document.addEventListener('click', async (e) => {
+        const trigger = (e.target as HTMLElement)?.closest<HTMLElement>('[data-copy]');
+        if (!trigger) return;
+        const textToCopy = trigger.getAttribute('data-copy');
+        if (!textToCopy) return;
+
+        const labelEl = trigger.querySelector<HTMLElement>('[data-copy-label]') || trigger;
+        const originalText = labelEl.innerText;
+        const copiedText = trigger.getAttribute('data-copied-text') || 'COPIED!';
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          labelEl.innerText = copiedText;
+          trigger.classList.add('border-primary', 'text-primary');
+          setTimeout(() => {
+            labelEl.innerText = originalText;
+            trigger.classList.remove('border-primary', 'text-primary');
+          }, 2000);
+        } catch {
+          labelEl.innerText = 'ERR';
+          setTimeout(() => {
+            labelEl.innerText = originalText;
+          }, 2000);
+        }
+      });
+    </script>
   </body>
 </html>
